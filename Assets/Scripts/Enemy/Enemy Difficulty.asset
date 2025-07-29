@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8722dce96525b9246ac183a6ca404b5f, type: 3}
   m_Name: Enemy Difficulty
   m_EditorClassIdentifier: 
+  currentDifficulty: 0
   easy:
   - 1
   - 0.75
@@ -28,3 +29,6 @@ MonoBehaviour:
   - 0.3
   - 0.2
   - 0.1
+  characters: []
+  reactionFrames: []
+  enemySprites: []

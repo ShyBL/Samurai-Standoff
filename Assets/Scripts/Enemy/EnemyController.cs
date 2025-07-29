@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -21,7 +22,14 @@ public class EnemyController : MonoBehaviour
         //sr.sprite = characters[listLevel];
 
         //Apply To Boss
-        reactionTimer = enemyStats.reactionFrames[listLevel];
+        reactionTimer = enemyStats.currentDifficulty switch
+        {
+            EnemyDifficultyType.EasyMode => enemyStats.easy[listLevel],
+            EnemyDifficultyType.MediumMode => enemyStats.medium[listLevel],
+            EnemyDifficultyType.HardMode => enemyStats.hard[listLevel],
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
         //Boss.GetComponent<SpriteRenderer>().sprite = sr.sprite;
     } 
 
