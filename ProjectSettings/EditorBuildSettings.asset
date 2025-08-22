@@ -5,13 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main Menu.unity
     guid: 6a3386bf79382404493ce4b898c466d6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DayLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Results.unity
     guid: 679b9fc7d67edcd47a69789165290bce
+  - enabled: 0
+    path: Assets/Samples/Netcode for GameObjects/2.4.4/Bootstrap/Scenes/Bootstrap.unity
+    guid: 7a6e122bd2b01425989087a299b6bb93
+  - enabled: 0
+    path: Assets/NGO_Minimal_Setup/NGO_Setup.unity
+    guid: 10fd21f03f95371418f026d8db8011ba
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
