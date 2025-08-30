@@ -14,11 +14,15 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerDrawn = false;
-
-        //if( GameController.instance.pTwo == this)
-        //{
-            
-        //}
+        
+        // Subscribe to signal event
+        EventsManager.instance.Subscribe(GameEventType.SignalTriggered, OnSignalTriggered);
+    }
+    
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        EventsManager.instance.Unsubscribe(GameEventType.SignalTriggered, OnSignalTriggered);
     }
 
     void Update()
@@ -40,23 +44,34 @@ public class Player : MonoBehaviour
         {
             if(GameController.instance.winnerDeclared != true)
             {
-                Debug.Log("Player Attacked");
                 playerDrawn = true;
+                
                 if (Timer.instance.signal == false)
                 {
                     Fault();
                 }
                 else
                 {
-                    GameController.instance.DeclareWinner(this.gameObject);
+                    // Publish player drawn event
+                    EventsManager.instance.Publish(GameEventType.PlayerDrawn, this.gameObject, this.gameObject);
                 }
             }
         }
+    }
+    
+    private void OnSignalTriggered(GameEvent gameEvent)
+    {
+        // Player can now react to the signal
+        // This could be used for visual feedback or other logic
     }
 
     void Fault()
     {
         faultCounter += 1;
+        
+        // Publish player fault event
+        EventsManager.instance.Publish(GameEventType.PlayerFault, faultCounter, this.gameObject);
+        
         if(faultCounter < 2)
         {
             StartCoroutine(GameController.instance.FaultRestart());
@@ -64,15 +79,14 @@ public class Player : MonoBehaviour
 
         if (faultCounter >= 2)
         {
-            if (GameController.instance.pOne = this.gameObject)
+            if (GameController.instance.pOne == this.gameObject)
             {
-                GameController.instance.DeclareWinner(GameController.instance.pTwo);//change these!
+                GameController.instance.DeclareWinner(GameController.instance.pTwo);
             }
-            else if (GameController.instance.pTwo = this.gameObject)
+            else if (GameController.instance.pTwo == this.gameObject)
             {
                 GameController.instance.DeclareWinner(GameController.instance.pOne);
             }
-           
         }
     }
 }

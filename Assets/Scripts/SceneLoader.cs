@@ -29,7 +29,7 @@ public class SceneLoader : MonoBehaviour
     //----Scene Transitions-----
      public void Loadgame()//Enter Game
     {
-        LevelManager.instance.StartCoroutine(LoadScene(1));
+        LevelManager.instance.StartCoroutine(LoadScene(2));
 
         AudioManager.instance.StopSound("Waterfall");
         AudioManager.instance.PlaySound("Waterfall");
@@ -37,14 +37,14 @@ public class SceneLoader : MonoBehaviour
      public void Restartgame()
     {
         LevelManager.instance.currentLevel = 1;
-        LevelManager.instance.StartCoroutine(LoadScene(1));
+        LevelManager.instance.StartCoroutine(LoadScene(2));
 
         AudioManager.instance.StopSound("Waterfall");
         AudioManager.instance.PlaySound("Waterfall");
     }
     public void LoadMainMenu(){
         LevelManager.instance.currentLevel = 1;
-        LevelManager.instance.StartCoroutine(LoadScene(0));
+        LevelManager.instance.StartCoroutine(LoadScene(1));
     }
 
     public IEnumerator LoadScene(int levelIndex)//
@@ -77,10 +77,7 @@ public class SceneLoader : MonoBehaviour
     public IEnumerator LoadResults()
     {
         yield return new WaitForSeconds(3f);
-        StartCoroutine(LoadScene(2));
+        StartCoroutine(LoadScene(3));
         AudioManager.instance.StopSound("Waterfall");
     }
-    
-    
-  
 }

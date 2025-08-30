@@ -9,7 +9,6 @@ public class AudioManager : MonoBehaviour
     public AudioMixer audioMixer;
     public Sound[] sounds;
 
-    //To add a sound effect: AudioManager.instance.PlaySound("");
     private void Awake()
     {
         if (instance == null)
@@ -31,6 +30,35 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+        
+        // Subscribe to audio events
+        EventsManager.instance.Subscribe(GameEventType.PlaySound, OnPlaySound);
+        EventsManager.instance.Subscribe(GameEventType.StopSound, OnStopSound);
+    }
+    
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        EventsManager.instance.Unsubscribe(GameEventType.PlaySound, OnPlaySound);
+        EventsManager.instance.Unsubscribe(GameEventType.StopSound, OnStopSound);
+    }
+    
+    private void OnPlaySound(GameEvent gameEvent)
+    {
+        string soundName = gameEvent.data as string;
+        if (!string.IsNullOrEmpty(soundName))
+        {
+            PlaySound(soundName);
+        }
+    }
+    
+    private void OnStopSound(GameEvent gameEvent)
+    {
+        string soundName = gameEvent.data as string;
+        if (!string.IsNullOrEmpty(soundName))
+        {
+            StopSound(soundName);
+        }
     }
 
     private void Start()
@@ -49,7 +77,6 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Play();
-        
     }
 
     public void StopSound(string name)
@@ -63,7 +90,6 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Stop();
-
     }
 
     public void SetVolume(float volume)

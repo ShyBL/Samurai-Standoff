@@ -9,19 +9,33 @@ public class EnemyController : MonoBehaviour
     SpriteRenderer sr;
 
     [SerializeField] EnemyDifficulty enemyStats;
+    
     void Start()
     {
         GetTraits();
         RestartAttackTimer();
+        
+        // Subscribe to signal event
+        EventsManager.instance.Subscribe(GameEventType.SignalTriggered, OnSignalTriggered);
     }
-     public void GetTraits()
+    
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        EventsManager.instance.Unsubscribe(GameEventType.SignalTriggered, OnSignalTriggered);
+    }
+    
+    private void OnSignalTriggered(GameEvent gameEvent)
+    {
+        // Enemy can now react to the signal
+        // This could be used for visual feedback or other logic
+    }
+    
+    public void GetTraits()
     {
         Debug.Log("Called");
         int listLevel = LevelManager.instance.currentLevel - 1;
 
-        //sr.sprite = characters[listLevel];
-
-        //Apply To Boss
         reactionTimer = enemyStats.currentDifficulty switch
         {
             EnemyDifficultyType.EasyMode => enemyStats.easy[listLevel],
@@ -29,8 +43,6 @@ public class EnemyController : MonoBehaviour
             EnemyDifficultyType.HardMode => enemyStats.hard[listLevel],
             _ => throw new ArgumentOutOfRangeException()
         };
-
-        //Boss.GetComponent<SpriteRenderer>().sprite = sr.sprite;
     } 
 
     void RestartAttackTimer()
@@ -50,7 +62,9 @@ public class EnemyController : MonoBehaviour
             {
                 Debug.Log("AI Attacked");
                 enemyDrawn = true;
-                GameController.instance.DeclareWinner(this.gameObject);
+                
+                // Publish enemy drawn event
+                EventsManager.instance.Publish(GameEventType.EnemyDrawn, this.gameObject, this.gameObject);
             }
         }
     }

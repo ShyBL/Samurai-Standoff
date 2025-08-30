@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
 
     void Awake()
     {
-         if(instance == null)
+        if(instance == null)
         {
             instance = this;
         }
@@ -27,6 +27,8 @@ public class Timer : MonoBehaviour
     void Start()
     {
         signalText.enabled = false;
+        // Publish timer started event
+        EventsManager.instance.Publish(GameEventType.TimerStarted);
     }
 
     void Update()
@@ -39,15 +41,19 @@ public class Timer : MonoBehaviour
             {
                 if (signalText.enabled == false)
                 {
-                    AudioManager.instance.PlaySound("Signal");
                     signal = true;
                     signalText.enabled = true;
+                    
+                    // Publish signal triggered event
+                    EventsManager.instance.Publish(GameEventType.SignalTriggered);
                 }
             }
         }
         else
         {
             signalText.enabled = false;
+            // Publish timer stopped event
+            EventsManager.instance.Publish(GameEventType.TimerStopped);
         }   
     }
 }
