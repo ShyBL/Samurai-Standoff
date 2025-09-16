@@ -1,0 +1,1053 @@
+fileFormatVersion: 2
+guid: ee3edbfc632890046936aa502d5d317a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -818157566402739362
+    second: Japanese_Crest_4_Sans_0
+  - first:
+      213: 5846227248093765217
+    second: Japanese_Crest_4_Sans_1
+  - first:
+      213: -7168268431297695528
+    second: Japanese_Crest_4_Sans_2
+  - first:
+      213: -7725831628419119745
+    second: Japanese_Crest_4_Sans_3
+  - first:
+      213: -7148164415913958231
+    second: Japanese_Crest_4_Sans_4
+  - first:
+      213: -3131289396934086432
+    second: Japanese_Crest_4_Sans_5
+  - first:
+      213: 233960900790992946
+    second: Japanese_Crest_4_Sans_6
+  - first:
+      213: 3848789549767228715
+    second: Japanese_Crest_4_Sans_7
+  - first:
+      213: -4097447525046513612
+    second: Japanese_Crest_4_Sans_8
+  - first:
+      213: -729370714055292348
+    second: Japanese_Crest_4_Sans_9
+  - first:
+      213: 9128032796596488103
+    second: Japanese_Crest_4_Sans_10
+  - first:
+      213: -6819486115075792811
+    second: Japanese_Crest_4_Sans_11
+  - first:
+      213: 8756062554659694912
+    second: Japanese_Crest_4_Sans_12
+  - first:
+      213: -2386877067113553337
+    second: Japanese_Crest_4_Sans_13
+  - first:
+      213: 5591890520604396888
+    second: Japanese_Crest_4_Sans_14
+  - first:
+      213: 8405618454009411230
+    second: Japanese_Crest_4_Sans_15
+  - first:
+      213: 6606948423013446407
+    second: Japanese_Crest_4_Sans_16
+  - first:
+      213: -8508759426071836063
+    second: Japanese_Crest_4_Sans_17
+  - first:
+      213: -4615426280175582133
+    second: Japanese_Crest_4_Sans_18
+  - first:
+      213: -8995267950764776820
+    second: Japanese_Crest_4_Sans_19
+  - first:
+      213: 235802441758962684
+    second: Japanese_Crest_4_Sans_20
+  - first:
+      213: 6452384197705735305
+    second: Japanese_Crest_4_Sans_21
+  - first:
+      213: 5566019554157138674
+    second: Japanese_Crest_4_Sans_22
+  - first:
+      213: -4054335059722752696
+    second: Japanese_Crest_4_Sans_23
+  - first:
+      213: 8674139238377089149
+    second: Japanese_Crest_4_Sans_24
+  - first:
+      213: 1956634103977504228
+    second: Japanese_Crest_4_Sans_25
+  - first:
+      213: -6938309813429162146
+    second: Japanese_Crest_4_Sans_26
+  - first:
+      213: 5405235837414700231
+    second: Japanese_Crest_4_Sans_27
+  - first:
+      213: -3390643541781733701
+    second: Japanese_Crest_4_Sans_28
+  - first:
+      213: -5932553063994270673
+    second: Japanese_Crest_4_Sans_29
+  - first:
+      213: 5991626262137571248
+    second: Japanese_Crest_4_Sans_30
+  - first:
+      213: 45891998509487132
+    second: Japanese_Crest_4_Sans_31
+  - first:
+      213: -3501594124087110241
+    second: Japanese_Crest_4_Sans_32
+  - first:
+      213: -2987199716009473747
+    second: Japanese_Crest_4_Sans_33
+  - first:
+      213: -4860394895423271576
+    second: Japanese_Crest_4_Sans_34
+  - first:
+      213: 1888510603758712484
+    second: Japanese_Crest_4_Sans_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 469
+        width: 137
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e534444370255a4f0800000000000000
+      internalID: -818157566402739362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_1
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 605
+        width: 29
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16e96de15b8f12150800000000000000
+      internalID: 5846227248093765217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_2
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 469
+        width: 138
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d0bad147d1358c90800000000000000
+      internalID: -7168268431297695528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_3
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 469
+        width: 138
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f75c991311558c490800000000000000
+      internalID: -7725831628419119745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_4
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 605
+        width: 29
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a46c59165e9ccc90800000000000000
+      internalID: -7148164415913958231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_5
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 469
+        width: 137
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e0fbce32ec6b84d0800000000000000
+      internalID: -3131289396934086432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_6
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 586
+        width: 29
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2304afe13323f3300800000000000000
+      internalID: 233960900790992946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_7
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 586
+        width: 29
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2d7c1924b5a96530800000000000000
+      internalID: 3848789549767228715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_8
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 427
+        width: 128
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4309cc76f21f227c0800000000000000
+      internalID: -4097447525046513612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_9
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 387
+        width: 124
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44a492f2331c0e5f0800000000000000
+      internalID: -729370714055292348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_10
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 215
+        width: 121
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a7cf3357794dae70800000000000000
+      internalID: 9128032796596488103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_11
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 40
+        width: 29
+        height: 545
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 550e23072815c51a0800000000000000
+      internalID: -6819486115075792811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_12
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 427
+        width: 128
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04927997088c38970800000000000000
+      internalID: 8756062554659694912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_13
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 387
+        width: 125
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 742ab2424fb10eed0800000000000000
+      internalID: -2386877067113553337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_14
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 215
+        width: 121
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85dcf772dc26a9d40800000000000000
+      internalID: 5591890520604396888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_15
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 427
+        width: 128
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e96f2b4f271c6a470800000000000000
+      internalID: 8405618454009411230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_16
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 387
+        width: 125
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7033b0be59890bb50800000000000000
+      internalID: 6606948423013446407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_17
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 215
+        width: 122
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16a4bb12260dae980800000000000000
+      internalID: -8508759426071836063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_18
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 40
+        width: 29
+        height: 545
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b44c1237046b2ffb0800000000000000
+      internalID: -4615426280175582133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_19
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 427
+        width: 128
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c82a53f25736a2380800000000000000
+      internalID: -8995267950764776820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_20
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 387
+        width: 124
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf3763a421db54300800000000000000
+      internalID: 235802441758962684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_21
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 215
+        width: 121
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98c189add397b8950800000000000000
+      internalID: 6452384197705735305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_22
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 176
+        width: 106
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f21a626b497e3d40800000000000000
+      internalID: 5566019554157138674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_23
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 143
+        width: 103
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84d20d47ebb1cb7c0800000000000000
+      internalID: -4054335059722752696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_24
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 45
+        width: 100
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d786eb30eabb06870800000000000000
+      internalID: 8674139238377089149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_25
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 176
+        width: 107
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ed6ef2d95c572b10800000000000000
+      internalID: 1956634103977504228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_26
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 143
+        width: 103
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5fa2f44cfb26bf90800000000000000
+      internalID: -6938309813429162146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_27
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 45
+        width: 100
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c470502b51430b40800000000000000
+      internalID: 5405235837414700231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_28
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 176
+        width: 107
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbe9024c9a302f0d0800000000000000
+      internalID: -3390643541781733701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_29
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 143
+        width: 103
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2c57799b665bada0800000000000000
+      internalID: -5932553063994270673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_30
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 45
+        width: 100
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b78c952758862350800000000000000
+      internalID: 5991626262137571248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_31
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 176
+        width: 106
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c14d03d878a03a000800000000000000
+      internalID: 45891998509487132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_32
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 143
+        width: 103
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f95513642b6d76fc0800000000000000
+      internalID: -3501594124087110241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_33
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 45
+        width: 100
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d298b166fa55b86d0800000000000000
+      internalID: -2987199716009473747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_34
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 2
+        width: 29
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86d8c2618986c8cb0800000000000000
+      internalID: -4860394895423271576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Japanese_Crest_4_Sans_35
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 2
+        width: 29
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a6b89b6366553a10800000000000000
+      internalID: 1888510603758712484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Japanese_Crest_4_Sans_0: -818157566402739362
+      Japanese_Crest_4_Sans_1: 5846227248093765217
+      Japanese_Crest_4_Sans_10: 9128032796596488103
+      Japanese_Crest_4_Sans_11: -6819486115075792811
+      Japanese_Crest_4_Sans_12: 8756062554659694912
+      Japanese_Crest_4_Sans_13: -2386877067113553337
+      Japanese_Crest_4_Sans_14: 5591890520604396888
+      Japanese_Crest_4_Sans_15: 8405618454009411230
+      Japanese_Crest_4_Sans_16: 6606948423013446407
+      Japanese_Crest_4_Sans_17: -8508759426071836063
+      Japanese_Crest_4_Sans_18: -4615426280175582133
+      Japanese_Crest_4_Sans_19: -8995267950764776820
+      Japanese_Crest_4_Sans_2: -7168268431297695528
+      Japanese_Crest_4_Sans_20: 235802441758962684
+      Japanese_Crest_4_Sans_21: 6452384197705735305
+      Japanese_Crest_4_Sans_22: 5566019554157138674
+      Japanese_Crest_4_Sans_23: -4054335059722752696
+      Japanese_Crest_4_Sans_24: 8674139238377089149
+      Japanese_Crest_4_Sans_25: 1956634103977504228
+      Japanese_Crest_4_Sans_26: -6938309813429162146
+      Japanese_Crest_4_Sans_27: 5405235837414700231
+      Japanese_Crest_4_Sans_28: -3390643541781733701
+      Japanese_Crest_4_Sans_29: -5932553063994270673
+      Japanese_Crest_4_Sans_3: -7725831628419119745
+      Japanese_Crest_4_Sans_30: 5991626262137571248
+      Japanese_Crest_4_Sans_31: 45891998509487132
+      Japanese_Crest_4_Sans_32: -3501594124087110241
+      Japanese_Crest_4_Sans_33: -2987199716009473747
+      Japanese_Crest_4_Sans_34: -4860394895423271576
+      Japanese_Crest_4_Sans_35: 1888510603758712484
+      Japanese_Crest_4_Sans_4: -7148164415913958231
+      Japanese_Crest_4_Sans_5: -3131289396934086432
+      Japanese_Crest_4_Sans_6: 233960900790992946
+      Japanese_Crest_4_Sans_7: 3848789549767228715
+      Japanese_Crest_4_Sans_8: -4097447525046513612
+      Japanese_Crest_4_Sans_9: -729370714055292348
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
