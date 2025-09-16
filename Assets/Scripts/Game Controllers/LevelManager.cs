@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -33,6 +34,14 @@ public class LevelManager: MonoBehaviour
             multiplayer = false;
         }
     }
-
-
+    
+    public void ApplicationQuit()
+    {
+        Application.Quit();
+    }
+    
+    private void OnApplicationQuit()
+    {
+        
+    }
 }
