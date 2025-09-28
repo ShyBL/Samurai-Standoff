@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-         if(instance == null)
+        if(instance == null)
         {
             instance = this;
         }
@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-       resultText.enabled = false;
+        resultText.enabled = false;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         pOne = players[0];
         pTwo = players[1];
@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
             resultText.text = Winner.name + " Wins!";
         }
 
-        if (Winner.GetComponent<Player>() != null)
+        if (Winner.GetComponent<PlayerController>() != null)
         {
             StartCoroutine(SceneLoader.instance.NextLevel());
         }

@@ -69,7 +69,12 @@ public class SceneLoader : MonoBehaviour
         else
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            Player.faultCounter = 0;
+            foreach (GameObject player in players)
+            {
+                if(TryGetComponent(out PlayerController playerController))
+                    playerController.faultCounter = 0;
+            }
+                
             Loadgame();
         }
     }
