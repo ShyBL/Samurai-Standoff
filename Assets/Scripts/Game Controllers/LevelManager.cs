@@ -8,8 +8,6 @@ public class LevelManager: MonoBehaviour
     public int totalLevels;
     public int currentLevel = 1;
 
-   
-
     public bool multiplayer;
 
     private void Awake()
