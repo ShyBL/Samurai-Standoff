@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 3c9aef9ff31970a498d148f8d6d20c9d
+guid: fe4ca210247469443ad7a853c90d219a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8161371200634687345
-    second: Lizard Idle_0
+      213: 4720480584726013231
+    second: Lizard Lose_0
+  - first:
+      213: 8716448373606697576
+    second: Lizard Lose_1
+  - first:
+      213: 5584413092270363440
+    second: Lizard Lose_2
+  - first:
+      213: -5024610829749902533
+    second: Lizard Lose_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lizard Idle_0
+      name: Lizard Lose_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17f0fedbdd3034170800000000000000
-      internalID: 8161371200634687345
+      spriteID: f25e8b5e414828140800000000000000
+      internalID: 4720480584726013231
       vertices: []
       indices: 
       edges: []
@@ -138,7 +147,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 7d07e9f0b8f803743a49e23c7ae72faa
+    spriteID: f7ca873e9573cab40926a2b0602f34a1
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +157,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lizard Idle_0: 8161371200634687345
+      Lizard Lose_0: 4720480584726013231
+      Lizard Lose_1: 8716448373606697576
+      Lizard Lose_2: 5584413092270363440
+      Lizard Lose_3: -5024610829749902533
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
