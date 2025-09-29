@@ -25,10 +25,10 @@ public class EnemyController : MonoBehaviour
 
     #region Private Fields
 
-    private float attackTimer;
-    private float reactionTime;
+    private float _attackTimer;
+    private float _reactionTime;
 
-    private Dictionary<EnemyDifficultyType, List<CharacterType>> difficultyCharacterMap;
+    private Dictionary<EnemyDifficultyType, List<CharacterType>> _difficultyCharacterMap;
 
     #endregion
 
@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
     // Maps difficulty levels to character type sequences.
     private void InitializeDifficultyCharacterMap()
     {
-        difficultyCharacterMap = new()
+        _difficultyCharacterMap = new()
         {
             { EnemyDifficultyType.EasyMode,   new List<CharacterType> { CharacterType.Nezumi, CharacterType.Ichi, CharacterType.Bluetail, CharacterType.Macaroni } },
             { EnemyDifficultyType.MediumMode, new List<CharacterType> { CharacterType.Nezumi, CharacterType.Bluetail, CharacterType.Macaroni, CharacterType.Chaolin } },
@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
         var difficulty = LevelManager.instance.currentDifficulty;
 
         // Set reaction time based on difficulty
-        reactionTime = difficulty switch
+        _reactionTime = difficulty switch
         {
             EnemyDifficultyType.EasyMode   => enemyStats.easy[levelIndex],
             EnemyDifficultyType.MediumMode => enemyStats.medium[levelIndex],
@@ -79,7 +79,7 @@ public class EnemyController : MonoBehaviour
         };
 
         // Select character for this level and difficulty
-        var characterOrder = difficultyCharacterMap[difficulty];
+        var characterOrder = _difficultyCharacterMap[difficulty];
         if (levelIndex >= characterOrder.Count)
         {
             Debug.LogWarning("Level index exceeds character list for difficulty.");
@@ -97,7 +97,7 @@ public class EnemyController : MonoBehaviour
 
     private void ResetAttackTimer()
     {
-        attackTimer = Timer.instance.signalTime + reactionTime;
+        _attackTimer = Timer.instance.signalTime + _reactionTime;
     }
 
     #endregion
@@ -108,12 +108,12 @@ public class EnemyController : MonoBehaviour
     {
         if (!GameController.instance.winnerDeclared)
         {
-            if (!hasEnemyAttacked && attackTimer > 0)
+            if (!hasEnemyAttacked && _attackTimer > 0)
             {
-                attackTimer -= Time.deltaTime;
+                _attackTimer -= Time.deltaTime;
             }
 
-            if (!hasEnemyAttacked && attackTimer <= 0)
+            if (!hasEnemyAttacked && _attackTimer <= 0)
             {
                 enemyImage.sprite = selectedCharacter.sprites[1]; // Attack sprite
 

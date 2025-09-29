@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player State")]
     [SerializeField] private bool hasPlayerAttacked;
-    [SerializeField] private int localFaultCount;
 
     #endregion
 
@@ -55,13 +54,16 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     GameController.instance.DeclareWinner(gameObject);
+                    playerImage.sprite = characterData.sprites[1]; // Win sprite
                     MovePlayerToAttackPosition();
+                    
                 }
             }
         }
 
         if (GameController.instance.winnerDeclared && !hasPlayerAttacked)
         {
+            playerImage.sprite = characterData.sprites[2]; // Lose sprite
             MovePlayerToAttackPosition();
         }
     }
@@ -72,7 +74,6 @@ public class PlayerController : MonoBehaviour
     
     private void UpdateFaultUI()
     {
-        localFaultCount = faultCounter;
         faultText.enabled = faultCounter >= 1;
     }
 

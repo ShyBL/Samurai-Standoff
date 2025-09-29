@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,14 +26,14 @@ public class SceneLoader : MonoBehaviour
     }
 
     //----Scene Transitions-----
-     public void Loadgame()//Enter Game
+    public void Loadgame()//Enter Game
     {
         LevelManager.instance.StartCoroutine(LoadScene(1));
 
         AudioManager.instance.StopSound("Waterfall");
         AudioManager.instance.PlaySound("Waterfall");
     }
-     public void Restartgame()
+    public void Restartgame()
     {
         LevelManager.instance.currentLevel = 1;
         LevelManager.instance.StartCoroutine(LoadScene(1));

@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     public GameObject pOne, pTwo;
 
     public bool winnerDeclared;
-    [SerializeField] TextMeshProUGUI resultText;
+    [SerializeField] private TextMeshProUGUI resultText;
 
     private void Awake()
     {
@@ -30,11 +30,11 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         resultText.enabled = false;
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        var players = GameObject.FindGameObjectsWithTag("Player");
         pOne = players[0];
         pTwo = players[1];
     }
-    public void DeclareWinner(GameObject Winner)
+    public void DeclareWinner(GameObject winner)
     {
         AudioManager.instance.PlaySound("Clash");
         SceneLoader.instance.Clash();
@@ -43,10 +43,10 @@ public class GameController : MonoBehaviour
         {
             winnerDeclared = true;
             resultText.enabled = true;
-            resultText.text = Winner.name + " Wins!";
+            resultText.text = winner.name + " Wins!";
         }
 
-        if (Winner.GetComponent<PlayerController>() != null)
+        if (winner.GetComponent<PlayerController>() != null)
         {
             StartCoroutine(SceneLoader.instance.NextLevel());
         }
@@ -66,7 +66,7 @@ public class GameController : MonoBehaviour
         Round2();
     }
 
-    public void Round2()
+    private void Round2()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

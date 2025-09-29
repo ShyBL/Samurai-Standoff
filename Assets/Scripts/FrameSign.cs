@@ -1,20 +1,21 @@
+using System.Globalization;
 using UnityEngine;
 using TMPro;
 
 public class FrameSign : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI SignGUI;
-    float frames;
+    [SerializeField] private TextMeshProUGUI signGUI;
+    private float _frames;
 
     private void Update()
     {
         if(Timer.instance.signal == true && GameController.instance.winnerDeclared == false)
         {
-            frames++;
+            _frames++;
         }
         else
         {
-            SignGUI.text = frames.ToString();
+            signGUI.text = _frames.ToString(CultureInfo.CurrentCulture);
         }
     }
 }

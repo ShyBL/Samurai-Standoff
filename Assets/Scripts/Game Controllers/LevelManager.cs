@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager: MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
     [SerializeField] private List<Button> buttons;
     public EnemyDifficultyType currentDifficulty;
@@ -16,7 +14,7 @@ public class LevelManager: MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -25,7 +23,7 @@ public class LevelManager: MonoBehaviour
         {
             Destroy(gameObject);
             return;
-        }      
+        }
     }
 
     // Buttons
@@ -33,7 +31,7 @@ public class LevelManager: MonoBehaviour
     {
         totalLevels = 4;
         currentDifficulty = EnemyDifficultyType.EasyMode;
-        foreach (Button button in buttons)
+        foreach (var button in buttons)
         {
             button.interactable = false;
         }
@@ -43,7 +41,7 @@ public class LevelManager: MonoBehaviour
     {
         totalLevels = 4;
         currentDifficulty = EnemyDifficultyType.MediumMode;
-        foreach (Button button in buttons)
+        foreach (var button in buttons)
         {
             button.interactable = false;
         }
@@ -53,26 +51,30 @@ public class LevelManager: MonoBehaviour
     {
         totalLevels = 5;
         currentDifficulty = EnemyDifficultyType.HardMode;
-        foreach (Button button in buttons)
+        foreach (var button in buttons)
         {
             button.interactable = false;
         }
     }
-    
-    public void ToggleMultiplayer(){
-        if(multiplayer != true){
+
+    public void ToggleMultiplayer()
+    {
+        if (multiplayer != true)
+        {
             multiplayer = true;
         }
-        else{
+        else
+        {
             multiplayer = false;
         }
     }
-    
+
     public void ApplicationQuit()
     {
+        OnApplicationQuit();
         Application.Quit();
     }
-    
+
     private void OnApplicationQuit()
     {
         

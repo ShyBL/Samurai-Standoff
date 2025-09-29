@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.outputAudioMixerGroup = s.Output;
+            s.source.outputAudioMixerGroup = s.output;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
@@ -38,13 +38,13 @@ public class AudioManager : MonoBehaviour
         FindFirstObjectByType<AudioManager>().PlaySound("Wind");
     }
 
-    public void PlaySound(string name)
+    public void PlaySound(string soundName)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.name == soundName);
 
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + name + "cannot be found");
+            Debug.LogWarning("Sound: " + soundName + "cannot be found");
             return;
         }
 
@@ -52,13 +52,13 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public void StopSound(string name)
+    public void StopSound(string soundName)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.name == soundName);
 
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + name + "cannot be found");
+            Debug.LogWarning("Sound: " + soundName + "cannot be found");
             return;
         }
 
