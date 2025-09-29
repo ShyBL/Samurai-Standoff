@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Samurai-Standoff/GameData")]
+[CreateAssetMenu(menuName = "Samurai Standoff/Game Data")]
 public class GameData : ScriptableObject
 {
+    [Header("Difficulty Settings")]
     public List<float> easy = new (){ 1f, 0.75f, 0.5f, 0.25f };
     public List<float> medium = new () { 0.75f, 0.5f, 0.3f };
     public List<float> hard = new (){ 0.5f, 0.4f, 0.3f, 0.2f, 0.1f };
