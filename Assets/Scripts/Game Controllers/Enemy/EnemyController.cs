@@ -87,8 +87,8 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("Assign Enemy Traits Called");
 
-        int levelIndex = LevelManager.instance.currentLevel - 1;
-        var difficulty = LevelManager.instance.currentDifficulty;
+        int levelIndex = GameManager.instance.currentLevel - 1;
+        var difficulty = GameManager.instance.currentDifficulty;
 
         // Set reaction time based on difficulty
         _reactionTime = difficulty switch
@@ -126,7 +126,7 @@ public class EnemyController : MonoBehaviour
 
     private void HandleEnemyAttackLogic()
     {
-        if (!GameController.instance.winnerDeclared)
+        if (!DuelController.instance.winnerDeclared)
         {
             if (!hasEnemyAttacked && _attackTimer > 0)
             {
@@ -141,10 +141,10 @@ public class EnemyController : MonoBehaviour
                 Debug.Log("AI Attacked");
 
                 hasEnemyAttacked = true;
-                GameController.instance.DeclareWinner(gameObject);
+                DuelController.instance.DeclareWinner(gameObject);
             }
         }
-        else if (GameController.instance.winnerDeclared && !hasEnemyAttacked)
+        else if (DuelController.instance.winnerDeclared && !hasEnemyAttacked)
         {
             enemyImage.sprite = selectedCharacter.sprites[2]; // Defeat sprite
             MoveEnemyToAttackPosition();

@@ -8,6 +8,6 @@ public class GameData : ScriptableObject
     public List<float> easy = new (){ 1f, 0.75f, 0.5f, 0.25f };
     public List<float> medium = new () { 0.75f, 0.5f, 0.3f };
     public List<float> hard = new (){ 0.5f, 0.4f, 0.3f, 0.2f, 0.1f };
-    
+    [Range(0.1f, 100f)] public float volume;
     public List<Character> allCharacters;
 }

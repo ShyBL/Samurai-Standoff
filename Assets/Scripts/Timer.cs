@@ -45,7 +45,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if (GameController.instance.winnerDeclared != true)
+        if (DuelController.instance.winnerDeclared != true)
         {
             _timer += Time.deltaTime;
 
@@ -66,10 +66,10 @@ public class Timer : MonoBehaviour
 
         switch (signal)
         {
-            case true when !GameController.instance.winnerDeclared:
+            case true when !DuelController.instance.winnerDeclared:
                 _frames++;
                 break;
-            case true when GameController.instance.winnerDeclared:
+            case true when DuelController.instance.winnerDeclared:
                 framesText.text = _frames.ToString(CultureInfo.CurrentCulture);
                 
                 // Log best frame count for result screen

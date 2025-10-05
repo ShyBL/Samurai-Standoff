@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && !hasPlayerAttacked)
         {
-            if (!GameController.instance.winnerDeclared)
+            if (!DuelController.instance.winnerDeclared)
             {
                 Debug.Log("Player Attacked");
                 hasPlayerAttacked = true;
@@ -59,14 +59,14 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    GameController.instance.DeclareWinner(gameObject);
+                    DuelController.instance.DeclareWinner(gameObject);
                     playerImage.sprite = _characterData.sprites[1]; // Win sprite
                     MovePlayerToAttackPosition();
                 }
             }
         }
 
-        if (GameController.instance.winnerDeclared && !hasPlayerAttacked)
+        if (DuelController.instance.winnerDeclared && !hasPlayerAttacked)
         {
             playerImage.sprite = _characterData.sprites[2]; // Lose sprite
             MovePlayerToAttackPosition();
@@ -93,18 +93,18 @@ public class PlayerController : MonoBehaviour
 
         if (faultCounter < 2)
         {
-            StartCoroutine(GameController.instance.FaultRestart());
+            StartCoroutine(DuelController.instance.FaultRestart());
         }
         else
         {
             // Determine which player is at fault and declare the other as winner
-            if (GameController.instance.pOne == gameObject)
+            if (DuelController.instance.pOne == gameObject)
             {
-                GameController.instance.DeclareWinner(GameController.instance.pTwo);
+                DuelController.instance.DeclareWinner(DuelController.instance.pTwo);
             }
-            else if (GameController.instance.pTwo == gameObject)
+            else if (DuelController.instance.pTwo == gameObject)
             {
-                GameController.instance.DeclareWinner(GameController.instance.pOne);
+                DuelController.instance.DeclareWinner(DuelController.instance.pOne);
             }
         }
     }

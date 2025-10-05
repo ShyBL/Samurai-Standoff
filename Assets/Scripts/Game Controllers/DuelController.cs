@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro;
 
-public class GameController : MonoBehaviour
+public class DuelController : MonoBehaviour
 {
     #region Singleton
 
-    public static GameController instance;
+    public static DuelController instance;
 
     private void Awake()
     {

@@ -10,11 +10,31 @@ public class SamuraiStandoffStats : MonoBehaviour
     private CGameID m_GameID;
     private bool m_bRequestedStats;
     private bool m_bStatsValid;
-    private bool m_bStoreStats; // Flag to trigger storing stats
+    public bool m_bStoreStats; // Flag to trigger storing stats
 
     protected Callback<UserStatsReceived_t> m_UserStatsReceived;
     protected Callback<UserStatsStored_t> m_UserStatsStored;
 
+    #region Singleton
+
+    public static SamuraiStandoffStats instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    #endregion
+    
     void OnEnable()
     {
         if (!SteamManager.Initialized) return;
@@ -122,7 +142,7 @@ public class SamuraiStandoffStats : MonoBehaviour
     public void OnDifficultyCompleted(string difficulty)
     {
         if (playerData == null) return;
-        playerData.MarkDifficultyCompleted(difficulty);
+        GameManager.instance.MarkDifficultyCompleted(difficulty);
         m_bStoreStats = true;
     }
 

@@ -28,7 +28,7 @@ public class SceneLoader : MonoBehaviour
     //----Scene Transitions-----
     public void Loadgame() //Enter Game
     {
-        LevelManager.instance.StartCoroutine(LoadScene(1));
+        GameManager.instance.StartCoroutine(LoadScene(1));
 
         AudioManager.instance.StopSound("Waterfall");
         AudioManager.instance.PlaySound("Waterfall");
@@ -36,8 +36,8 @@ public class SceneLoader : MonoBehaviour
 
     public void Restartgame()
     {
-        LevelManager.instance.currentLevel = 1;
-        LevelManager.instance.StartCoroutine(LoadScene(1));
+        GameManager.instance.currentLevel = 1;
+        GameManager.instance.StartCoroutine(LoadScene(1));
 
         AudioManager.instance.StopSound("Waterfall");
         AudioManager.instance.PlaySound("Waterfall");
@@ -45,8 +45,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        LevelManager.instance.currentLevel = 1;
-        LevelManager.instance.StartCoroutine(LoadScene(0));
+        GameManager.instance.currentLevel = 1;
+        GameManager.instance.StartCoroutine(LoadScene(0));
     }
 
     public IEnumerator LoadScene(int levelIndex) //
@@ -62,9 +62,9 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Debug.Log("Next Level");
         transition.SetTrigger("Start");
-        LevelManager.instance.currentLevel++;
+        GameManager.instance.currentLevel++;
 
-        if (LevelManager.instance.currentLevel > LevelManager.instance.totalLevels)
+        if (GameManager.instance.currentLevel > GameManager.instance.totalLevels)
         {
             StartCoroutine(LoadResults());
         }

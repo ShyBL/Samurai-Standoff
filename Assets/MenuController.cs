@@ -45,7 +45,7 @@ public class MenuController : MonoBehaviour
         LoadVolumeFromPlayerData();
         UpdateVolumeLabel();
     }
-    
+
     public void SelectCharacterByIndex(int index)
     {
         if (playerData == null || gameData == null) return;
@@ -76,17 +76,17 @@ public class MenuController : MonoBehaviour
         switch (index)
         {
             case 0: // Easy
-                LevelManager.instance.SetEasyMode();
+                GameManager.instance.SetEasyMode();
                 break;
 
             case 1: // Medium
                 if (!playerData.completedEasyMode) return;
-                LevelManager.instance.SetMediumMode();
+                GameManager.instance.SetMediumMode();
                 break;
 
             case 2: // Hard
                 if (!playerData.completedEasyMode) return;
-                LevelManager.instance.SetHardMode();
+                GameManager.instance.SetHardMode();
                 break;
 
             default:
@@ -100,7 +100,7 @@ public class MenuController : MonoBehaviour
 
     public void ApplicationQuit()
     {
-        LevelManager.instance.OnApplicationQuit();
+        GameManager.instance.OnApplicationQuit();
     }
     
     private void DisableDifficultyButtons()
@@ -131,12 +131,12 @@ public class MenuController : MonoBehaviour
 
     private void LoadVolumeFromPlayerData()
     {
-        var savedVolume = Mathf.Clamp(playerData.volume, 0.1f, 100f);
+        var savedVolume = Mathf.Clamp(gameData.volume, 0.1f, 100f);
         volumeSlider.value = savedVolume;
 
-        float normalized = savedVolume / 100f;
-        float curved = Mathf.Pow(normalized, 2f);
-        float volumeDb = Mathf.Lerp(-80f, 20f, curved);
+        var normalized = savedVolume / 100f;
+        var curved = Mathf.Pow(normalized, 2f);
+        var volumeDb = Mathf.Lerp(-80f, 20f, curved);
 
         _audioManager.audioMixer.SetFloat("Volume", volumeDb);
     }
@@ -145,37 +145,31 @@ public class MenuController : MonoBehaviour
     {
         var sliderValue = Mathf.Clamp(volumeSlider.value, 0.0001f, 100f);
     
-        // Normalize to 0–1
-        float normalized = sliderValue / 100f;
+        var normalized = sliderValue / 100f;
     
-        // Apply a smoothing curve (e.g., quadratic)
-        float curved = Mathf.Pow(normalized, 2f); // You can tweak the exponent
+        var curved = Mathf.Pow(normalized, 2f);
     
         // Map to dB range (-80 to +20)
-        float volumeDb = Mathf.Lerp(-80f, 20f, curved);
+        var volumeDb = Mathf.Lerp(-80f, 20f, curved);
     
         _audioManager.audioMixer.SetFloat("Volume", volumeDb);
-        playerData.volume = sliderValue;
+        gameData.volume = sliderValue;
     
         Debug.Log($"Applied and saved volume: {sliderValue} → {volumeDb} dB");
     }
-    
-    // public void ApplyVolume()
-    // {
-    //     var sliderValue = Mathf.Clamp(volumeSlider.value, 0.0001f, 100f);
-    //     var volumeDb = Mathf.Log10(sliderValue / 100f) * 20f;
-    //
-    //     _audioManager.audioMixer.SetFloat("Volume", volumeDb);
-    //     playerData.volume = sliderValue;
-    //
-    //     Debug.Log($"Applied and saved volume: {sliderValue} → {volumeDb} dB");
-    // }
 
+    public void CancelApplyVolume()
+    {
+        LoadVolumeFromPlayerData();
+    }
 
     public void UpdateVolumeLabel()
     {
         if (volumeValueText != null)
+        {
             volumeValueText.text = $"{Mathf.RoundToInt(volumeSlider.value)}";
+
+        }
     }
     
 }

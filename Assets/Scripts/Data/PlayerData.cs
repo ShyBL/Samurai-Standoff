@@ -7,15 +7,16 @@ public class PlayerData : ScriptableObject
     public Character selectedCharacter;
     public CharacterType characterType;
     public float lastBestFrameCount;
-    [Range(0.1f, 100f)]
-    public float volume;
+    
+    // TODO: ADD HERE EVERY VARIABLE ADDED IN PLAYER DATA
 
-    [Header("Difficulty Progression")]
+    
+    [Header("Difficulty Progression & Analytics")]
     public bool completedEasyMode;
     public bool completedMediumMode;
     public bool completedHardMode;
 
-    [Header("Analytics")]
+    [Header("Analytics & Achievements")]
     public bool startedFirstDuel; // Did player enter their first battle?
     public bool wonFirstDuel;  // Did they win their first duel?
     public bool reachedMediumDifficulty; // Finished all 4 Easy stages
@@ -54,46 +55,5 @@ public class PlayerData : ScriptableObject
             var gameData = Resources.Load("GameData") as GameData;
             selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == characterType);
         }
-    }
-
-    /// <summary>
-    /// Call this method from your game logic when a difficulty is fully completed.
-    /// </summary>
-    public void MarkDifficultyCompleted(string difficulty)
-    {
-        switch (difficulty.ToLower())
-        {
-            case "easy":
-                completedEasyMode = true; // Progression
-                reachedMediumDifficulty = true; // Analytics
-                break;
-            case "medium":
-                completedMediumMode = true; // Progression
-                reachedHardDifficulty = true; // Analytics
-                break;
-            case "hard":
-                completedHardMode = true; // Progression
-                
-                break;
-        }
-    }
-
-    /// <summary>
-    /// Resets all progression data to default values. Useful for testing.
-    /// </summary>
-    public void ResetProgression()
-    {
-        completedEasyMode = false;
-        completedMediumMode = false;
-        completedHardMode = false;
-        startedFirstDuel = false;
-        wonFirstDuel = false;
-        reachedMediumDifficulty = false;
-        reachedHardDifficulty = false;
-        defeatedFraug = false;
-        easyStagesCompleted = 0;
-        mediumStagesCompleted = 0;
-        hardStagesCompleted = 0;
-        Debug.Log("Player Progression Data has been reset.");
     }
 }
