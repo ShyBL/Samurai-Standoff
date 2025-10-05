@@ -1,8 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Samurai Standoff/Player Data")]
 public class PlayerData : ScriptableObject
 {
+    public Character selectedCharacter;
+    public CharacterType characterType;
+    public float lastBestFrameCount;
+    [Range(0.1f, 100f)]
+    public float volume;
+
     [Header("Difficulty Progression")]
     public bool completedEasyMode;
     public bool completedMediumMode;
@@ -15,19 +22,17 @@ public class PlayerData : ScriptableObject
     public bool reachedHardDifficulty; // Finished all 4 Medium stages  
     public bool defeatedFraug; // Finished all 5 Hard stages (full game)
     
-    // Aggregate Stats
+    public int m_perfectTimingWins; // Exactly 1 frame after signal
+    public int m_totalEarlyAttacks; // Attacked before signal
+    public int m_currentWinStreak; // Best streak (resets on loss)
+    public int m_bestWinStreak; // Best ever streak
+    
     public int m_totalDuels;
     public int m_totalWins;
     public int m_totalLosses;
     public int m_totalDraws;
     public int m_maxWinStreak;
     public int m_earlyAttacks;
-    
-    // Skill & Engagement Metrics
-    public int m_perfectTimingWins; // Exactly 1 frame after signal
-    public int m_totalEarlyAttacks; // Attacked before signal
-    private int m_currentWinStreak; // Best streak (resets on loss)
-    public int m_bestWinStreak; // Best ever streak
     
     [Header("Stage Completion Counts")]
     [Tooltip("How many stages completed in Easy (0-4)")]
@@ -37,6 +42,20 @@ public class PlayerData : ScriptableObject
     [Tooltip("How many stages completed in Hard (0-5)")]
     public int hardStagesCompleted;
 
+    private void Awake()
+    {
+        if (characterType != CharacterType.Monk)
+        {
+            characterType = CharacterType.Monk;
+        }
+        
+        if (selectedCharacter == null)
+        {
+            var gameData = Resources.Load("GameData") as GameData;
+            selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == characterType);
+        }
+    }
+
     /// <summary>
     /// Call this method from your game logic when a difficulty is fully completed.
     /// </summary>
@@ -45,15 +64,16 @@ public class PlayerData : ScriptableObject
         switch (difficulty.ToLower())
         {
             case "easy":
-                completedEasyMode = true;
-                reachedMediumDifficulty = true; // Assumed progression
+                completedEasyMode = true; // Progression
+                reachedMediumDifficulty = true; // Analytics
                 break;
             case "medium":
-                completedMediumMode = true;
-                reachedHardDifficulty = true; // Assumed progression
+                completedMediumMode = true; // Progression
+                reachedHardDifficulty = true; // Analytics
                 break;
             case "hard":
-                completedHardMode = true;
+                completedHardMode = true; // Progression
+                
                 break;
         }
     }

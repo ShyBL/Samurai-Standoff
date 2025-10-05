@@ -9,14 +9,12 @@ public class Character
     public List<Sprite> sprites = new List<Sprite>(); // 0: Idle, 1: Win, 2: Lose
 }
 
-public enum CharacterType
-{
-    Monk,
-    Nezumi,
-    Ichi,
-    Bluetail,
-    Macaroni,
-    Chaolin,
-    Fraug,
-    Bandit
-}
+    public enum CharacterType
+    {
+        Monk,
+        Ichi,
+        Bluetail,
+        Macaroni,
+        Chaolin, 
+        Fraug, 
+    }
