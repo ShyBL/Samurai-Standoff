@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -49,7 +50,6 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Play();
-        
     }
 
     public void StopSound(string soundName)
@@ -63,7 +63,6 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Stop();
-
     }
 
     public void SetVolume(float volume)
