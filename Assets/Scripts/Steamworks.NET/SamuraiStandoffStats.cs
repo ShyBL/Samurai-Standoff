@@ -5,7 +5,7 @@ public class SamuraiStandoffStats : MonoBehaviour
 {
     // Reference to the shared progression data
     public PlayerData playerData;
-    
+
     // Steamworks API
     private CGameID m_GameID;
     private bool m_bRequestedStats;
@@ -14,7 +14,6 @@ public class SamuraiStandoffStats : MonoBehaviour
 
     protected Callback<UserStatsReceived_t> m_UserStatsReceived;
     protected Callback<UserStatsStored_t> m_UserStatsStored;
-
 
     void OnEnable()
     {
@@ -27,18 +26,17 @@ public class SamuraiStandoffStats : MonoBehaviour
 
     private void Update()
     {
-        if (!SteamManager.Initialized)
-            return;
-        
+        if (!SteamManager.Initialized) return;
+
         if (!m_bRequestedStats)
         {
             var success = SteamUserStats.RequestUserStats(SteamUser.GetSteamID());
             m_bRequestedStats = true;
             Debug.Log("Requesting stats from Steam...");
         }
-        
+
         if (!m_bStatsValid) return;
-        
+
         // If a change has occurred, store the stats
         if (m_bStoreStats)
         {
@@ -119,7 +117,7 @@ public class SamuraiStandoffStats : MonoBehaviour
         playerData.m_totalEarlyAttacks++;
         m_bStoreStats = true;
     }
-    
+
     // Call this when you complete a difficulty, which will then trigger stats to be saved.
     public void OnDifficultyCompleted(string difficulty)
     {
@@ -134,8 +132,7 @@ public class SamuraiStandoffStats : MonoBehaviour
 
     private void OnUserStatsReceived(UserStatsReceived_t pCallback)
     {
-        if ((ulong)m_GameID != pCallback.m_nGameID || pCallback.m_eResult != EResult.k_EResultOK)
-            return;
+        if ((ulong)m_GameID != pCallback.m_nGameID || pCallback.m_eResult != EResult.k_EResultOK) return;
 
         Debug.Log("Received stats from Steam.");
         m_bStatsValid = true;

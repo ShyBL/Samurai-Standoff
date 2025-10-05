@@ -27,3 +27,40 @@ MonoBehaviour:
   - 0.3
   - 0.2
   - 0.1
+  allCharacters:
+  - name: Monk
+    type: 0
+    sprites:
+    - {fileID: 21300000, guid: 4d28aabb291ca594a8d1b1ff6cf8bcda, type: 3}
+    - {fileID: 21300000, guid: ffae2026c1b0fa94cad9d8eff8b51b0d, type: 3}
+    - {fileID: 21300000, guid: ab35707c4d4954d458f63c4bddd8b2fb, type: 3}
+  - name: Ichi
+    type: 1
+    sprites:
+    - {fileID: 21300000, guid: c772303bf6ddb6d4d981e8ad4c8554b3, type: 3}
+    - {fileID: 21300000, guid: 3d4491682c2bd334090acb59116677e5, type: 3}
+    - {fileID: 21300000, guid: ce9a39e1a1f43154f971440bfdeb8097, type: 3}
+  - name: Bluetail
+    type: 2
+    sprites:
+    - {fileID: 21300000, guid: 3c9aef9ff31970a498d148f8d6d20c9d, type: 3}
+    - {fileID: 21300000, guid: 567d80f6bac1f754c97670d9a495cbb3, type: 3}
+    - {fileID: 21300000, guid: fe4ca210247469443ad7a853c90d219a, type: 3}
+  - name: Macaroni
+    type: 3
+    sprites:
+    - {fileID: 21300000, guid: 4856ba386e2b45841ac1fb442fe627fa, type: 3}
+    - {fileID: 21300000, guid: 4392e1e5f00c2ef4bb565225aa2f7964, type: 3}
+    - {fileID: 21300000, guid: 0cbe9307dbf0bcd4095e326f29c88733, type: 3}
+  - name: Chaolin
+    type: 4
+    sprites:
+    - {fileID: 21300000, guid: b62f3c9bf6e902444a4505bb400b7c83, type: 3}
+    - {fileID: 21300000, guid: ac28886ec5f340e49a069009b784b80f, type: 3}
+    - {fileID: 21300000, guid: a992f387e00e7a34791561d665335dc1, type: 3}
+  - name: Fraug
+    type: 5
+    sprites:
+    - {fileID: 21300000, guid: d934941d5675bff40a301ec39de8c6ed, type: 3}
+    - {fileID: 21300000, guid: 45abe035cf766eb46b11642ea29e92ed, type: 3}
+    - {fileID: 21300000, guid: 0aff80abbfc6c2f449b0b27ecbc1ebab, type: 3}

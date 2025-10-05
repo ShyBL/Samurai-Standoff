@@ -1,18 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Globalization;
+using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class Timer : MonoBehaviour
 {
     public static Timer instance;
-
-    public float signalTime, timer;
-    [SerializeField] float minSignal, maxSignal;
-    [SerializeField] TextMeshProUGUI signalText;
+    [SerializeField] private PlayerData playerData;
+    
+    [SerializeField] private float minSignal, maxSignal;
+    [SerializeField] private TextMeshProUGUI signalText;
+    [SerializeField] private TextMeshProUGUI framesText;
+    
+    private float _timer;
+    private float _frames;
+    private float _lastFrameCount;
+    
     public bool signal;
+    public float signalTime;
 
-    void Awake()
+    private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -20,22 +29,27 @@ public class Timer : MonoBehaviour
         {
             Destroy(gameObject);
             return;
-        }      
+        }
+
         signalTime = Random.Range(minSignal, maxSignal);
+
+        // Zero out best time for result screen
+        _frames = 0f;
+        //playerData.lastBestFrameCount = _frames;
     }
 
-    void Start()
+    private void Start()
     {
         signalText.enabled = false;
     }
 
-    void Update()
+    private void Update()
     {
-        if(GameController.instance.winnerDeclared != true)
+        if (GameController.instance.winnerDeclared != true)
         {
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
 
-            if (timer >= signalTime)
+            if (_timer >= signalTime)
             {
                 if (signalText.enabled == false)
                 {
@@ -48,6 +62,23 @@ public class Timer : MonoBehaviour
         else
         {
             signalText.enabled = false;
-        }   
+        }
+
+        switch (signal)
+        {
+            case true when !GameController.instance.winnerDeclared:
+                _frames++;
+                break;
+            case true when GameController.instance.winnerDeclared:
+                framesText.text = _frames.ToString(CultureInfo.CurrentCulture);
+                
+                // Log best frame count for result screen
+                if (_lastFrameCount > _frames)
+                {
+                    _lastFrameCount = _frames;
+                    playerData.lastBestFrameCount = _frames;
+                }
+                break;
+        }
     }
 }

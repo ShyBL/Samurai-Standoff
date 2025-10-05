@@ -9,17 +9,17 @@ public class EnemyController : MonoBehaviour
 {
     #region Serialized Fields
 
-    [Header("Enemy UI Elements")]
+    [Header("Enemy UI Elements")] 
     [SerializeField] private TextMeshProUGUI enemyNameText;
+
     [SerializeField] private Image enemyImage;
 
-    [Header("Enemy State")]
+    [Header("Enemy State")] 
     [SerializeField] private bool hasEnemyAttacked;
     [SerializeField] private Character selectedCharacter;
 
-    [Header("Game Data")]
-    [SerializeField] private GameData enemyStats;
-    public List<Character> allCharacters;
+    [Header("Game Data")] 
+    [SerializeField] private GameData enemyStats; 
 
     #endregion
 
@@ -55,9 +55,30 @@ public class EnemyController : MonoBehaviour
     {
         _difficultyCharacterMap = new()
         {
-            { EnemyDifficultyType.EasyMode,   new List<CharacterType> { CharacterType.Nezumi, CharacterType.Ichi, CharacterType.Bluetail, CharacterType.Macaroni } },
-            { EnemyDifficultyType.MediumMode, new List<CharacterType> { CharacterType.Nezumi, CharacterType.Bluetail, CharacterType.Macaroni, CharacterType.Chaolin } },
-            { EnemyDifficultyType.HardMode,   new List<CharacterType> { CharacterType.Nezumi, CharacterType.Bluetail, CharacterType.Chaolin, CharacterType.Ichi, CharacterType.Fraug } }
+            {
+                EnemyDifficultyType.EasyMode,
+                new List<CharacterType>
+                {
+                    CharacterType.Ichi, CharacterType.Bluetail, CharacterType.Macaroni
+                }
+            },
+            {
+                EnemyDifficultyType.MediumMode,
+                new List<CharacterType>
+                {
+                    CharacterType.Bluetail, CharacterType.Macaroni, CharacterType.Chaolin
+                }
+            },
+            {
+                EnemyDifficultyType.HardMode,
+                new List<CharacterType>
+                {
+                    CharacterType.Macaroni,
+                    CharacterType.Chaolin,
+                    CharacterType.Ichi,
+                    CharacterType.Fraug
+                }
+            }
         };
     }
 
@@ -72,9 +93,9 @@ public class EnemyController : MonoBehaviour
         // Set reaction time based on difficulty
         _reactionTime = difficulty switch
         {
-            EnemyDifficultyType.EasyMode   => enemyStats.easy[levelIndex],
+            EnemyDifficultyType.EasyMode => enemyStats.easy[levelIndex],
             EnemyDifficultyType.MediumMode => enemyStats.medium[levelIndex],
-            EnemyDifficultyType.HardMode   => enemyStats.hard[levelIndex],
+            EnemyDifficultyType.HardMode => enemyStats.hard[levelIndex],
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -87,13 +108,12 @@ public class EnemyController : MonoBehaviour
         }
 
         var characterType = characterOrder[levelIndex];
-        selectedCharacter = allCharacters.FirstOrDefault(c => c.type == characterType);
+        selectedCharacter = enemyStats.allCharacters.FirstOrDefault(c => c.type == characterType);
 
         // Set UI elements
         enemyImage.sprite = selectedCharacter?.sprites.FirstOrDefault(); // Idle sprite
         enemyNameText.text = selectedCharacter?.name;
     }
-
 
     private void ResetAttackTimer()
     {

@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -17,22 +17,23 @@ public class SceneLoader : MonoBehaviour
         {
             Destroy(gameObject);
             return;
-        }      
+        }
     }
 
     public void Clash()
     {
-        transition.SetTrigger("Clash");   
+        transition.SetTrigger("Clash");
     }
 
     //----Scene Transitions-----
-    public void Loadgame()//Enter Game
+    public void Loadgame() //Enter Game
     {
         LevelManager.instance.StartCoroutine(LoadScene(1));
 
         AudioManager.instance.StopSound("Waterfall");
         AudioManager.instance.PlaySound("Waterfall");
     }
+
     public void Restartgame()
     {
         LevelManager.instance.currentLevel = 1;
@@ -41,12 +42,14 @@ public class SceneLoader : MonoBehaviour
         AudioManager.instance.StopSound("Waterfall");
         AudioManager.instance.PlaySound("Waterfall");
     }
-    public void LoadMainMenu(){
+
+    public void LoadMainMenu()
+    {
         LevelManager.instance.currentLevel = 1;
         LevelManager.instance.StartCoroutine(LoadScene(0));
     }
 
-    public IEnumerator LoadScene(int levelIndex)//
+    public IEnumerator LoadScene(int levelIndex) //
     {
         transition.SetTrigger("Start");
 
@@ -70,21 +73,17 @@ public class SceneLoader : MonoBehaviour
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
             foreach (GameObject player in players)
             {
-                if(TryGetComponent(out PlayerController playerController))
-                    playerController.faultCounter = 0;
+                if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
             }
-                
+
             Loadgame();
         }
     }
-    
+
     public IEnumerator LoadResults()
     {
         yield return new WaitForSeconds(3f);
         StartCoroutine(LoadScene(2));
         AudioManager.instance.StopSound("Waterfall");
     }
-    
-    
-  
 }

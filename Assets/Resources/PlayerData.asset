@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a991cbcabbf42b2b191ff7fd8499eb1, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  selectedCharacter:
+    name: Monk
+    type: 0
+    sprites:
+    - {fileID: 21300000, guid: 4d28aabb291ca594a8d1b1ff6cf8bcda, type: 3}
+    - {fileID: 21300000, guid: ffae2026c1b0fa94cad9d8eff8b51b0d, type: 3}
+    - {fileID: 21300000, guid: ab35707c4d4954d458f63c4bddd8b2fb, type: 3}
+  characterType: 0
+  lastBestFrameCount: 0
+  volume: 65
+  completedEasyMode: 0
+  completedMediumMode: 0
+  completedHardMode: 0
+  startedFirstDuel: 0
+  wonFirstDuel: 0
+  reachedMediumDifficulty: 0
+  reachedHardDifficulty: 0
+  defeatedFraug: 0
+  m_perfectTimingWins: 0
+  m_totalEarlyAttacks: 0
+  m_currentWinStreak: 0
+  m_bestWinStreak: 0
+  m_totalDuels: 0
+  m_totalWins: 0
+  m_totalLosses: 0
+  m_totalDraws: 0
+  m_maxWinStreak: 0
+  m_earlyAttacks: 0
+  easyStagesCompleted: 0
+  mediumStagesCompleted: 0
+  hardStagesCompleted: 0

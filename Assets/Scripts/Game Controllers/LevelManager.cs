@@ -1,16 +1,15 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private List<Button> buttons;
     public EnemyDifficultyType currentDifficulty;
-    public static LevelManager instance;
     public int totalLevels;
     public int currentLevel = 1;
+    public bool isMultiplayer;
+    
+    #region Singleton
 
-    public bool multiplayer;
+    public static LevelManager instance;
 
     private void Awake()
     {
@@ -26,57 +25,43 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Buttons
-    public void EasyMode()
+    #endregion
+
+    #region Game Mode
+
+    public void SetEasyMode()
     {
-        totalLevels = 4;
+        totalLevels = 3;
         currentDifficulty = EnemyDifficultyType.EasyMode;
-        foreach (var button in buttons)
-        {
-            button.interactable = false;
-        }
     }
 
-    public void MediumMode()
+    public void SetMediumMode()
+    {
+        totalLevels = 3;
+        currentDifficulty = EnemyDifficultyType.MediumMode;
+    }
+
+    public void SetHardMode()
     {
         totalLevels = 4;
-        currentDifficulty = EnemyDifficultyType.MediumMode;
-        foreach (var button in buttons)
-        {
-            button.interactable = false;
-        }
-    }
-
-    public void HardMode()
-    {
-        totalLevels = 5;
         currentDifficulty = EnemyDifficultyType.HardMode;
-        foreach (var button in buttons)
-        {
-            button.interactable = false;
-        }
     }
-
+    
+    // Toggles multiplayer mode on or off.
     public void ToggleMultiplayer()
     {
-        if (multiplayer != true)
-        {
-            multiplayer = true;
-        }
-        else
-        {
-            multiplayer = false;
-        }
+        isMultiplayer = !isMultiplayer;
     }
 
-    public void ApplicationQuit()
+    #endregion
+
+    #region Application Control
+
+    public void OnApplicationQuit()
     {
-        OnApplicationQuit();
+        // Optional cleanup logic
         Application.Quit();
     }
 
-    private void OnApplicationQuit()
-    {
-        
-    }
+    #endregion
 }

@@ -1,4 +1,6 @@
 ﻿public enum EnemyDifficultyType
 {
-    EasyMode, MediumMode, HardMode
+    EasyMode,
+    MediumMode,
+    HardMode
 }

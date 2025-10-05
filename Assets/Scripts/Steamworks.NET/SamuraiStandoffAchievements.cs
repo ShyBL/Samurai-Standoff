@@ -1,23 +1,28 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using Steamworks;
 
-public class SamuraiStandoffAchievements : MonoBehaviour {
-
-    private class Achievement_t {
+public class SamuraiStandoffAchievements : MonoBehaviour
+{
+    private class Achievement_t
+    {
         public Achievement m_eAchievementID;
         public string m_strName;
         public string m_strDescription;
         public bool m_bAchieved;
 
-        public Achievement_t(Achievement achievementID, string name, string desc) {
+        public Achievement_t(Achievement achievementID, string name, string desc)
+        {
             m_eAchievementID = achievementID;
             m_strName = name;
             m_strDescription = desc;
             m_bAchieved = false;
         }
     }
-    private enum Achievement : int {
+
+    private enum Achievement : int
+    {
         ACH_FIRST_VICTORY,
         ACH_PERFECT_TIMING,
         ACH_EARLY_BIRD,
@@ -33,9 +38,10 @@ public class SamuraiStandoffAchievements : MonoBehaviour {
         ACH_NEVER_GIVE_UP
     };
 
-    private Achievement_t[] m_Achievements = new Achievement_t[] {
+    private Achievement_t[] m_Achievements = new Achievement_t[]
+    {
         new Achievement_t(Achievement.ACH_FIRST_VICTORY, "First Blood", "Win your first duel"),
-        new Achievement_t(Achievement.ACH_PERFECT_TIMING, "Perfect Timing", "Win with exactly 1 frame after signal"),
+        new Achievement_t(Achievement.ACH_PERFECT_TIMING, "Perfect Timing","Win with exactly 1 frame after signal"),
         new Achievement_t(Achievement.ACH_EARLY_BIRD, "Eager Samurai", "Attack too early 10 times"),
         new Achievement_t(Achievement.ACH_DRAW_MASTER, "Draw Master", "Achieve 5 draws in duels"),
         new Achievement_t(Achievement.ACH_EASY_COMPLETE, "Novice Warrior", "Complete all Easy difficulty stages"),
@@ -48,9 +54,9 @@ public class SamuraiStandoffAchievements : MonoBehaviour {
         new Achievement_t(Achievement.ACH_PRECISION_MASTER, "Precision Master", "Win 20 duels with perfect timing"),
         new Achievement_t(Achievement.ACH_NEVER_GIVE_UP, "Never Give Up", "Lose 50 duels but keep fighting")
     };
-    
+
     protected Callback<UserAchievementStored_t> m_UserAchievementStored;
-    
+
     // Our GameID
     private CGameID m_GameID;
 
@@ -62,9 +68,9 @@ public class SamuraiStandoffAchievements : MonoBehaviour {
     // Reference to the shared progression data
     public PlayerData playerData;
 
-    void OnEnable() {
-        if (!SteamManager.Initialized)
-            return;
+    private void OnEnable()
+    {
+        if (!SteamManager.Initialized) return;
 
         // Cache the GameID for use in the Callbacks
         m_UserAchievementStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
@@ -73,10 +79,10 @@ public class SamuraiStandoffAchievements : MonoBehaviour {
         m_bRequestedStats = false;
         m_bStatsValid = false;
     }
-    
-    private void Update() {
-        if (!SteamManager.Initialized)
-            return;
+
+    private void Update()
+    {
+        if (!SteamManager.Initialized) return;
         if (!m_bRequestedStats)
         {
             SteamAPICall_t call = SteamUserStats.RequestUserStats(SteamUser.GetSteamID());
@@ -84,107 +90,134 @@ public class SamuraiStandoffAchievements : MonoBehaviour {
             Debug.Log("Requesting stats from Steam...");
         }
 
-        if (!m_bStatsValid)
-            return;
+        if (!m_bStatsValid) return;
 
         // Check achievements
         CheckAchievements();
     }
 
-    private void CheckAchievements() {
-        foreach (Achievement_t achievement in m_Achievements) {
-            if (achievement.m_bAchieved)
-                continue;
+    private void CheckAchievements()
+    {
+        foreach (Achievement_t achievement in m_Achievements)
+        {
+            if (achievement.m_bAchieved) continue;
 
-            switch (achievement.m_eAchievementID) {
+            switch (achievement.m_eAchievementID)
+            {
                 case Achievement.ACH_FIRST_VICTORY:
-                    if (playerData.m_totalWins >= 1) {
+                    if (playerData.m_totalWins >= 1)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_PERFECT_TIMING:
-                    if (playerData.m_perfectTimingWins >= 1) {
+                    if (playerData.m_perfectTimingWins >= 1)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_EARLY_BIRD:
-                    if (playerData.m_earlyAttacks >= 10) {
+                    if (playerData.m_earlyAttacks >= 10)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_DRAW_MASTER:
-                    if (playerData.m_totalDraws >= 5) {
+                    if (playerData.m_totalDraws >= 5)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_EASY_COMPLETE:
-                    if (playerData.reachedMediumDifficulty) {
+                    if (playerData.reachedMediumDifficulty)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_MEDIUM_COMPLETE:
-                    if (playerData.reachedHardDifficulty) {
+                    if (playerData.reachedHardDifficulty)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_HARD_COMPLETE:
-                    if (playerData.defeatedFraug) {
-                        UnlockAchievement(achievement);
-                    }
-                    break;
                 case Achievement.ACH_DEFEAT_FRAUG:
-                    if (playerData.defeatedFraug) {
+                    if (playerData.defeatedFraug)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_WIN_STREAK_5:
-                    if (playerData.m_maxWinStreak >= 5) {
+                    if (playerData.m_maxWinStreak >= 5)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_WIN_STREAK_10:
-                    if (playerData.m_maxWinStreak >= 10) {
+                    if (playerData.m_maxWinStreak >= 10)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_LIGHTNING_FAST:
                     // This will be triggered externally when a fast win occurs
                     break;
                 case Achievement.ACH_PRECISION_MASTER:
-                    if (playerData.m_perfectTimingWins >= 20) {
+                    if (playerData.m_perfectTimingWins >= 20)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
                 case Achievement.ACH_NEVER_GIVE_UP:
-                    if (playerData.m_totalLosses >= 50) {
+                    if (playerData.m_totalLosses >= 50)
+                    {
                         UnlockAchievement(achievement);
                     }
+
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }
-   
-    private void TriggerLightningFastAchievement() {
-        foreach (Achievement_t achievement in m_Achievements) {
-            if (achievement.m_eAchievementID == Achievement.ACH_LIGHTNING_FAST && !achievement.m_bAchieved) {
+
+    private void TriggerLightningFastAchievement()
+    {
+        foreach (Achievement_t achievement in m_Achievements)
+        {
+            if (achievement.m_eAchievementID == Achievement.ACH_LIGHTNING_FAST && !achievement.m_bAchieved)
+            {
                 UnlockAchievement(achievement);
                 break;
             }
         }
     }
 
-    private void UnlockAchievement(Achievement_t achievement) {
+    private void UnlockAchievement(Achievement_t achievement)
+    {
         achievement.m_bAchieved = true;
         SteamUserStats.SetAchievement(achievement.m_eAchievementID.ToString());
+
         m_bStoreStats = true;
-        
+
         Debug.Log("Achievement Unlocked: " + achievement.m_strName);
     }
 
-    private void OnAchievementStored(UserAchievementStored_t pCallback) {
-        if ((ulong)m_GameID == pCallback.m_nGameID) {
+    private void OnAchievementStored(UserAchievementStored_t pCallback)
+    {
+        if ((ulong)m_GameID == pCallback.m_nGameID)
+        {
             Debug.Log("Achievement '" + pCallback.m_rgchAchievementName + "' unlocked!");
         }
     }
-    
 }

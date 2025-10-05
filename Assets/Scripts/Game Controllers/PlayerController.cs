@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -6,17 +7,17 @@ public class PlayerController : MonoBehaviour
 {
     #region Serialized Fields
 
-    [Header("Player UI Elements")]
+    [Header("Player UI Elements")] 
     [SerializeField] private TextMeshProUGUI faultText;
+
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private Image playerImage;
 
-    [Header("Player Data")]
-    [SerializeField] private Character characterData;
-
-    [Header("Player State")]
+    [Header("Player State")] 
     [SerializeField] private bool hasPlayerAttacked;
+    [SerializeField] private PlayerData playerData;
 
+    private Character _characterData;
     #endregion
 
     #region Public Fields
@@ -27,13 +28,18 @@ public class PlayerController : MonoBehaviour
 
     #region Unity Methods
 
+    private void Awake()
+    {
+        _characterData = playerData.selectedCharacter;
+    }
+
     private void Start()
     {
         hasPlayerAttacked = false;
 
         // Initialize player visuals
-        playerImage.sprite = characterData.sprites[0]; // Idle sprite
-        playerNameText.text = characterData?.name;
+        playerImage.sprite = _characterData.sprites[0]; // Idle sprite
+        playerNameText.text = _characterData?.name;
     }
 
     private void Update()
@@ -54,16 +60,15 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     GameController.instance.DeclareWinner(gameObject);
-                    playerImage.sprite = characterData.sprites[1]; // Win sprite
+                    playerImage.sprite = _characterData.sprites[1]; // Win sprite
                     MovePlayerToAttackPosition();
-                    
                 }
             }
         }
 
         if (GameController.instance.winnerDeclared && !hasPlayerAttacked)
         {
-            playerImage.sprite = characterData.sprites[2]; // Lose sprite
+            playerImage.sprite = _characterData.sprites[2]; // Lose sprite
             MovePlayerToAttackPosition();
         }
     }
@@ -71,7 +76,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region UI Logic
-    
+
     private void UpdateFaultUI()
     {
         faultText.enabled = faultCounter >= 1;
