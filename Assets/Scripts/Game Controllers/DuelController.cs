@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Globalization;
 using TMPro;
 
 public class DuelController : MonoBehaviour
@@ -22,20 +23,82 @@ public class DuelController : MonoBehaviour
         }
 
         winnerDeclared = false;
+        TimerInit();
     }
 
     #endregion
 
-    #region Game State
+    #region Timer Logic
+    [SerializeField] private float minSignal, maxSignal;
+    [SerializeField] private TextMeshProUGUI signalText;
+    [SerializeField] private TextMeshProUGUI framesText;
+    
+    private float _timer;
+    private int _frames;
+    private int _bestFrameCount = 100000;
+    
+    public bool signal;
+    public float signalTime;
+    
+    private void Update()
+    {
+        if (winnerDeclared != true)
+        {
+            _timer += Time.deltaTime;
 
+            if (_timer >= signalTime)
+            {
+                if (signalText.enabled == false)
+                {
+                    AudioManager.instance.PlaySound("Signal");
+                    signal = true;
+                    signalText.enabled = true;
+                }
+            }
+        }
+        else
+        {
+            signalText.enabled = false;
+        }
+
+        switch (signal)
+        {
+            case true when winnerDeclared:
+                _frames++;
+                break;
+            case true when winnerDeclared:
+                framesText.text = _frames.ToString(CultureInfo.CurrentCulture);
+                
+                // Log best frame count for result screen
+                if (_bestFrameCount > _frames)
+                {
+                    _bestFrameCount = _frames;
+                    playerData.lastBestFrameCount = _frames;
+                }
+                break;
+        }
+    }
+    #endregion
+    
+    #region Game State
+    [SerializeField] private PlayerData playerData;
     public GameObject pOne, pTwo;
     public bool winnerDeclared;
 
     [Header("UI Elements")] [SerializeField]
     private TextMeshProUGUI resultText;
 
+    private void TimerInit()
+    {
+        signalTime = Random.Range(minSignal, maxSignal);
+        // Zero out best time for result screen
+        _frames = 0;
+        //playerData.lastBestFrameCount = _frames;
+    }
+    
     private void Start()
     {
+        signalText.enabled = false;
         resultText.enabled = false;
 
         // Assign player references
@@ -48,8 +111,13 @@ public class DuelController : MonoBehaviour
 
     #region Win Logic
 
-    // Declares the winner and triggers appropriate scene transitions.
-    public void DeclareWinner(GameObject winner)
+    /// <summary>
+    /// Declares the winner, records progression stats, and triggers scene transitions.
+    /// A win can be triggered by a fault, which is tracked for stats.
+    /// </summary>
+    /// <param name="winner">The GameObject of the winner.</param>
+    /// <param name="winByFault">Set to true if the win was caused by the opponent's second fault.</param>
+    public void DeclareWinner(GameObject winner, bool winByFault = false)
     {
         AudioManager.instance.PlaySound("Clash");
         SceneLoader.instance.Clash();
@@ -57,6 +125,61 @@ public class DuelController : MonoBehaviour
         if (!winnerDeclared)
         {
             winnerDeclared = true;
+
+            GameObject loser = (winner == pOne) ? pTwo : pOne;
+
+            if (winByFault)
+            {
+                // This call handles the second, loss-inducing fault. The first is in FaultRestart.
+                GameManager.instance.OnEarlyAttack();
+            }
+
+            if (!GameManager.instance.isMultiplayer) // Single Player Logic
+            {
+                if (winner.GetComponent<PlayerController>() != null) // Player wins
+                {
+                    GameManager.instance.OnDuelWon(_frames, loser.name);
+
+                    // Check for difficulty completion after winning the final level
+                    if (GameManager.instance.currentLevel >= GameManager.instance.totalLevels)
+                    {
+                        string difficulty = "";
+                        switch (GameManager.instance.currentDifficulty)
+                        {
+                            case EnemyDifficultyType.EasyMode:
+                                difficulty = "easy";
+                                break;
+                            case EnemyDifficultyType.MediumMode:
+                                difficulty = "medium";
+                                break;
+                            case EnemyDifficultyType.HardMode:
+                                difficulty = "hard";
+                                break;
+                        }
+                        if (!string.IsNullOrEmpty(difficulty))
+                        {
+                            GameManager.instance.OnDifficultyCompleted(difficulty);
+                        }
+                    }
+                }
+                else // AI wins
+                {
+                    GameManager.instance.OnDuelLost();
+                }
+            }
+            else // Multiplayer Logic
+            {
+                // Assuming progression is tracked from the perspective of Player 1 (pOne).
+                if (winner == pOne)
+                {
+                    GameManager.instance.OnDuelWon(_frames, loser.name);
+                }
+                else
+                {
+                    GameManager.instance.OnDuelLost();
+                }
+            }
+
             resultText.enabled = true;
             resultText.text = $"{winner.name} Wins!";
         }
@@ -78,6 +201,9 @@ public class DuelController : MonoBehaviour
     // Handles fault scenario and restarts round if needed.
     public IEnumerator FaultRestart()
     {
+        // Track the first fault as an early attack.
+        GameManager.instance.OnEarlyAttack();
+
         winnerDeclared = true;
         resultText.enabled = true;
         resultText.text = "Fault";

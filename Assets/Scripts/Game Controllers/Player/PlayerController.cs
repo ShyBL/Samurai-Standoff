@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player Attacked");
                 hasPlayerAttacked = true;
 
-                if (!Timer.instance.signal)
+                if (!DuelController.instance.signal)
                 {
                     RegisterFault();
                 }
@@ -95,16 +95,17 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(DuelController.instance.FaultRestart());
         }
-        else
+        else // Determine which player is at fault and declare the other as winner
         {
-            // Determine which player is at fault and declare the other as winner
             if (DuelController.instance.pOne == gameObject)
             {
-                DuelController.instance.DeclareWinner(DuelController.instance.pTwo);
+                // The second parameter 'true' indicates this win was caused by a fault.
+                DuelController.instance.DeclareWinner(DuelController.instance.pTwo, true);
             }
             else if (DuelController.instance.pTwo == gameObject)
             {
-                DuelController.instance.DeclareWinner(DuelController.instance.pOne);
+                // The second parameter 'true' indicates this win was caused by a fault.
+                DuelController.instance.DeclareWinner(DuelController.instance.pOne, true);
             }
         }
     }

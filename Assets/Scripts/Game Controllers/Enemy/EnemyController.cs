@@ -117,7 +117,7 @@ public class EnemyController : MonoBehaviour
 
     private void ResetAttackTimer()
     {
-        _attackTimer = Timer.instance.signalTime + _reactionTime;
+        _attackTimer = DuelController.instance.signalTime + _reactionTime;
     }
 
     #endregion
