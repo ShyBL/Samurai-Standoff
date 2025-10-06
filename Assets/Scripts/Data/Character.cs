@@ -8,13 +8,3 @@ public class Character
     public CharacterType type;
     public List<Sprite> sprites = new List<Sprite>(); // 0: Idle, 1: Win, 2: Lose
 }
-
-    public enum CharacterType
-    {
-        Monk,
-        Ichi,
-        Bluetail,
-        Macaroni,
-        Chaolin, 
-        Fraug, 
-    }

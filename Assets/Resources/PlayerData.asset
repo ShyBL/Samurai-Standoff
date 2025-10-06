@@ -18,7 +18,6 @@ MonoBehaviour:
     sprites: []
   characterType: 0
   lastBestFrameCount: 0
-  volume: 0
   completedEasyMode: 0
   completedMediumMode: 0
   completedHardMode: 0
@@ -36,7 +35,6 @@ MonoBehaviour:
   m_totalLosses: 0
   m_totalDraws: 0
   m_maxWinStreak: 0
-  m_earlyAttacks: 0
   easyStagesCompleted: 0
   mediumStagesCompleted: 0
   hardStagesCompleted: 0

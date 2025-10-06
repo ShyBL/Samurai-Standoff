@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
             playerData.defeatedFraug = true;
         }
 
-        SamuraiStandoffStats.instance.m_bStoreStats = true;
+      //  SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     public void OnDuelLost()
@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
         playerData.m_totalDuels++;
         playerData.m_totalLosses++;
         playerData.m_maxWinStreak = 0;
-        SamuraiStandoffStats.instance.m_bStoreStats = true;
+     //   SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     public void OnDuelDraw()
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
         playerData.m_totalDuels++;
         playerData.m_totalDraws++;
         playerData.m_maxWinStreak = 0;
-        SamuraiStandoffStats.instance.m_bStoreStats = true;
+      //  SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     public void OnEarlyAttack()
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
         if (playerData == null) return;
         
         playerData.m_totalEarlyAttacks++;
-        SamuraiStandoffStats.instance.m_bStoreStats = true;
+       // SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     // Call this when you complete a difficulty, which will then trigger stats to be saved.
@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
         if (playerData == null) return;
         
         MarkDifficultyCompleted(difficulty);
-        SamuraiStandoffStats.instance.m_bStoreStats = true;
+     //   SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     

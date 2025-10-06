@@ -9,7 +9,6 @@ public class PlayerData : ScriptableObject
     public float lastBestFrameCount;
     
     // TODO: ADD HERE EVERY VARIABLE ADDED IN PLAYER DATA
-
     
     [Header("Difficulty Progression & Analytics")]
     public bool completedEasyMode;
@@ -33,7 +32,6 @@ public class PlayerData : ScriptableObject
     public int m_totalLosses;
     public int m_totalDraws;
     public int m_maxWinStreak;
-    public int m_earlyAttacks;
     
     [Header("Stage Completion Counts")]
     [Tooltip("How many stages completed in Easy (0-4)")]
