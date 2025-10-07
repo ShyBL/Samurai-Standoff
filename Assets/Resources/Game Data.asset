@@ -27,7 +27,7 @@ MonoBehaviour:
   - 0.3
   - 0.2
   - 0.1
-  volume: 60
+  volume: 80
   allCharacters:
   - name: Monk
     type: 0

@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player UI Elements")] 
     [SerializeField] private TextMeshProUGUI faultText;
-
-    [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private Image playerImage;
 
     [Header("Player State")] 
@@ -39,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
         // Initialize player visuals
         playerImage.sprite = _characterData.sprites[0]; // Idle sprite
-        playerNameText.text = _characterData?.name;
     }
 
     private void Update()

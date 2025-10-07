@@ -46,22 +46,38 @@ public class SceneLoader : MonoBehaviour
     public void LoadMainMenu()
     {
         GameManager.instance.currentLevel = 1;
-        GameManager.instance.StartCoroutine(LoadScene(0));
+       GameManager.instance.StartCoroutine(LoadMainMenuScene());
     }
 
+    private IEnumerator LoadMainMenuScene()
+    {
+        yield return StartCoroutine(LoadScene(0));
+
+        // Wait one frame to ensure scene objects are initialized
+        yield return null;
+
+        // Find MenuController and update panels
+        MenuController menuController = FindObjectOfType<MenuController>();
+        if (menuController != null)
+        {
+            menuController.ShowCharacterSelection();
+        }
+    }
+
+    
     public IEnumerator LoadScene(int levelIndex) //
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(levelIndex);
+       SceneManager.LoadScene(levelIndex);
     }
 
     public IEnumerator NextLevel()
     {
         yield return new WaitForSeconds(3f);
         Debug.Log("Next Level");
-        transition.SetTrigger("Start");
+       // transition.SetTrigger("Start");
         GameManager.instance.currentLevel++;
 
         if (GameManager.instance.currentLevel > GameManager.instance.totalLevels)

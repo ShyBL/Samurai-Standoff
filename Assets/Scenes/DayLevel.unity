@@ -985,7 +985,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0475124103f85e34bbc2da7fac1abb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyNameText: {fileID: 1232306934}
   enemyImage: {fileID: 679417271}
   hasEnemyAttacked: 0
   selectedCharacter:
@@ -1278,7 +1277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1232306933
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1541,7 +1540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faultText: {fileID: 987551789}
-  playerNameText: {fileID: 1517230242}
   playerImage: {fileID: 1972835361}
   hasPlayerAttacked: 0
   playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
@@ -1571,7 +1569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1517230241
 RectTransform:
   m_ObjectHideFlags: 0

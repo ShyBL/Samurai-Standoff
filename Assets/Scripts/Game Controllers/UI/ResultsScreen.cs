@@ -8,7 +8,9 @@ public class ResultsScreen : MonoBehaviour
 {
     [Header("UI")] 
     [SerializeField] private GameObject soloText, multiText;
+    [SerializeField] private TextMeshProUGUI topTimeText;
     [SerializeField] private TextMeshProUGUI bestTimeText;
+
     [SerializeField] private Image characterImage;
     
     [Header("Data")] 
@@ -34,6 +36,8 @@ public class ResultsScreen : MonoBehaviour
             characterImage.sprite = playerSelectedCharacter.sprites[0];
         }
         
-        bestTimeText.text = playerData.lastBestFrameCount.ToString(CultureInfo.CurrentCulture);
+        topTimeText.text = playerData.lastBestFrameCount.ToString(CultureInfo.CurrentCulture);
+        bestTimeText.text = playerData.currentBestFrameCount.ToString(CultureInfo.CurrentCulture);
+
     }
 }

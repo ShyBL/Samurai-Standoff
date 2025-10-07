@@ -17,6 +17,9 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Color inactiveTextColor = new Color32(255, 255, 255, 125);
     
     [Header("Character Selection")]
+    [SerializeField] private GameObject characterSelectionPanel;
+    [SerializeField] private GameObject menuSelectionPanel;
+
     [SerializeField] private PlayerData playerData;
     [SerializeField] private GameData gameData;
     [SerializeField] private Image characterImage;
@@ -44,6 +47,8 @@ public class MenuController : MonoBehaviour
         _audioManager = AudioManager.instance;
         LoadVolumeFromPlayerData();
         UpdateVolumeLabel();
+
+        volumeSlider.onValueChanged.AddListener(ApplyVolume);
     }
 
     public void SelectCharacterByIndex(int index)
@@ -141,11 +146,9 @@ public class MenuController : MonoBehaviour
         _audioManager.audioMixer.SetFloat("Volume", volumeDb);
     }
 
-    public void ApplyVolume()
+    public void ApplyVolume(float arg0)
     {
-        var sliderValue = Mathf.Clamp(volumeSlider.value, 0.0001f, 100f);
-    
-        var normalized = sliderValue / 100f;
+        var normalized = arg0 / 100f;
     
         var curved = Mathf.Pow(normalized, 2f);
     
@@ -153,9 +156,9 @@ public class MenuController : MonoBehaviour
         var volumeDb = Mathf.Lerp(-80f, 20f, curved);
     
         _audioManager.audioMixer.SetFloat("Volume", volumeDb);
-        gameData.volume = sliderValue;
+        gameData.volume = arg0;
     
-        Debug.Log($"Applied and saved volume: {sliderValue} → {volumeDb} dB");
+        Debug.Log($"Applied and saved volume: {arg0} → {volumeDb} dB");
     }
 
     public void CancelApplyVolume()
@@ -171,5 +174,12 @@ public class MenuController : MonoBehaviour
 
         }
     }
+    
+    public void ShowCharacterSelection()
+    {
+        menuSelectionPanel.SetActive(false);
+        characterSelectionPanel.SetActive(true);
+    }
+
     
 }

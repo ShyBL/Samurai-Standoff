@@ -35,14 +35,17 @@ public class DuelController : MonoBehaviour
     
     private float _timer;
     private int _frames;
-    private int _bestFrameCount = 100000;
     
     public bool signal;
     public float signalTime;
     
     private void Update()
     {
-        if (winnerDeclared != true)
+        if (winnerDeclared)
+        {
+            signalText.enabled = false;
+        }
+        else
         {
             _timer += Time.deltaTime;
 
@@ -56,24 +59,25 @@ public class DuelController : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            signalText.enabled = false;
-        }
 
         switch (signal)
         {
-            case true when winnerDeclared:
+            case true when !winnerDeclared:
                 _frames++;
                 break;
             case true when winnerDeclared:
                 framesText.text = _frames.ToString(CultureInfo.CurrentCulture);
                 
                 // Log best frame count for result screen
-                if (_bestFrameCount > _frames)
+                if (playerData.lastBestFrameCount > _frames)
                 {
-                    _bestFrameCount = _frames;
                     playerData.lastBestFrameCount = _frames;
+                    
+                    if (playerData.currentBestFrameCount > playerData.lastBestFrameCount)
+                    {
+                        playerData.currentBestFrameCount = playerData.lastBestFrameCount;
+                    }
+                   
                 }
                 break;
         }
@@ -186,6 +190,7 @@ public class DuelController : MonoBehaviour
 
         if (winner.GetComponent<PlayerController>() != null)
         {
+            playerData.lastBestFrameCount = 10000;
             StartCoroutine(SceneLoader.instance.NextLevel());
         }
         else

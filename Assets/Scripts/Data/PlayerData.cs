@@ -6,8 +6,9 @@ public class PlayerData : ScriptableObject
 {
     public Character selectedCharacter;
     public CharacterType characterType;
-    public float lastBestFrameCount;
-    
+    public int lastBestFrameCount = 10000;
+    public int currentBestFrameCount = 10000;
+
     // TODO: ADD HERE EVERY VARIABLE ADDED IN PLAYER DATA
     
     [Header("Difficulty Progression & Analytics")]
@@ -40,6 +41,7 @@ public class PlayerData : ScriptableObject
     public int mediumStagesCompleted;
     [Tooltip("How many stages completed in Hard (0-5)")]
     public int hardStagesCompleted;
+
 
     private void Awake()
     {

@@ -10,8 +10,6 @@ public class EnemyController : MonoBehaviour
     #region Serialized Fields
 
     [Header("Enemy UI Elements")] 
-    [SerializeField] private TextMeshProUGUI enemyNameText;
-
     [SerializeField] private Image enemyImage;
 
     [Header("Enemy State")] 
@@ -112,7 +110,6 @@ public class EnemyController : MonoBehaviour
 
         // Set UI elements
         enemyImage.sprite = selectedCharacter?.sprites.FirstOrDefault(); // Idle sprite
-        enemyNameText.text = selectedCharacter?.name;
     }
 
     private void ResetAttackTimer()

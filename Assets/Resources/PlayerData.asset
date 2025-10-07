@@ -17,7 +17,8 @@ MonoBehaviour:
     type: 0
     sprites: []
   characterType: 0
-  lastBestFrameCount: 0
+  lastBestFrameCount: 10000
+  currentBestFrameCount: 10000
   completedEasyMode: 0
   completedMediumMode: 0
   completedHardMode: 0
