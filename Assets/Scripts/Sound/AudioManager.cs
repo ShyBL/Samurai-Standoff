@@ -36,7 +36,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        FindFirstObjectByType<AudioManager>().PlaySound("Wind");
+        PlaySound("Intro");
+       // FindFirstObjectByType<AudioManager>().PlaySound("Wind");
     }
 
     public void PlaySound(string soundName)

@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3758524887010183833}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.2933634, y: -0.35913226, z: 0.064512335}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2169953349631547787
 MonoBehaviour:
@@ -48,49 +48,70 @@ MonoBehaviour:
   sounds:
   - name: Wind
     clip: {fileID: 8300000, guid: 628d360792475e34987a5d164f56f08c, type: 3}
-    Output: {fileID: 553943012517259396, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 1
     pitch: 0.9
     loop: 1
     source: {fileID: 0}
   - name: Waterfall
     clip: {fileID: 8300000, guid: 0303caa4100084241b4562de837c8563, type: 3}
-    Output: {fileID: 553943012517259396, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 0.1
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Clash
     clip: {fileID: 8300000, guid: d6af8d81a63f6e440b92242957f287d9, type: 3}
-    Output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Signal
     clip: {fileID: 8300000, guid: 96eef390b10064349a0c8d1e4770cfc4, type: 3}
-    Output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Click1
     clip: {fileID: 8300000, guid: d90606f28fd1a6b4a967b3b1dd132a4f, type: 3}
-    Output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Click2
     clip: {fileID: 8300000, guid: ce6299b90c636ab42984a083711592f6, type: 3}
-    Output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Click3
     clip: {fileID: 8300000, guid: a22d6e51352eae54bbd320235a293719, type: 3}
-    Output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Intro
+    clip: {fileID: 8300000, guid: bcb05142a551ae04a8c4720a07233295, type: 3}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Menu
+    clip: {fileID: 8300000, guid: e77625ebe60294b47a3234953e2c7a37, type: 3}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Fight
+    clip: {fileID: 8300000, guid: bc217436f4899a74399d790a2c2dd81a, type: 3}
+    output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 1
     pitch: 1
     loop: 0
