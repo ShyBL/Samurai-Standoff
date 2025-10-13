@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -29,6 +30,34 @@ public class MenuController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI volumeValueText;
 
     private AudioManager _audioManager;
+    private bool _introFinished;
+    
+    private IEnumerator WaitForIntroToFinish(Sound introSound)
+    {
+        _introFinished = true;
+
+        float clipLength = introSound.source.clip.length;
+        Debug.Log($"Waiting for {clipLength} seconds (Intro clip length).");
+
+        yield return new WaitForSeconds(5.5f);
+
+        Debug.Log("Intro clip duration elapsed. Stopping Intro sound.");
+        _audioManager.StopSound("Intro");
+
+        yield return null; // Wait one frame
+
+        if (!introSound.source.isPlaying)
+        {
+            Debug.Log("Intro sound has stopped. Playing Menu sound.");
+            _audioManager.PlaySound("Menu");
+            _introFinished = false;
+        }
+        else
+        {
+            Debug.LogWarning("Intro sound is still playing after StopSound call.");
+        }
+    }
+    
     private void Start()
     {
         if (playerData != null || gameData != null)
@@ -45,6 +74,19 @@ public class MenuController : MonoBehaviour
         UpdateDifficultyButtons();
         
         _audioManager = AudioManager.instance;
+        
+        var introSound = _audioManager.sounds.FirstOrDefault(s => s.name == "Intro");
+
+        if (introSound != null && introSound.source.isPlaying)
+        {
+            Debug.Log("Intro is currently playing. Starting coroutine.");
+            StartCoroutine(WaitForIntroToFinish(introSound));
+        }
+        else
+        {
+            Debug.Log("Intro is not playing. Skipping coroutine.");
+        }
+        
         LoadVolumeFromPlayerData();
         UpdateVolumeLabel();
 
@@ -100,7 +142,7 @@ public class MenuController : MonoBehaviour
         }
 
         DisableDifficultyButtons();
-        SceneLoader.instance.Loadgame();
+        SceneLoader.instance.LoadDuel();
     }
 
     public void ApplicationQuit()

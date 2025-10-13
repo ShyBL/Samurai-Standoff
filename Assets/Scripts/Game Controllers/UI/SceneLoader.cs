@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,7 @@ public class SceneLoader : MonoBehaviour
 {
     public static SceneLoader instance;
     [SerializeField] Animator transition;
+    [SerializeField] private GameData gameData;
 
     private void Awake()
     {
@@ -26,26 +28,53 @@ public class SceneLoader : MonoBehaviour
     }
 
     //----Scene Transitions-----
-    public void Loadgame() //Enter Game
+    public void LoadDuel() //Enter Game
     {
         GameManager.instance.StartCoroutine(LoadScene(1));
+        
+        var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
 
-        AudioManager.instance.StopSound("Waterfall");
-        AudioManager.instance.PlaySound("Waterfall");
+        if (menuSound == null || !menuSound.source.isPlaying)
+        {
+            Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
+            return;
+        }
+
+        Debug.Log("Menu music is playing. Proceeding to load game.");
+
+        AudioManager.instance.StopSound("Menu");
+        AudioManager.instance.PlaySound("Fight");
+
+
+        //AudioManager.instance.StopSound("Waterfall");
+        //AudioManager.instance.PlaySound("Waterfall");
     }
 
-    public void Restartgame()
+    public void RestartDuel()
     {
-        GameManager.instance.currentLevel = 1;
+        gameData.currentLevel = 1;
         GameManager.instance.StartCoroutine(LoadScene(1));
+        
+        var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
 
-        AudioManager.instance.StopSound("Waterfall");
-        AudioManager.instance.PlaySound("Waterfall");
+        if (menuSound == null || !menuSound.source.isPlaying)
+        {
+            Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
+            return;
+        }
+
+        Debug.Log("Menu music is playing. Proceeding to load game.");
+
+        AudioManager.instance.StopSound("Menu");
+        AudioManager.instance.PlaySound("Fight");
+
+       // AudioManager.instance.StopSound("Waterfall");
+       // AudioManager.instance.PlaySound("Waterfall");
     }
 
     public void LoadMainMenu()
-    {
-        GameManager.instance.currentLevel = 1;
+    { 
+        gameData.currentLevel = 1;
        GameManager.instance.StartCoroutine(LoadMainMenuScene());
     }
 
@@ -78,28 +107,33 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Debug.Log("Next Level");
        // transition.SetTrigger("Start");
-        GameManager.instance.currentLevel++;
+       gameData.currentLevel++;
 
-        if (GameManager.instance.currentLevel > GameManager.instance.totalLevels)
+        if (gameData.currentLevel > GameManager.instance.totalLevels)
         {
             StartCoroutine(LoadResults());
         }
         else
         {
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in players)
-            {
-                if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
-            }
+            // GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            // foreach (GameObject player in players)
+            // {
+            //     if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
+            // }
+            Resources.Load<GameData>("Game Data").faultCounter = 0;
 
-            Loadgame();
+            LoadDuel();
         }
     }
 
     public IEnumerator LoadResults()
     {
+        Resources.Load<GameData>("Game Data").faultCounter = 0;
         yield return new WaitForSeconds(3f);
         StartCoroutine(LoadScene(2));
-        AudioManager.instance.StopSound("Waterfall");
+        
+        AudioManager.instance.StopSound("Fight");
+        AudioManager.instance.PlaySound("Menu");
+       // AudioManager.instance.StopSound("Waterfall");
     }
 }

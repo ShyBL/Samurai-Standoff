@@ -11,7 +11,7 @@ public class BackgroundSwitch : MonoBehaviour
 
     private void Awake()
     {
-        _selectedBackground = GameManager.instance.currentDifficulty switch
+        _selectedBackground = Resources.Load<GameData>("Game Data").currentDifficulty switch
         {
             EnemyDifficultyType.EasyMode => backgrounds[0],
             EnemyDifficultyType.MediumMode => backgrounds[1],

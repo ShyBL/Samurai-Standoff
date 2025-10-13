@@ -698,6 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab4bcfd09f9ec04d8d38c2f2bd54fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
   minSignal: 5
   maxSignal: 6
   signalText: {fileID: 1196382732}
@@ -708,6 +709,7 @@ MonoBehaviour:
   pOne: {fileID: 0}
   pTwo: {fileID: 0}
   winnerDeclared: 0
+  playerFault: 0
   resultText: {fileID: 1187237024}
 --- !u!4 &910813844
 Transform:
@@ -991,7 +993,7 @@ MonoBehaviour:
     name: 
     type: 0
     sprites: []
-  enemyStats: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
+  gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
 --- !u!1 &1187237022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,7 +1545,7 @@ MonoBehaviour:
   playerImage: {fileID: 1972835361}
   hasPlayerAttacked: 0
   playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
-  faultCounter: 0
+  gamerData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
 --- !u!222 &1383273716
 CanvasRenderer:
   m_ObjectHideFlags: 0

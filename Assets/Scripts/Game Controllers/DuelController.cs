@@ -9,6 +9,7 @@ public class DuelController : MonoBehaviour
     #region Singleton
 
     public static DuelController instance;
+    [SerializeField] private GameData gameData;
 
     private void Awake()
     {
@@ -82,16 +83,7 @@ public class DuelController : MonoBehaviour
                 break;
         }
     }
-    #endregion
     
-    #region Game State
-    [SerializeField] private PlayerData playerData;
-    public GameObject pOne, pTwo;
-    public bool winnerDeclared;
-
-    [Header("UI Elements")] [SerializeField]
-    private TextMeshProUGUI resultText;
-
     private void TimerInit()
     {
         signalTime = Random.Range(minSignal, maxSignal);
@@ -99,6 +91,17 @@ public class DuelController : MonoBehaviour
         _frames = 0;
         //playerData.lastBestFrameCount = _frames;
     }
+    
+    #endregion
+    
+    #region Game State
+    [SerializeField] private PlayerData playerData;
+    public GameObject pOne, pTwo;
+    public bool winnerDeclared;
+    public bool playerFault;
+
+    [Header("UI Elements")] [SerializeField]
+    private TextMeshProUGUI resultText;
     
     private void Start()
     {
@@ -138,17 +141,17 @@ public class DuelController : MonoBehaviour
                 GameManager.instance.OnEarlyAttack();
             }
 
-            if (!GameManager.instance.isMultiplayer) // Single Player Logic
+            if (!gameData.isMultiplayer) // Single Player Logic
             {
                 if (winner.GetComponent<PlayerController>() != null) // Player wins
                 {
                     GameManager.instance.OnDuelWon(_frames, loser.name);
 
                     // Check for difficulty completion after winning the final level
-                    if (GameManager.instance.currentLevel >= GameManager.instance.totalLevels)
+                    if (gameData.currentLevel >= GameManager.instance.totalLevels)
                     {
                         string difficulty = "";
-                        switch (GameManager.instance.currentDifficulty)
+                        switch (gameData.currentDifficulty)
                         {
                             case EnemyDifficultyType.EasyMode:
                                 difficulty = "easy";

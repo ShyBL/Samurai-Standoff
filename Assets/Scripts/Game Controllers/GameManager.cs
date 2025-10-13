@@ -3,10 +3,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private GameData gameData;
     public int totalLevels;
-    public int currentLevel = 1;
-    public bool isMultiplayer;
-    public EnemyDifficultyType currentDifficulty;
+
 
     #region Singleton
 
@@ -32,26 +31,26 @@ public class GameManager : MonoBehaviour
 
     public void SetEasyMode()
     {
-        totalLevels = 3;
-        currentDifficulty = EnemyDifficultyType.EasyMode;
+        totalLevels = gameData.easyTotalLevels; 
+        gameData.currentDifficulty = EnemyDifficultyType.EasyMode;
     }
 
     public void SetMediumMode()
     {
-        totalLevels = 3;
-        currentDifficulty = EnemyDifficultyType.MediumMode;
+        totalLevels = gameData.mediumTotalLevels; 
+        gameData.currentDifficulty = EnemyDifficultyType.MediumMode;
     }
 
     public void SetHardMode()
     {
-        totalLevels = 4;
-        currentDifficulty = EnemyDifficultyType.HardMode;
+        totalLevels = gameData.hardTotalLevels; 
+        gameData.currentDifficulty = EnemyDifficultyType.HardMode;
     }
     
     // Toggles multiplayer mode on or off.
     public void ToggleMultiplayer()
     {
-        isMultiplayer = !isMultiplayer;
+        gameData.isMultiplayer = !gameData.isMultiplayer;
     }
 
     #endregion

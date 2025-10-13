@@ -14,14 +14,9 @@ public class PlayerController : MonoBehaviour
     [Header("Player State")] 
     [SerializeField] private bool hasPlayerAttacked;
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private GameData gamerData;
 
     private Character _characterData;
-    #endregion
-
-    #region Public Fields
-
-    public int faultCounter;
-
     #endregion
 
     #region Unity Methods
@@ -76,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateFaultUI()
     {
-        faultText.enabled = faultCounter >= 1;
+        faultText.enabled =  gamerData.faultCounter >= 1;
     }
 
     #endregion
@@ -86,9 +81,10 @@ public class PlayerController : MonoBehaviour
     // Handles fault registration and win condition logic.
     private void RegisterFault()
     {
-        faultCounter++;
-
-        if (faultCounter < 2)
+        gamerData.faultCounter++;
+        DuelController.instance.playerFault = true;
+        
+        if (gamerData.faultCounter < 2)
         {
             StartCoroutine(DuelController.instance.FaultRestart());
         }

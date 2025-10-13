@@ -193,7 +193,7 @@ MonoBehaviour:
     m_Bits: 4294967295
 --- !u!95 &5036610399679144369
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -207,7 +207,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -259,3 +258,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 5036610399679144369}
+  gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}

@@ -45,7 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
+  gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
   totalLevels: 0
-  currentLevel: 1
-  isMultiplayer: 0
-  currentDifficulty: 0

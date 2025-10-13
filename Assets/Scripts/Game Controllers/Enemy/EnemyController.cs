@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
@@ -15,9 +16,9 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy State")] 
     [SerializeField] private bool hasEnemyAttacked;
     [SerializeField] private Character selectedCharacter;
-
+    
     [Header("Game Data")] 
-    [SerializeField] private GameData enemyStats; 
+    [SerializeField] private GameData gameData; 
 
     #endregion
 
@@ -41,7 +42,10 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        HandleEnemyAttackLogic();
+        if (!DuelController.instance.playerFault)
+        {
+            HandleEnemyAttackLogic();
+        }
     }
 
     #endregion
@@ -85,15 +89,15 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("Assign Enemy Traits Called");
 
-        int levelIndex = GameManager.instance.currentLevel - 1;
-        var difficulty = GameManager.instance.currentDifficulty;
+        int levelIndex = gameData.currentLevel - 1;
+        var difficulty = gameData.currentDifficulty;
 
         // Set reaction time based on difficulty
         _reactionTime = difficulty switch
         {
-            EnemyDifficultyType.EasyMode => enemyStats.easy[levelIndex],
-            EnemyDifficultyType.MediumMode => enemyStats.medium[levelIndex],
-            EnemyDifficultyType.HardMode => enemyStats.hard[levelIndex],
+            EnemyDifficultyType.EasyMode => gameData.easy[levelIndex],
+            EnemyDifficultyType.MediumMode => gameData.medium[levelIndex],
+            EnemyDifficultyType.HardMode => gameData.hard[levelIndex],
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -106,7 +110,7 @@ public class EnemyController : MonoBehaviour
         }
 
         var characterType = characterOrder[levelIndex];
-        selectedCharacter = enemyStats.allCharacters.FirstOrDefault(c => c.type == characterType);
+        selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == characterType);
 
         // Set UI elements
         enemyImage.sprite = selectedCharacter?.sprites.FirstOrDefault(); // Idle sprite
