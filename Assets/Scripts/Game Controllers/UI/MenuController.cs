@@ -171,7 +171,7 @@ public class MenuController : MonoBehaviour
         difficultyButtons[1].interactable = mediumUnlocked;
         difficultyText[1].color = mediumUnlocked ? activeTextColor : inactiveTextColor;
 
-        bool hardUnlocked = playerData.completedEasyMode;
+        bool hardUnlocked = playerData.completedMediumMode;
         difficultyButtons[2].interactable = hardUnlocked;
         difficultyText[2].color = hardUnlocked ? activeTextColor : inactiveTextColor;
     }
