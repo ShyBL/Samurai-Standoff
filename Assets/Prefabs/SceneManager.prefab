@@ -259,3 +259,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 5036610399679144369}
   gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
+  playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}

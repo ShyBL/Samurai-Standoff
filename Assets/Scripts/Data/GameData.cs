@@ -6,6 +6,13 @@ public class GameData : ScriptableObject
 {
     [Header("Game Definitions")]
     public List<Character> allCharacters;
+    public List<KeyCode> attackKeys = new List<KeyCode>() 
+    { 
+        KeyCode.Space, 
+        KeyCode.A, 
+        KeyCode.S, 
+        KeyCode.D 
+    };
     
     [Header("Difficulty Settings")]
     public List<float> easy = new (){ 1f, 0.75f, 0.5f, 0.25f };
@@ -20,7 +27,6 @@ public class GameData : ScriptableObject
 
     [Header("Game State")]
     public int faultCounter;
-    public int currentLevel = 1;
     public bool isMultiplayer;
     public EnemyDifficultyType currentDifficulty;
 }

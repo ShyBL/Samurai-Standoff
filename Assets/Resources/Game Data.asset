@@ -49,6 +49,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 7ea3494648b0bb24da60374c3ac6a0d1, type: 3}
     - {fileID: 21300000, guid: 0cccaf586a372fc42a22f1bab9482468, type: 3}
     - {fileID: 21300000, guid: 3e78d1f881a83774ca9fa20e2a47520c, type: 3}
+  attackKeys: 610000007300000064000000
   easy:
   - 1
   - 0.75
@@ -69,6 +70,5 @@ MonoBehaviour:
   hardTotalLevels: 4
   volume: 80
   faultCounter: 0
-  currentLevel: 1
   isMultiplayer: 0
   currentDifficulty: 0

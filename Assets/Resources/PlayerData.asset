@@ -13,15 +13,13 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   selectedCharacter:
-    name: Monk
+    name: 
     type: 0
-    sprites:
-    - {fileID: 21300000, guid: 6ceaea32f5c043145bf2c2de683d39c5, type: 3}
-    - {fileID: 21300000, guid: c6c4fe77de1812f45ae1d811404ef73d, type: 3}
-    - {fileID: 21300000, guid: 5b342cc80a8812448811ff9be7994404, type: 3}
+    sprites: []
   characterType: 0
   lastBestFrameCount: 10000
   currentBestFrameCount: 10000
+  currentLevel: 1
   completedEasyMode: 0
   completedMediumMode: 0
   completedHardMode: 0

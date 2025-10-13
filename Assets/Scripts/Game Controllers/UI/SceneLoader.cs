@@ -8,6 +8,7 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader instance;
     [SerializeField] Animator transition;
     [SerializeField] private GameData gameData;
+    [SerializeField] private PlayerData playerData; 
 
     private void Awake()
     {
@@ -52,7 +53,7 @@ public class SceneLoader : MonoBehaviour
 
     public void RestartDuel()
     {
-        gameData.currentLevel = 1;
+        playerData.currentLevel = 1;
         GameManager.instance.StartCoroutine(LoadScene(1));
         
         var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
@@ -74,7 +75,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     { 
-        gameData.currentLevel = 1;
+        playerData.currentLevel = 1;
        GameManager.instance.StartCoroutine(LoadMainMenuScene());
     }
 
@@ -107,9 +108,9 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Debug.Log("Next Level");
        // transition.SetTrigger("Start");
-       gameData.currentLevel++;
+       playerData.currentLevel++;
 
-        if (gameData.currentLevel > GameManager.instance.totalLevels)
+        if (playerData.currentLevel > GameManager.instance.totalLevels)
         {
             StartCoroutine(LoadResults());
         }

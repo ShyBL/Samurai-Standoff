@@ -18,7 +18,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Character selectedCharacter;
     
     [Header("Game Data")] 
-    [SerializeField] private GameData gameData; 
+    [SerializeField] private GameData gameData;
+    [SerializeField] private PlayerData playerData; 
+
 
     #endregion
 
@@ -38,6 +40,9 @@ public class EnemyController : MonoBehaviour
         InitializeDifficultyCharacterMap();
         AssignEnemyTraits();
         ResetAttackTimer();
+        
+        DuelController.instance.enemyReactionTime = _reactionTime;
+        DuelController.instance.SetMaxFramesForSlider();
     }
 
     private void Update()
@@ -89,7 +94,7 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("Assign Enemy Traits Called");
 
-        int levelIndex = gameData.currentLevel - 1;
+        int levelIndex = playerData.currentLevel - 1;
         var difficulty = gameData.currentDifficulty;
 
         // Set reaction time based on difficulty

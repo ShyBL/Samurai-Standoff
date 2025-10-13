@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Globalization;
 using TMPro;
+using UnityEngine.UI;
 
 public class DuelController : MonoBehaviour
 {
@@ -31,20 +32,22 @@ public class DuelController : MonoBehaviour
 
     #region Timer Logic
     [SerializeField] private float minSignal, maxSignal;
-    [SerializeField] private TextMeshProUGUI signalText;
+    [SerializeField] private Slider signalSlider; // Radial slider for visual feedback
     [SerializeField] private TextMeshProUGUI framesText;
     
     private float _timer;
     private int _frames;
+    private int _maxFramesForSlider; // Calculated based on enemy reaction time
     
     public bool signal;
     public float signalTime;
+    public float enemyReactionTime; // Set by EnemyController
     
     private void Update()
     {
         if (winnerDeclared)
         {
-            signalText.enabled = false;
+            signalSlider.gameObject.SetActive(false);
         }
         else
         {
@@ -52,11 +55,12 @@ public class DuelController : MonoBehaviour
 
             if (_timer >= signalTime)
             {
-                if (signalText.enabled == false)
+                if (!signal)
                 {
                     AudioManager.instance.PlaySound("Signal");
                     signal = true;
-                    signalText.enabled = true;
+                    signalSlider.gameObject.SetActive(true);
+                    signalSlider.value = 0f;
                 }
             }
         }
@@ -65,6 +69,8 @@ public class DuelController : MonoBehaviour
         {
             case true when !winnerDeclared:
                 _frames++;
+                // Update slider based on frame count directly
+                signalSlider.value = _frames;
                 break;
             case true when winnerDeclared:
                 framesText.text = _frames.ToString(CultureInfo.CurrentCulture);
@@ -92,6 +98,17 @@ public class DuelController : MonoBehaviour
         //playerData.lastBestFrameCount = _frames;
     }
     
+    // Called by EnemyController to set the max frames based on enemy reaction time
+    public void SetMaxFramesForSlider()
+    {
+        // Convert enemy reaction time (in seconds) to frames (assuming 60 FPS)
+        _maxFramesForSlider = Mathf.RoundToInt(enemyReactionTime * 60f);
+        
+        // Set the slider's max value to match
+        signalSlider.maxValue = _maxFramesForSlider;
+        signalSlider.minValue = 0f;
+    }
+    
     #endregion
     
     #region Game State
@@ -104,8 +121,9 @@ public class DuelController : MonoBehaviour
     private TextMeshProUGUI resultText;
     
     private void Start()
-    {
-        signalText.enabled = false;
+    { 
+        signalSlider.gameObject.SetActive(false);
+        signalSlider.value = 0f;
         resultText.enabled = false;
 
         // Assign player references
@@ -148,7 +166,7 @@ public class DuelController : MonoBehaviour
                     GameManager.instance.OnDuelWon(_frames, loser.name);
 
                     // Check for difficulty completion after winning the final level
-                    if (gameData.currentLevel >= GameManager.instance.totalLevels)
+                    if (playerData.currentLevel >= GameManager.instance.totalLevels)
                     {
                         string difficulty = "";
                         switch (gameData.currentDifficulty)

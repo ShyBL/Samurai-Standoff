@@ -10,13 +10,15 @@ public class PlayerController : MonoBehaviour
     [Header("Player UI Elements")] 
     [SerializeField] private TextMeshProUGUI faultText;
     [SerializeField] private Image playerImage;
+    [SerializeField] private GameObject keyPromptObject; // The UI object showing which key to press
 
     [Header("Player State")] 
     [SerializeField] private bool hasPlayerAttacked;
     [SerializeField] private PlayerData playerData;
-    [SerializeField] private GameData gamerData;
+    [SerializeField] private GameData gameData;
 
     private Character _characterData;
+    private KeyCode _currentKey; // The key the player needs to press this round
     #endregion
 
     #region Unity Methods
@@ -32,13 +34,28 @@ public class PlayerController : MonoBehaviour
 
         // Initialize player visuals
         playerImage.sprite = _characterData.sprites[0]; // Idle sprite
+        
+        // Set the key based on difficulty
+        AssignKey();
+        
+        // Hide key prompt initially
+        if (keyPromptObject != null)
+        {
+            keyPromptObject.SetActive(false);
+        }
     }
 
     private void Update()
     {
         UpdateFaultUI();
+        
+        // Show key prompt when signal appears
+        if (DuelController.instance.signal && keyPromptObject != null && !DuelController.instance.winnerDeclared)
+        {
+            keyPromptObject.SetActive(true);
+        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !hasPlayerAttacked)
+        if (Input.GetKeyDown(_currentKey) && !hasPlayerAttacked)
         {
             if (!DuelController.instance.winnerDeclared)
             {
@@ -54,6 +71,12 @@ public class PlayerController : MonoBehaviour
                     DuelController.instance.DeclareWinner(gameObject);
                     playerImage.sprite = _characterData.sprites[1]; // Win sprite
                     MovePlayerToAttackPosition();
+                    
+                    // Hide key prompt after attack
+                    if (keyPromptObject != null)
+                    {
+                        keyPromptObject.SetActive(false);
+                    }
                 }
             }
         }
@@ -62,6 +85,50 @@ public class PlayerController : MonoBehaviour
         {
             playerImage.sprite = _characterData.sprites[2]; // Lose sprite
             MovePlayerToAttackPosition();
+            
+            // Hide key prompt when round ends
+            if (keyPromptObject != null)
+            {
+                keyPromptObject.SetActive(false);
+            }
+        }
+    }
+
+    #endregion
+
+    #region Key Assignment
+
+    private void AssignKey()
+    {
+        // Get the list of keys from GameData
+        if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
+        {
+            Debug.LogWarning("No attack keys defined in GameData! Defaulting to Space.");
+            _currentKey = KeyCode.Space;
+            return;
+        }
+
+        // Easy mode: always use first key
+        if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode)
+        {
+            _currentKey = gameData.attackKeys[0];
+        }
+        else // Medium and Hard: random key from the list
+        {
+            int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
+            _currentKey = gameData.attackKeys[randomIndex];
+        }
+        
+        Debug.Log($"Player must press: {_currentKey}");
+        
+        // Update the key prompt text if it has a TextMeshProUGUI component
+        if (keyPromptObject != null)
+        {
+            TextMeshProUGUI promptText = keyPromptObject.GetComponent<TextMeshProUGUI>();
+            if (promptText != null)
+            {
+                promptText.text = _currentKey.ToString();
+            }
         }
     }
 
@@ -71,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateFaultUI()
     {
-        faultText.enabled =  gamerData.faultCounter >= 1;
+        faultText.enabled = gameData.faultCounter >= 1;
     }
 
     #endregion
@@ -81,10 +148,10 @@ public class PlayerController : MonoBehaviour
     // Handles fault registration and win condition logic.
     private void RegisterFault()
     {
-        gamerData.faultCounter++;
+        gameData.faultCounter++;
         DuelController.instance.playerFault = true;
         
-        if (gamerData.faultCounter < 2)
+        if (gameData.faultCounter < 2)
         {
             StartCoroutine(DuelController.instance.FaultRestart());
         }

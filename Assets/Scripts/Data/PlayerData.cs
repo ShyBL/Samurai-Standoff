@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject
     public CharacterType characterType;
     public int lastBestFrameCount = 10000;
     public int currentBestFrameCount = 10000;
+    public int currentLevel = 1;
 
     // TODO: ADD HERE EVERY VARIABLE ADDED IN PLAYER DATA
     
