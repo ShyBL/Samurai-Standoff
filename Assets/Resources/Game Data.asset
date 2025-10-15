@@ -72,3 +72,4 @@ MonoBehaviour:
   currentLevel: 1
   isMultiplayer: 0
   currentDifficulty: 0
+  currentlanguge: 5

@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Menu_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 434e58bd81b21e04c93e52cd09c03635, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1646644600832
+    m_Localized: JOUEUR UNIQUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349568
+    m_Localized: MULTIJOUEUR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349569
+    m_Localized: "PARAM\xC8TRES"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349570
+    m_Localized: SORTIE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349571
+    m_Localized: CHOISIR LA LANGUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349572
+    m_Localized: CONFIRMER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349573
+    m_Localized: CHOISISSEZ LE PERSONNAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349574
+    m_Localized: CHOISIR LE MODE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349575
+    m_Localized: Retour
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349576
+    m_Localized: Facile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349577
+    m_Localized: Normale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349578
+    m_Localized: Dur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349579
+    m_Localized: Comment jouer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349581
+    m_Localized: quand tu vois le point d'exclamation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1646682349582
+    m_Localized: D'ACCORD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5827585548288
+    m_Localized: Volume sonore principal
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
