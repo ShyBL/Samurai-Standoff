@@ -23,4 +23,5 @@ public class GameData : ScriptableObject
     public int currentLevel = 1;
     public bool isMultiplayer;
     public EnemyDifficultyType currentDifficulty;
+    public int currentlanguge = 0;
 }
