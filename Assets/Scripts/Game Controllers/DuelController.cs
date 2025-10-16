@@ -4,7 +4,7 @@ using System.Collections;
 using System.Globalization;
 using TMPro;
 using UnityEngine.UI;
-
+public enum RPS { Rock, Paper, Scissors }
 public class DuelController : MonoBehaviour
 {
     #region Singleton
@@ -43,6 +43,11 @@ public class DuelController : MonoBehaviour
     public float signalTime;
     public float enemyReactionTime; // Set by EnemyController
     
+    private RPS _playerChoice;
+    private RPS _enemyChoice;
+    private bool _playerHasChosen;
+    private bool _enemyHasChosen;
+    
     private void Update()
     {
         if (winnerDeclared)
@@ -61,6 +66,9 @@ public class DuelController : MonoBehaviour
                     signal = true;
                     signalSlider.gameObject.SetActive(true);
                     signalSlider.value = 0f;
+                    
+                    _playerHasChosen = false;
+                    _enemyHasChosen = false;
                 }
             }
         }
@@ -132,6 +140,67 @@ public class DuelController : MonoBehaviour
         pTwo = players[1];
     }
 
+    public void SubmitRPSChoice(GameObject player, RPS choice)
+    {
+        if (player == pOne)
+        {
+            _playerChoice = choice;
+            _playerHasChosen = true;
+        }
+        else if (player == pTwo)
+        {
+            _enemyChoice = choice;
+            _enemyHasChosen = true;
+        }
+
+        Debug.Log($"{player.name} chose: {choice}");
+
+        if (_playerHasChosen && _enemyHasChosen)
+        {
+            StartCoroutine(EvaluateRPSRound());
+        }
+    }
+    
+    private IEnumerator EvaluateRPSRound()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        int result = CompareRPSChoices(_playerChoice, _enemyChoice);
+
+        if (result > 0) 
+        {
+            DeclareWinner(pOne);
+        }
+        else if (result < 0)
+        {
+            DeclareWinner(pTwo);
+        }
+        else
+        {
+            resultText.enabled = true;
+            resultText.text = "Tie!";
+            yield return new WaitForSeconds(2f);
+            RestartRound();
+        }
+    }
+
+    private int CompareRPSChoices(RPS choice1, RPS choice2)
+    {
+    
+        if (choice1 == choice2) return 0;
+
+        if (choice1 == RPS.Rock)
+            return choice2 == RPS.Scissors ? 1 : -1;
+
+        if (choice1 == RPS.Paper)
+            return choice2 == RPS.Rock ? 1 : -1;
+
+        if (choice1 == RPS.Scissors)
+            return choice2 == RPS.Paper ? 1 : -1;
+
+        return 0;
+    }
+    
     #endregion
 
     #region Win Logic

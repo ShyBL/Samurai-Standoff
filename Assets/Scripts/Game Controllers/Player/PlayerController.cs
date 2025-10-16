@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -10,7 +11,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player UI Elements")] 
     [SerializeField] private TextMeshProUGUI faultText;
     [SerializeField] private Image playerImage;
-    [SerializeField] private GameObject keyPromptObject; // The UI object showing which key to press
+    [SerializeField] private GameObject keyPromptObject;
+    [SerializeField] private TextMeshProUGUI rpsDisplayText;
 
     [Header("Player State")] 
     [SerializeField] private bool hasPlayerAttacked;
@@ -18,7 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameData gameData;
 
     private Character _characterData;
-    private KeyCode _currentKey; // The key the player needs to press this round
+    private RPS _playerChoice;
+    private List<KeyCode> _attackKeys;
+    //private KeyCode _currentKey; 
     #endregion
 
     #region Unity Methods
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _characterData = playerData.selectedCharacter;
+        _attackKeys = gameData.attackKeys;
     }
 
     private void Start()
@@ -36,12 +41,16 @@ public class PlayerController : MonoBehaviour
         playerImage.sprite = _characterData.sprites[0]; // Idle sprite
         
         // Set the key based on difficulty
-        AssignKey();
+        //AssignKey();
         
-        // Hide key prompt initially
         if (keyPromptObject != null)
         {
             keyPromptObject.SetActive(false);
+        }
+        
+        if (rpsDisplayText != null)
+        {
+            rpsDisplayText.gameObject.SetActive(false);
         }
     }
 
@@ -49,90 +58,124 @@ public class PlayerController : MonoBehaviour
     {
         UpdateFaultUI();
         
-        // Show key prompt when signal appears
         if (DuelController.instance.signal && keyPromptObject != null && !DuelController.instance.winnerDeclared)
         {
             keyPromptObject.SetActive(true);
         }
-
-        if (Input.GetKeyDown(_currentKey) && !hasPlayerAttacked)
+     
+        if (Input.GetKeyDown(_attackKeys[0]))
         {
-            if (!DuelController.instance.winnerDeclared)
+            _playerChoice = RPS.Rock;
+            DuelController.instance.SubmitRPSChoice(gameObject, _playerChoice);
+            if (rpsDisplayText != null)
             {
-                Debug.Log("Player Attacked");
-                hasPlayerAttacked = true;
-
-                if (!DuelController.instance.signal)
-                {
-                    RegisterFault();
-                }
-                else
-                {
-                    DuelController.instance.DeclareWinner(gameObject);
-                    playerImage.sprite = _characterData.sprites[1]; // Win sprite
-                    MovePlayerToAttackPosition();
-                    
-                    // Hide key prompt after attack
-                    if (keyPromptObject != null)
-                    {
-                        keyPromptObject.SetActive(false);
-                    }
-                }
+                rpsDisplayText.gameObject.SetActive(true);
+                rpsDisplayText.text = _playerChoice.ToString();
             }
-        }
 
-        if (DuelController.instance.winnerDeclared && !hasPlayerAttacked)
-        {
-            playerImage.sprite = _characterData.sprites[2]; // Lose sprite
-            MovePlayerToAttackPosition();
+            if (keyPromptObject != null)
+            {
+                keyPromptObject.SetActive(false);
+            }
             
-            // Hide key prompt when round ends
+        }
+        else if (Input.GetKeyDown(_attackKeys[1]))
+        {
+            _playerChoice = RPS.Paper;
+            DuelController.instance.SubmitRPSChoice(gameObject, _playerChoice);
+            if (rpsDisplayText != null)
+            {
+                rpsDisplayText.gameObject.SetActive(true);
+                rpsDisplayText.text = _playerChoice.ToString();
+            }
+
             if (keyPromptObject != null)
             {
                 keyPromptObject.SetActive(false);
             }
         }
-    }
-
-    #endregion
-
-    #region Key Assignment
-
-    private void AssignKey()
-    {
-        // Get the list of keys from GameData
-        if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
+        else if (Input.GetKeyDown(_attackKeys[2]))
         {
-            Debug.LogWarning("No attack keys defined in GameData! Defaulting to Space.");
-            _currentKey = KeyCode.Space;
-            return;
-        }
-
-        // Easy mode: always use first key
-        if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode)
-        {
-            _currentKey = gameData.attackKeys[0];
-        }
-        else // Medium and Hard: random key from the list
-        {
-            int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
-            _currentKey = gameData.attackKeys[randomIndex];
-        }
-        
-        Debug.Log($"Player must press: {_currentKey}");
-        
-        // Update the key prompt text if it has a TextMeshProUGUI component
-        if (keyPromptObject != null)
-        {
-            TextMeshProUGUI promptText = keyPromptObject.GetComponent<TextMeshProUGUI>();
-            if (promptText != null)
+            _playerChoice = RPS.Scissors;
+            DuelController.instance.SubmitRPSChoice(gameObject, _playerChoice);
+            if (rpsDisplayText != null)
             {
-                promptText.text = _currentKey.ToString();
+                rpsDisplayText.gameObject.SetActive(true);
+                rpsDisplayText.text = _playerChoice.ToString();
+            }
+
+            if (keyPromptObject != null)
+            {
+                keyPromptObject.SetActive(false);
             }
         }
+        
+        
+        // if (Input.GetKeyDown(_currentKey) && !hasPlayerAttacked)
+        // {
+        //     if (!DuelController.instance.winnerDeclared)
+        //     {
+        //         Debug.Log("Player Attacked");
+        //         hasPlayerAttacked = true;
+        //
+        //         if (!DuelController.instance.signal)
+        //         {
+        //             RegisterFault();
+        //         }
+        //         else
+        //         {
+        //             RegisterWin();
+        //         }
+        //     }
+        // }
+
+        // if (DuelController.instance.winnerDeclared && !hasPlayerAttacked)
+        // {
+        //     RegisterLose();
+        // }
     }
 
+
+
     #endregion
+
+    // #region Key Assignment
+    //
+    // private void AssignKey()
+    // {
+    //     // Get the list of keys from GameData
+    //     if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
+    //     {
+    //         Debug.LogWarning("No attack keys defined in GameData! Defaulting to Space.");
+    //         _currentKey = KeyCode.Space;
+    //         return;
+    //     }
+    //
+    //     // Easy mode: always use first key
+    //     if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode)
+    //     {
+    //         _currentKey = gameData.attackKeys[0];
+    //     }
+    //     else // Medium and Hard: random key from the list
+    //     {
+    //         int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
+    //         _currentKey = gameData.attackKeys[randomIndex];
+    //     }
+    //     
+    //     Debug.Log($"Player must press: {_currentKey}");
+    //     
+    //     // Update the key prompt text if it has a TextMeshProUGUI component
+    //     if (keyPromptObject != null)
+    //     {
+    //         TextMeshProUGUI promptText = keyPromptObject.GetComponent<TextMeshProUGUI>();
+    //         if (promptText != null)
+    //         {
+    //             promptText.text = _currentKey.ToString();
+    //         }
+    //     }
+    // }
+    //
+    // #endregion
 
     #region UI Logic
 
@@ -144,7 +187,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Game Logic
-
+    
     // Handles fault registration and win condition logic.
     private void RegisterFault()
     {
@@ -167,6 +210,31 @@ public class PlayerController : MonoBehaviour
                 // The second parameter 'true' indicates this win was caused by a fault.
                 DuelController.instance.DeclareWinner(DuelController.instance.pOne, true);
             }
+        }
+    }
+    
+    private void RegisterLose()
+    {
+        playerImage.sprite = _characterData.sprites[2]; // Lose sprite
+        MovePlayerToAttackPosition();
+            
+        // Hide key prompt when round ends
+        if (keyPromptObject != null)
+        {
+            keyPromptObject.SetActive(false);
+        }
+    }
+
+    private void RegisterWin()
+    {
+        DuelController.instance.DeclareWinner(gameObject);
+        playerImage.sprite = _characterData.sprites[1]; // Win sprite
+        MovePlayerToAttackPosition();
+                    
+        // Hide key prompt after attack
+        if (keyPromptObject != null)
+        {
+            keyPromptObject.SetActive(false);
         }
     }
 

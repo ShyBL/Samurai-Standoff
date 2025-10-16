@@ -16,7 +16,8 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy State")] 
     [SerializeField] private bool hasEnemyAttacked;
     [SerializeField] private Character selectedCharacter;
-    
+    [SerializeField] private TextMeshProUGUI rpsDisplayText;
+
     [Header("Game Data")] 
     [SerializeField] private GameData gameData;
     [SerializeField] private PlayerData playerData; 
@@ -43,6 +44,8 @@ public class EnemyController : MonoBehaviour
         
         DuelController.instance.enemyReactionTime = _reactionTime;
         DuelController.instance.SetMaxFramesForSlider();
+        
+        rpsDisplayText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -100,9 +103,9 @@ public class EnemyController : MonoBehaviour
         // Set reaction time based on difficulty
         _reactionTime = difficulty switch
         {
-            EnemyDifficultyType.EasyMode => gameData.easy[levelIndex],
-            EnemyDifficultyType.MediumMode => gameData.medium[levelIndex],
-            EnemyDifficultyType.HardMode => gameData.hard[levelIndex],
+            EnemyDifficultyType.EasyMode => gameData.easyReactionTimes[levelIndex],
+            EnemyDifficultyType.MediumMode => gameData.mediumReactionTimes[levelIndex],
+            EnemyDifficultyType.HardMode => gameData.hardReactionTimes[levelIndex],
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -145,9 +148,17 @@ public class EnemyController : MonoBehaviour
 
                 MoveEnemyToAttackPosition();
                 Debug.Log("AI Attacked");
-
                 hasEnemyAttacked = true;
-                DuelController.instance.DeclareWinner(gameObject);
+                
+                RPS enemyChoice = (RPS)UnityEngine.Random.Range(0, 3);
+                DuelController.instance.SubmitRPSChoice(gameObject, enemyChoice);
+                if (rpsDisplayText != null)
+                {
+                    rpsDisplayText.gameObject.SetActive(true);
+                    rpsDisplayText.text = enemyChoice.ToString();
+                }
+
+                // DuelController.instance.DeclareWinner(gameObject);
             }
         }
         else if (DuelController.instance.winnerDeclared && !hasEnemyAttacked)
