@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -6,8 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    #region Serialized Fields
-
     [Header("Player UI Elements")] 
     [SerializeField] private TextMeshProUGUI faultText;
     [SerializeField] private Image playerImage;
@@ -23,7 +20,6 @@ public class PlayerController : MonoBehaviour
     private RPS _playerChoice;
     private List<KeyCode> _attackKeys;
     //private KeyCode _currentKey; 
-    #endregion
 
     #region Unity Methods
 

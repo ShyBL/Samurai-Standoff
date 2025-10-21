@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public enum RPS { Rock, Paper, Scissors }
 public class DuelController : MonoBehaviour
 {
+    [SerializeField] private GameData gameData;
     #region Singleton
 
     public static DuelController instance;
-    [SerializeField] private GameData gameData;
-
+    
     private void Awake()
     {
         if (instance == null)
