@@ -100,9 +100,9 @@ public class EnemyController : MonoBehaviour
         // Set reaction time based on difficulty
         _reactionTime = difficulty switch
         {
-            EnemyDifficultyType.EasyMode => gameData.easy[levelIndex],
-            EnemyDifficultyType.MediumMode => gameData.medium[levelIndex],
-            EnemyDifficultyType.HardMode => gameData.hard[levelIndex],
+            EnemyDifficultyType.EasyMode => gameData.easyReactionTimes[levelIndex],
+            EnemyDifficultyType.MediumMode => gameData.mediumReactionTimes[levelIndex],
+            EnemyDifficultyType.HardMode => gameData.hardReactionTimes[levelIndex],
             _ => throw new ArgumentOutOfRangeException()
         };
 
