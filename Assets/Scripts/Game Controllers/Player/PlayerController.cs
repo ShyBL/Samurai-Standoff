@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameData gameData;
 
     private Character _characterData;
-    private KeyCode _currentKey; // The key the player needs to press this round
+    public KeyCode _currentKey; // The key the player needs to press this round
     #endregion
 
     #region Unity Methods
@@ -103,8 +103,8 @@ public class PlayerController : MonoBehaviour
         // Get the list of keys from GameData
         if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
         {
-            Debug.LogWarning("No attack keys defined in GameData! Defaulting to Space.");
-            _currentKey = KeyCode.Space;
+            Debug.LogWarning("No attack keys defined in GameData! Defaulting to A.");
+            _currentKey = KeyCode.A;
             return;
         }
 
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         // Update the key prompt text if it has a TextMeshProUGUI component
         if (keyPromptObject != null)
         {
-            TextMeshProUGUI promptText = keyPromptObject.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI promptText = keyPromptObject.GetComponentInChildren<TextMeshProUGUI>();
             if (promptText != null)
             {
                 promptText.text = _currentKey.ToString();
