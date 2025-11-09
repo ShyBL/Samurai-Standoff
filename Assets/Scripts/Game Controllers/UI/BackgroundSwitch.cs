@@ -20,5 +20,12 @@ public class BackgroundSwitch : MonoBehaviour
         };
 
         background.sprite = _selectedBackground;
+        
+        AudioManager.instance.PlaySound("Waterfall");
+    }
+
+    private void OnDestroy()
+    {
+        AudioManager.instance.StopSound("Waterfall");
     }
 }

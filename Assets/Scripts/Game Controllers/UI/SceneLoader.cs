@@ -54,7 +54,7 @@ public class SceneLoader : MonoBehaviour
     public void RestartDuel()
     {
         playerData.currentLevel = 1;
-        GameManager.instance.StartCoroutine(LoadScene(1));
+        StartCoroutine(LoadScene(1));
         
         var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
 
@@ -69,14 +69,14 @@ public class SceneLoader : MonoBehaviour
         AudioManager.instance.StopSound("Menu");
         AudioManager.instance.PlaySound("Fight");
 
-       // AudioManager.instance.StopSound("Waterfall");
-       // AudioManager.instance.PlaySound("Waterfall");
+        // AudioManager.instance.StopSound("Waterfall");
+        // AudioManager.instance.PlaySound("Waterfall");
     }
 
     public void LoadMainMenu()
     { 
         playerData.currentLevel = 1;
-       GameManager.instance.StartCoroutine(LoadMainMenuScene());
+        StartCoroutine(LoadMainMenuScene());
     }
 
     private IEnumerator LoadMainMenuScene()
@@ -94,21 +94,21 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
-    
-    public IEnumerator LoadScene(int levelIndex) //
+
+    private IEnumerator LoadScene(int levelIndex) //
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(3f);
-       SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(levelIndex);
     }
 
     public IEnumerator NextLevel()
     {
         yield return new WaitForSeconds(3f);
         Debug.Log("Next Level");
-       // transition.SetTrigger("Start");
-       playerData.currentLevel++;
+        // transition.SetTrigger("Start");
+        playerData.currentLevel++;
 
         if (playerData.currentLevel > GameManager.instance.totalLevels)
         {
@@ -121,7 +121,7 @@ public class SceneLoader : MonoBehaviour
             // {
             //     if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
             // }
-            Resources.Load<GameData>("Game Data").faultCounter = 0;
+            gameData.faultCounter = 0;
 
             LoadDuel();
         }
@@ -129,12 +129,12 @@ public class SceneLoader : MonoBehaviour
 
     public IEnumerator LoadResults()
     {
-        Resources.Load<GameData>("Game Data").faultCounter = 0;
+        gameData.faultCounter = 0;
         yield return new WaitForSeconds(3f);
         StartCoroutine(LoadScene(2));
         
         AudioManager.instance.StopSound("Fight");
         AudioManager.instance.PlaySound("Menu");
-       // AudioManager.instance.StopSound("Waterfall");
+        // AudioManager.instance.StopSound("Waterfall");
     }
 }
