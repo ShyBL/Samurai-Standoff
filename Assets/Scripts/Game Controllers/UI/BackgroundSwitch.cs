@@ -3,29 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BackgroundSwitch : MonoBehaviour
+namespace SamuraiStandoff
 {
-    [SerializeField] private List<Sprite> backgrounds;
-    [SerializeField] private Image background;
-    private Sprite _selectedBackground;
-
-    private void Awake()
+    public class BackgroundSwitch : MonoBehaviour
     {
-        _selectedBackground = Resources.Load<GameData>("Game Data").currentDifficulty switch
+        [SerializeField] private List<Sprite> backgrounds;
+        [SerializeField] private Image background;
+        private Sprite _selectedBackground;
+
+        private void Awake()
         {
-            EnemyDifficultyType.EasyMode => backgrounds[0],
-            EnemyDifficultyType.MediumMode => backgrounds[1],
-            EnemyDifficultyType.HardMode => backgrounds[2],
-            _ => throw new ArgumentOutOfRangeException()
-        };
+            _selectedBackground = Resources.Load<GameData>("Game Data").currentDifficulty switch
+            {
+                EnemyDifficultyType.EasyMode => backgrounds[0],
+                EnemyDifficultyType.MediumMode => backgrounds[1],
+                EnemyDifficultyType.HardMode => backgrounds[2],
+                _ => throw new ArgumentOutOfRangeException()
+            };
 
-        background.sprite = _selectedBackground;
-        
-        AudioManager.instance.PlaySound("Waterfall");
-    }
+            background.sprite = _selectedBackground;
 
-    private void OnDestroy()
-    {
-        AudioManager.instance.StopSound("Waterfall");
+            AudioManager.instance.PlaySound("Waterfall");
+        }
+
+        private void OnDestroy()
+        {
+            AudioManager.instance.StopSound("Waterfall");
+        }
     }
 }

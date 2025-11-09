@@ -2,72 +2,75 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace SamuraiStandoff
 {
-    public static AudioManager instance;
-
-    public AudioMixer audioMixer;
-    public Sound[] sounds;
-
-    //To add a sound effect: AudioManager.instance.PlaySound("");
-    private void Awake()
+    public class AudioManager : MonoBehaviour
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        public static AudioManager instance;
 
-        foreach (Sound s in sounds)
+        public AudioMixer audioMixer;
+        public Sound[] sounds;
+
+        //To add a sound effect: AudioManager.instance.PlaySound("");
+        private void Awake()
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.outputAudioMixerGroup = s.output;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-        }
-    }
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
 
-    private void Start()
-    {
-        PlaySound("Intro");
-       // FindFirstObjectByType<AudioManager>().PlaySound("Wind");
-    }
-
-    public void PlaySound(string soundName)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == soundName);
-
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + soundName + "cannot be found");
-            return;
+            foreach (Sound s in sounds)
+            {
+                s.source = gameObject.AddComponent<AudioSource>();
+                s.source.clip = s.clip;
+                s.source.outputAudioMixerGroup = s.output;
+                s.source.volume = s.volume;
+                s.source.pitch = s.pitch;
+                s.source.loop = s.loop;
+            }
         }
 
-        s.source.Play();
-    }
-
-    public void StopSound(string soundName)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == soundName);
-
-        if (s == null)
+        private void Start()
         {
-            Debug.LogWarning("Sound: " + soundName + "cannot be found");
-            return;
+            PlaySound("Intro");
+            // FindFirstObjectByType<AudioManager>().PlaySound("Wind");
         }
 
-        s.source.Stop();
-    }
+        public void PlaySound(string soundName)
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == soundName);
 
-    public void SetVolume(float volume)
-    {
-        audioMixer.SetFloat("volume", volume);
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + soundName + "cannot be found");
+                return;
+            }
+
+            s.source.Play();
+        }
+
+        public void StopSound(string soundName)
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == soundName);
+
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + soundName + "cannot be found");
+                return;
+            }
+
+            s.source.Stop();
+        }
+
+        public void SetVolume(float volume)
+        {
+            audioMixer.SetFloat("volume", volume);
+        }
     }
 }
