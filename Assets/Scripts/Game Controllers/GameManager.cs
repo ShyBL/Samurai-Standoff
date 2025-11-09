@@ -97,6 +97,15 @@ namespace SamuraiStandoff
             playerData.easyStagesCompleted = 0;
             playerData.mediumStagesCompleted = 0;
             playerData.hardStagesCompleted = 0;
+            playerData.m_perfectTimingWins = 0;
+            playerData.m_totalEarlyAttacks = 0;
+            playerData.m_currentWinStreak = 0;
+            playerData.m_bestWinStreak = 0;
+            playerData.m_totalDuels = 0;
+            playerData.m_totalWins = 0;
+            playerData.m_totalLosses = 0;
+            playerData.m_totalDraws = 0;
+            playerData.m_maxWinStreak = 0;
             Debug.Log("Player Progression Data has been reset.");
         }
     

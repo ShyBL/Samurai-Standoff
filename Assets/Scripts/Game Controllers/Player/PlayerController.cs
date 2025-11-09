@@ -30,11 +30,12 @@ namespace SamuraiStandoff
 
         private void Awake()
         {
-            _characterData = playerData.selectedCharacter;
         }
 
         private void Start()
         {
+            _characterData = playerData.selectedCharacter;
+
             hasPlayerAttacked = false;
 
             // Initialize player visuals
