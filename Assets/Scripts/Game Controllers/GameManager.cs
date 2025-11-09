@@ -1,11 +1,10 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
     [SerializeField] private GameData gameData;
-    public int totalLevels;
-
 
     #region Singleton
 
@@ -17,6 +16,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            ValidateCharacterUnlocks();
+
         }
         else
         {
@@ -25,10 +26,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+    }
+
     #endregion
 
     #region Game Mode
 
+    public int totalLevels;
+    
     public void SetEasyMode()
     {
         totalLevels = gameData.easyTotalLevels; 
@@ -90,6 +97,38 @@ public class GameManager : MonoBehaviour
     
     #region Progression Control
     
+    private void ValidateCharacterUnlocks()
+    {
+        // Ensure characters are unlocked based on actual progression
+        if (playerData.completedEasyMode)
+            UnlockCharacter(CharacterType.Ichi);
+    
+        if (playerData.completedMediumMode)
+            UnlockCharacter(CharacterType.Bluetail);
+    
+        if (playerData.completedHardMode)
+            UnlockCharacter(CharacterType.Fraug);
+    
+        if (playerData.m_totalLosses >= 10)
+            UnlockCharacter(CharacterType.Macaroni);
+    
+        if (playerData.m_bestWinStreak >= 10)
+            UnlockCharacter(CharacterType.Chaolin);
+    }
+    
+    public bool IsCharacterUnlocked(CharacterType type)
+    {
+        return playerData.Characters[type];
+    }
+
+    public void UnlockCharacter(CharacterType type)
+    {
+        if (playerData.Characters.ContainsKey(type))
+            playerData.Characters[type] = true;
+        else
+            playerData.Characters.Add(type, true);
+    }
+    
     public void OnDuelWon(int framesAfterSignal, string opponentName = "")
     {
         if (playerData == null) return;
@@ -118,7 +157,17 @@ public class GameManager : MonoBehaviour
             playerData.defeatedFraug = true;
         }
 
-      //  SamuraiStandoffStats.instance.m_bStoreStats = true;
+        if (playerData.m_totalLosses == 10)
+        {
+            UnlockCharacter(CharacterType.Macaroni);
+        }
+        
+        if (playerData.m_bestWinStreak == 10)
+        {
+            UnlockCharacter(CharacterType.Chaolin);
+        }
+        
+        //  SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     public void OnDuelLost()
@@ -128,7 +177,7 @@ public class GameManager : MonoBehaviour
         playerData.m_totalDuels++;
         playerData.m_totalLosses++;
         playerData.m_maxWinStreak = 0;
-     //   SamuraiStandoffStats.instance.m_bStoreStats = true;
+        //   SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     public void OnDuelDraw()
@@ -138,7 +187,7 @@ public class GameManager : MonoBehaviour
         playerData.m_totalDuels++;
         playerData.m_totalDraws++;
         playerData.m_maxWinStreak = 0;
-      //  SamuraiStandoffStats.instance.m_bStoreStats = true;
+        //  SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     public void OnEarlyAttack()
@@ -146,7 +195,7 @@ public class GameManager : MonoBehaviour
         if (playerData == null) return;
         
         playerData.m_totalEarlyAttacks++;
-       // SamuraiStandoffStats.instance.m_bStoreStats = true;
+        // SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
 
     // Call this when you complete a difficulty, which will then trigger stats to be saved.
@@ -155,27 +204,31 @@ public class GameManager : MonoBehaviour
         if (playerData == null) return;
         
         MarkDifficultyCompleted(difficulty);
-     //   SamuraiStandoffStats.instance.m_bStoreStats = true;
+        //   SamuraiStandoffStats.instance.m_bStoreStats = true;
     }
-
     
     /// <summary>
     /// Call this method from your game logic when a difficulty is fully completed.
     /// </summary>
-    public void MarkDifficultyCompleted(string difficulty)
+    private void MarkDifficultyCompleted(string difficulty)
     {
         switch (difficulty.ToLower())
         {
             case "easy":
-                playerData.completedEasyMode = true; // Progression
+                UnlockCharacter(CharacterType.Ichi); // Character Progression
+                playerData.completedEasyMode = true; // Stage Progression
+                
                 playerData.reachedMediumDifficulty = true; // Analytics
                 break;
             case "medium":
-                playerData.completedMediumMode = true; // Progression
+                UnlockCharacter(CharacterType.Bluetail); // Character Progression
+                playerData.completedMediumMode = true; // Stage Progression
+                
                 playerData.reachedHardDifficulty = true; // Analytics
                 break;
             case "hard":
-                playerData.completedHardMode = true; // Progression
+                UnlockCharacter(CharacterType.Fraug); // Character Progression
+                playerData.completedHardMode = true; // Stage Progression
                 break;
         }
     }

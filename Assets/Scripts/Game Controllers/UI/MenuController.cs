@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,37 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
+    [SerializeField] private PlayerData playerData;
+    [SerializeField] private GameData gameData;
+
+    #region Unity Methods
+    [SerializeField] private List<Button> characterButtons;
+
+    private void Start()
+    {
+        UpdateCharacterButtons();
+        UpdateCharacterImage();
+        UpdateDifficultyButtons();
+        UpdateAudio();
+    }
+
+    private void UpdateCharacterButtons()
+    {
+        foreach (var button in characterButtons)
+        {
+            var controller = button.GetComponent<CharacterButtonController>();
+            var type = controller.characterType;
+
+            var unlocked = GameManager.instance.IsCharacterUnlocked(type);
+            button.interactable = unlocked;
+            controller.SetLockedVisual(!unlocked);
+        }
+    }
+
+    #endregion
+
+    #region Buttons
+    
     [Header("Difficulty UI")] 
     [SerializeField] private List<Button> difficultyButtons;
     [SerializeField] private List<TextMeshProUGUI> difficultyText;
@@ -20,79 +50,8 @@ public class MenuController : MonoBehaviour
     [Header("Character Selection")]
     [SerializeField] private GameObject characterSelectionPanel;
     [SerializeField] private GameObject menuSelectionPanel;
-
-    [SerializeField] private PlayerData playerData;
-    [SerializeField] private GameData gameData;
     [SerializeField] private Image characterImage;
     
-    [Header("Settings")]
-    [SerializeField] private Slider volumeSlider;
-    [SerializeField] private TextMeshProUGUI volumeValueText;
-
-    private AudioManager _audioManager;
-    private bool _introFinished;
-    
-    private IEnumerator WaitForIntroToFinish(Sound introSound)
-    {
-        _introFinished = true;
-
-        float clipLength = introSound.source.clip.length;
-        Debug.Log($"Waiting for {clipLength} seconds (Intro clip length).");
-
-        yield return new WaitForSeconds(5.5f);
-
-        Debug.Log("Intro clip duration elapsed. Stopping Intro sound.");
-        _audioManager.StopSound("Intro");
-
-        yield return null; // Wait one frame
-
-        if (!introSound.source.isPlaying)
-        {
-            Debug.Log("Intro sound has stopped. Playing Menu sound.");
-            _audioManager.PlaySound("Menu");
-            _introFinished = false;
-        }
-        else
-        {
-            Debug.LogWarning("Intro sound is still playing after StopSound call.");
-        }
-    }
-    
-    private void Start()
-    {
-        if (playerData != null || gameData != null)
-        {
-            var playerSelectedCharacter = playerData.selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == playerData.characterType);
-        
-            if (playerSelectedCharacter != null)
-            {
-                characterImage.sprite = playerSelectedCharacter.sprites[0];
-                selectedCharacterNameTest.text = playerSelectedCharacter.name;
-            }
-        }
-        
-        UpdateDifficultyButtons();
-        
-        _audioManager = AudioManager.instance;
-        
-        var introSound = _audioManager.sounds.FirstOrDefault(s => s.name == "Intro");
-
-        if (introSound != null && introSound.source.isPlaying)
-        {
-            Debug.Log("Intro is currently playing. Starting coroutine.");
-            StartCoroutine(WaitForIntroToFinish(introSound));
-        }
-        else
-        {
-            Debug.Log("Intro is not playing. Skipping coroutine.");
-        }
-        
-        LoadVolumeFromPlayerData();
-        UpdateVolumeLabel();
-
-        volumeSlider.onValueChanged.AddListener(ApplyVolume);
-    }
-
     public void SelectCharacterByIndex(int index)
     {
         if (playerData == null || gameData == null) return;
@@ -176,6 +135,16 @@ public class MenuController : MonoBehaviour
         difficultyText[2].color = hardUnlocked ? activeTextColor : inactiveTextColor;
     }
 
+    #endregion
+
+    #region Audio
+    
+    [Header("Audio Settings")]
+    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private TextMeshProUGUI volumeValueText;
+    private AudioManager _audioManager;
+    public bool introFinished;
+    
     private void LoadVolumeFromPlayerData()
     {
         var savedVolume = Mathf.Clamp(gameData.volume, 0.1f, 100f);
@@ -217,11 +186,83 @@ public class MenuController : MonoBehaviour
         }
     }
     
+    private void UpdateAudio()
+    {
+        _audioManager = AudioManager.instance;
+        
+        var introSound = _audioManager.sounds.FirstOrDefault(s => s.name == "Intro");
+
+        if (introSound != null && introSound.source.isPlaying)
+        {
+            Debug.Log("Intro is currently playing. Starting coroutine.");
+            StartCoroutine(WaitForIntroToFinish(introSound));
+        }
+        else
+        {
+            Debug.Log("Intro is not playing. Skipping coroutine.");
+        }
+        
+        LoadVolumeFromPlayerData();
+        UpdateVolumeLabel();
+
+        volumeSlider.onValueChanged.AddListener(ApplyVolume);
+    }
+    
+    private IEnumerator WaitForIntroToFinish(Sound introSound)
+    {
+        introFinished = true;
+
+        float clipLength = introSound.source.clip.length;
+        Debug.Log($"Waiting for {clipLength} seconds (Intro clip length).");
+
+        yield return new WaitForSeconds(5.5f);
+
+        Debug.Log("Intro clip duration elapsed. Stopping Intro sound.");
+        _audioManager.StopSound("Intro");
+
+        yield return null; // Wait one frame
+
+        if (!introSound.source.isPlaying)
+        {
+            Debug.Log("Intro sound has stopped. Playing Menu sound.");
+            _audioManager.PlaySound("Menu");
+            introFinished = false;
+        }
+        else
+        {
+            Debug.LogWarning("Intro sound is still playing after StopSound call.");
+        }
+    }
+    
+    #endregion
+    
+    private void UpdateCharacterImage()
+    {
+        if (playerData != null && gameData != null)
+        {
+            var playerSelectedCharacter = playerData.selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == playerData.characterType);
+        
+            if (playerSelectedCharacter != null)
+            {
+                characterImage.sprite = playerSelectedCharacter.sprites[0];
+                selectedCharacterNameTest.text = playerSelectedCharacter.name;
+            }
+        }
+    }
+    
     public void ShowCharacterSelection()
     {
         menuSelectionPanel.SetActive(false);
         characterSelectionPanel.SetActive(true);
     }
 
+    public void OpenDiscordServer()
+    {
+        Application.OpenURL("https://discord.gg/bSrjGR6D6W");
+    }
     
+    public void OpenGoogleForm()
+    {
+        Application.OpenURL("https://forms.gle/bs9jxMEavH6QVxeh8");
+    }
 }

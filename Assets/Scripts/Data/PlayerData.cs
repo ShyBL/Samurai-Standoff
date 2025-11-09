@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Samurai Standoff/Player Data")]
@@ -9,6 +10,15 @@ public class PlayerData : ScriptableObject
     public int lastBestFrameCount = 10000;
     public int currentBestFrameCount = 10000;
     public int currentLevel = 1;
+    public Dictionary<CharacterType,bool> Characters = new Dictionary<CharacterType, bool>()
+    {
+        {CharacterType.Monk,true},
+        {CharacterType.Ichi,false},
+        {CharacterType.Bluetail,false},
+        {CharacterType.Macaroni,false},
+        {CharacterType.Chaolin,false},
+        { CharacterType.Fraug,false}
+    };
 
     // TODO: ADD HERE EVERY VARIABLE ADDED IN PLAYER DATA
     
