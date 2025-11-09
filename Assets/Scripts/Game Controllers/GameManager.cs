@@ -7,7 +7,8 @@ namespace SamuraiStandoff
     {
         [SerializeField] private PlayerData playerData;
         [SerializeField] private GameData gameData;
-
+        public static bool isTestMode = false;
+        
         #region Singleton
 
         public static GameManager instance;
@@ -18,7 +19,11 @@ namespace SamuraiStandoff
             {
                 instance = this;
                 DontDestroyOnLoad(gameObject);
-                ValidateCharacterUnlocks();
+                
+                if (!isTestMode)
+                {
+                    ValidateCharacterUnlocks();
+                }
 
             }
             else

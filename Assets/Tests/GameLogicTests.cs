@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using SamuraiStandoff;
 
 public class GameLogicTests
@@ -16,6 +15,7 @@ public class GameLogicTests
     [SetUp]
     public void Setup()
     {
+        GameManager.isTestMode = true; // Set BEFORE creating GameManager
         testGameObject = new GameObject();
         SetupMockData();
     }
@@ -23,12 +23,19 @@ public class GameLogicTests
     [TearDown]
     public void Teardown()
     {
+        GameManager.isTestMode = false; // Reset after test
+        
         if (testGameObject != null)
             Object.DestroyImmediate(testGameObject);
         if (playerData != null)
             Object.DestroyImmediate(playerData);
         if (gameData != null)
             Object.DestroyImmediate(gameData);
+        
+        if (GameManager.instance != null)
+        {
+            Object.DestroyImmediate(GameManager.instance.gameObject);
+        }
     }
 
     private void SetupMockData()
@@ -119,6 +126,7 @@ public class GameLogicTests
     {
         var obj1 = new GameObject().AddComponent<GameManager>();
         yield return null;
+        
         var obj2 = new GameObject().AddComponent<GameManager>();
         yield return null;
         
