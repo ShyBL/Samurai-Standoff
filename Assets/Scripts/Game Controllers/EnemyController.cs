@@ -18,7 +18,7 @@ namespace SamuraiStandoff
         [Header("Enemy State")] [SerializeField]
         private bool hasEnemyAttacked;
 
-        [SerializeField] private Character selectedCharacter;
+        [SerializeField] public Character selectedCharacter;
 
         [Header("Game Data")] [SerializeField] private GameData gameData;
         [SerializeField] private PlayerData playerData;

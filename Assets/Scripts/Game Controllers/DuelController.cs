@@ -167,36 +167,15 @@ namespace SamuraiStandoff
                 {
                     // This call handles the second, loss-inducing fault. The first is in FaultRestart.
                     GameManager.instance.OnEarlyAttack();
-                }
+                } // Fault
 
                 if (!gameData.isMultiplayer) // Single Player Logic
                 {
-                    if (winner.GetComponent<PlayerController>() != null) // Player wins
+                    if (winner.TryGetComponent(out PlayerController player)) // Player wins
                     {
                         GameManager.instance.OnDuelWon(_frames, loser.name);
 
-                        // Check for difficulty completion after winning the final level
-                        if (playerData.currentLevel >= GameManager.instance.totalLevels)
-                        {
-                            string difficulty = "";
-                            switch (gameData.currentDifficulty)
-                            {
-                                case EnemyDifficultyType.EasyMode:
-                                    difficulty = "easy";
-                                    break;
-                                case EnemyDifficultyType.MediumMode:
-                                    difficulty = "medium";
-                                    break;
-                                case EnemyDifficultyType.HardMode:
-                                    difficulty = "hard";
-                                    break;
-                            }
-
-                            if (!string.IsNullOrEmpty(difficulty))
-                            {
-                                GameManager.instance.OnDifficultyCompleted(difficulty);
-                            }
-                        }
+                        CheckForDifficultyCompletionAfterWinningFinalDuel();
                     }
                     else // AI wins
                     {
@@ -216,19 +195,59 @@ namespace SamuraiStandoff
                     }
                 }
 
-                resultText.enabled = true;
-                resultText.text = $"{winner.name} Wins!";
+                ShowWinner(winner);
             }
 
-            if (winner.GetComponent<PlayerController>() != null)
+            if (winner.TryGetComponent(out PlayerController _playerController))
             {
-                playerData.lastBestFrameCount = 10000;
+                _playerController.playerData.lastBestFrameCount = 10000;
                 StartCoroutine(SceneLoader.instance.NextLevel());
             }
             else
             {
                 StartCoroutine(SceneLoader.instance.LoadResults());
             }
+        }
+
+        private void CheckForDifficultyCompletionAfterWinningFinalDuel()
+        {
+            if (playerData.currentLevel >= GameManager.instance.totalLevels)
+            {
+                string difficulty = "";
+                switch (gameData.currentDifficulty)
+                {
+                    case EnemyDifficultyType.EasyMode:
+                        difficulty = "easy";
+                        break;
+                    case EnemyDifficultyType.MediumMode:
+                        difficulty = "medium";
+                        break;
+                    case EnemyDifficultyType.HardMode:
+                        difficulty = "hard";
+                        break;
+                }
+
+                if (!string.IsNullOrEmpty(difficulty))
+                {
+                    GameManager.instance.OnDifficultyCompleted(difficulty);
+                }
+            }
+        }
+
+        private void ShowWinner(GameObject winner)
+        {
+            if (winner.TryGetComponent(out PlayerController player))
+            {
+                resultText.enabled = true;
+                resultText.text = $"{player.characterData.name} Wins!";
+            }
+            
+            if (winner.TryGetComponent(out EnemyController enemy))
+            {
+                resultText.enabled = true;
+                resultText.text = $"{enemy.selectedCharacter.name} Wins!";
+            }
+            
         }
 
         #endregion

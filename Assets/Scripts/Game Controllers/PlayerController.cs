@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SamuraiStandoff
@@ -18,10 +19,10 @@ namespace SamuraiStandoff
         [Header("Player State")] [SerializeField]
         private bool hasPlayerAttacked;
 
-        [SerializeField] private PlayerData playerData;
+        [SerializeField] public PlayerData playerData;
         [SerializeField] private GameData gameData;
 
-        private Character _characterData;
+        public Character characterData;
         public KeyCode _currentKey; // The key the player needs to press this round
 
         #endregion
@@ -34,12 +35,12 @@ namespace SamuraiStandoff
 
         private void Start()
         {
-            _characterData = playerData.selectedCharacter;
+            characterData = playerData.selectedCharacter;
 
             hasPlayerAttacked = false;
 
             // Initialize player visuals
-            playerImage.sprite = _characterData.sprites[0]; // Idle sprite
+            playerImage.sprite = characterData.sprites[0]; // Idle sprite
 
             // Set the key based on difficulty
             AssignKey();
@@ -75,7 +76,7 @@ namespace SamuraiStandoff
                     else
                     {
                         DuelController.instance.DeclareWinner(gameObject);
-                        playerImage.sprite = _characterData.sprites[1]; // Win sprite
+                        playerImage.sprite = characterData.sprites[1]; // Win sprite
                         MovePlayerToAttackPosition();
 
                         // Hide key prompt after attack
@@ -89,7 +90,7 @@ namespace SamuraiStandoff
 
             if (DuelController.instance.winnerDeclared && !hasPlayerAttacked)
             {
-                playerImage.sprite = _characterData.sprites[2]; // Lose sprite
+                playerImage.sprite = characterData.sprites[2]; // Lose sprite
                 MovePlayerToAttackPosition();
 
                 // Hide key prompt when round ends
