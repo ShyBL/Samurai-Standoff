@@ -27,7 +27,7 @@ namespace SamuraiStandoff
         public float volume;
 
         [Header("Game State")] public int faultCounter;
-        public bool isMultiplayer;
+        
         public EnemyDifficultyType currentDifficulty;
     }
 }

@@ -60,12 +60,6 @@ namespace SamuraiStandoff
             totalLevels = gameData.hardTotalLevels; 
             gameData.currentDifficulty = EnemyDifficultyType.HardMode;
         }
-    
-        // Toggles multiplayer mode on or off.
-        public void ToggleMultiplayer()
-        {
-            gameData.isMultiplayer = !gameData.isMultiplayer;
-        }
 
         #endregion
 
