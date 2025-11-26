@@ -1,6 +1,9 @@
-﻿public enum EnemyDifficultyType
+﻿namespace SamuraiStandoff
 {
-    EasyMode,
-    MediumMode,
-    HardMode
+    public enum EnemyDifficultyType
+    {
+        EasyMode,
+        MediumMode,
+        HardMode
+    }
 }

@@ -1,9 +1,12 @@
-public enum CharacterType
+namespace SamuraiStandoff
 {
-    Monk,
-    Ichi,
-    Bluetail,
-    Macaroni,
-    Chaolin, 
-    Fraug, 
+    public enum CharacterType
+    {
+        Monk,
+        Ichi,
+        Bluetail,
+        Macaroni,
+        Chaolin,
+        Fraug,
+    }
 }
