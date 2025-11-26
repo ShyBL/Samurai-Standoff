@@ -18,6 +18,9 @@ namespace SamuraiStandoff
             if (instance == null)
             {
                 instance = this;
+                Application.targetFrameRate = 30;
+                QualitySettings.vSyncCount = 0;
+
                 DontDestroyOnLoad(gameObject);
                 
                 if (!isTestMode)

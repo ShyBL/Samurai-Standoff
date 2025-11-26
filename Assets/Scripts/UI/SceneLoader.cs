@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace SamuraiStandoff
         [SerializeField] Animator transition;
         [SerializeField] private GameData gameData;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private GameObject fx;
 
         private void Awake()
         {
@@ -25,9 +27,25 @@ namespace SamuraiStandoff
             }
         }
 
+        private void Update()
+        {
+            if (SceneManager.GetActiveScene().buildIndex != 1) return;
+        
+            // if (!fx.IsAlive())
+            // {
+            //     fx.gameObject.SetActive(false);
+            // }
+        
+            // if (!particlesTop.IsAlive())
+            // {
+            //     particlesTop.gameObject.SetActive(false);
+            // }
+        }
+
         public void Clash()
         {
             transition.SetTrigger("Clash");
+            fx.gameObject.SetActive(true);
         }
 
         //----Scene Transitions-----
