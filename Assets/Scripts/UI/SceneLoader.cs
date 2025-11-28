@@ -9,7 +9,8 @@ namespace SamuraiStandoff
     public class SceneLoader : MonoBehaviour
     {
         public static SceneLoader instance;
-        [SerializeField] Animator transition;
+        [SerializeField] private Animator transition;
+        [SerializeField] private GameObject transitionGameObject;
         [SerializeField] private GameData gameData;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private GameObject fx;
@@ -44,7 +45,8 @@ namespace SamuraiStandoff
 
         public void Clash()
         {
-            transition.SetTrigger("Clash");
+            transitionGameObject.SetActive(true);
+            //transition.SetTrigger("Clash");
             fx.gameObject.SetActive(true);
         }
 
@@ -117,7 +119,7 @@ namespace SamuraiStandoff
 
         private IEnumerator LoadScene(int levelIndex) //
         {
-            transition.SetTrigger("Start");
+            transition.SetTrigger("TransitionIn");
 
             yield return new WaitForSeconds(3f);
             SceneManager.LoadScene(levelIndex);
