@@ -359,7 +359,6 @@ public class GameLogicTests
         InjectPrivateField(dcObject, "pTwo", pTwoObject.gameObject);
 
         // Set game state
-        gameData.isMultiplayer = false;
         gameData.currentDifficulty = EnemyDifficultyType.EasyMode;
         gameData.easyTotalLevels = 3;
         playerData.currentLevel = 3; 

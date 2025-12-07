@@ -168,21 +168,19 @@ namespace SamuraiStandoff
                     // This call handles the second, loss-inducing fault. The first is in FaultRestart.
                     GameManager.instance.OnEarlyAttack();
                 } // Fault
-
-                if (!gameData.isMultiplayer) // Single Player Logic
+            
+                if (winner.TryGetComponent(out PlayerController player)) // Player wins
                 {
-                    if (winner.TryGetComponent(out PlayerController player)) // Player wins
-                    {
-                        GameManager.instance.OnDuelWon(_frames, loser.name);
+                    GameManager.instance.OnDuelWon(_frames, loser.name);
 
-                        CheckForDifficultyCompletionAfterWinningFinalDuel();
-                    }
-                    else // AI wins
-                    {
-                        GameManager.instance.OnDuelLost();
-                    }
+                    CheckForDifficultyCompletionAfterWinningFinalDuel();
                 }
-                else // Multiplayer Logic
+                else // AI wins
+                {
+                    GameManager.instance.OnDuelLost();
+                }
+                
+                if(pTwo == gameObject.CompareTag("Player")) // Multiplayer Logic
                 {
                     // Assuming progression is tracked from the perspective of Player 1 (pOne).
                     if (winner == pOne)

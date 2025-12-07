@@ -10,11 +10,15 @@ namespace SamuraiStandoff
     public class MenuController : MonoBehaviour
     {
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private PlayerData player2Data;
         [SerializeField] private GameData gameData;
 
         #region Unity Methods
 
+        bool player2pick = false;
         [SerializeField] private List<Button> characterButtons;
+
+        
 
         private void Start()
         {
@@ -67,13 +71,28 @@ namespace SamuraiStandoff
 
             if (selected != null)
             {
-                playerData.selectedCharacter = selected;
-                playerData.characterType = selected.type;
+                if(player2pick == false)
+                {
+                    playerData.selectedCharacter = selected;
+                    playerData.characterType = selected.type;
 
-                selectedCharacterNameTest.text = selected.name;
-                characterImage.sprite = selected.sprites[0];
+                    selectedCharacterNameTest.text = selected.name;
+                    characterImage.sprite = selected.sprites[0];
 
-                Debug.Log($"Selected character: {selected.name}");
+                    Debug.Log($"Selected character: {selected.name}");
+                }
+                else
+                {
+                    player2Data.selectedCharacter = selected;
+                    player2Data.characterType = selected.type;
+
+                    selectedCharacterNameTest.text = selected.name;
+                    characterImage.sprite = selected.sprites[0];
+
+                    Debug.Log($"Selected character: {selected.name}");
+                }
+
+                
             }
             else
             {
@@ -108,6 +127,19 @@ namespace SamuraiStandoff
 
             DisableDifficultyButtons();
             SceneLoader.instance.LoadDuel();
+        }
+
+        public void multiplayerPlayButton(Button multiplayerButton)
+        {
+            if (player2pick == false)
+            {
+                player2pick = true;
+                multiplayerButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start";
+            }
+            else
+            {
+                SceneLoader.instance.LoadMultiplayer();
+            }
         }
 
         public void ApplicationQuit()

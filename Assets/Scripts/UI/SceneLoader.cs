@@ -96,6 +96,28 @@ namespace SamuraiStandoff
             }
         }
 
+        public void LoadMultiplayer() //Enter Multiplayer
+        {
+            GameManager.instance.StartCoroutine(LoadScene(3));
+
+            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
+
+            if (menuSound == null || !menuSound.source.isPlaying)
+            {
+                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
+                return;
+            }
+
+            Debug.Log("Menu music is playing. Proceeding to load game.");
+
+            AudioManager.instance.StopSound("Menu");
+            AudioManager.instance.PlaySound("Fight");
+
+
+            //AudioManager.instance.StopSound("Waterfall");
+            //AudioManager.instance.PlaySound("Waterfall");
+        }
+
 
         private IEnumerator LoadScene(int levelIndex) //
         {

@@ -6,6 +6,8 @@ namespace SamuraiStandoff
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private PlayerData playerData;
+
+        [SerializeField] private PlayerData player2Data;
         [SerializeField] private GameData gameData;
         public static bool isTestMode = false;
         

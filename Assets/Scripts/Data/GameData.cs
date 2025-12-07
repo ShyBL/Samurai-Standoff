@@ -10,10 +10,16 @@ namespace SamuraiStandoff
 
         public List<KeyCode> attackKeys = new List<KeyCode>()
         {
-            KeyCode.Space,
             KeyCode.A,
             KeyCode.S,
             KeyCode.D
+        };
+
+        public List<KeyCode> p2AttackKeys = new List<KeyCode>()
+        {
+            KeyCode.J,
+            KeyCode.K,
+            KeyCode.L
         };
 
         [Header("Difficulty Settings")] public List<float> easyReactionTimes = new() { 1f, 0.75f, 0.5f, 0.25f };
