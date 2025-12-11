@@ -191,7 +191,15 @@ namespace SamuraiStandoff
         private void MovePlayerToAttackPosition()
         {
             Vector3 newPosition = transform.localPosition;
+            if (newPosition.x == -600)
+            {
             newPosition.x = 600;
+            }
+            else
+            {
+            newPosition.x = -600;
+            }
+            
             transform.localPosition = newPosition;
         }
 
