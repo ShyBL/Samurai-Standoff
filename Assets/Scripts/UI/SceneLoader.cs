@@ -56,8 +56,8 @@ namespace SamuraiStandoff
         public void RestartDuel()
         {
             playerData.currentLevel = 1;
-            StartCoroutine(LoadScene(1));
-
+            GameManager.instance.StartCoroutine(LoadScene(1));
+            
             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
 
             if (menuSound == null || !menuSound.source.isPlaying)

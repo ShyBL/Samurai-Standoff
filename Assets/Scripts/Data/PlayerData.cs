@@ -7,6 +7,7 @@ namespace SamuraiStandoff
     [CreateAssetMenu(fileName = "PlayerData", menuName = "Samurai Standoff/Player Data")]
     public class PlayerData : ScriptableObject
     {
+        public int playerNumber;
         public Character selectedCharacter;
         public CharacterType characterType;
         public int lastBestFrameCount = 10000;

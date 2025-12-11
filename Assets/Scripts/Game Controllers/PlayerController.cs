@@ -24,7 +24,7 @@ namespace SamuraiStandoff
 
         public Character characterData;
         public KeyCode _currentKey; // The key the player needs to press this round
-
+        
         #endregion
 
         #region Unity Methods
@@ -107,6 +107,8 @@ namespace SamuraiStandoff
 
         private void AssignKey()
         {
+            if(playerData.playerNumber == 1)
+            {
             // Get the list of keys from GameData
             if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
             {
@@ -128,6 +130,14 @@ namespace SamuraiStandoff
 
             Debug.Log($"Player must press: {_currentKey}");
 
+            }
+            else if(playerData.playerNumber == 2)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, gameData.p2AttackKeys.Count);
+                _currentKey = gameData.p2AttackKeys[randomIndex];
+                Debug.Log($"Player 2 must press: {_currentKey}");
+            }
+
             // Update the key prompt text if it has a TextMeshProUGUI component
             if (keyPromptObject != null)
             {
@@ -137,6 +147,7 @@ namespace SamuraiStandoff
                     promptText.text = _currentKey.ToString();
                 }
             }
+              
         }
 
         #endregion

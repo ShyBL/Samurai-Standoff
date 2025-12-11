@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a991cbcabbf42b2b191ff7fd8499eb1, type: 3}
   m_Name: Player2Data
   m_EditorClassIdentifier: 
+  playerNumber: 2
   selectedCharacter:
-    name: 
-    type: 3
-    sprites: []
+    name: Bluetail
+    type: 2
+    sprites:
+    - {fileID: 21300000, guid: e65410626f1c7ba4dbc8eec32194b449, type: 3}
+    - {fileID: 21300000, guid: 649f2dfbfa320f247ae270ceb1873d69, type: 3}
+    - {fileID: 21300000, guid: 3e87ddac47973e44281f391625ce60bd, type: 3}
   characterType: 0
   lastBestFrameCount: 10000
   currentBestFrameCount: 10000

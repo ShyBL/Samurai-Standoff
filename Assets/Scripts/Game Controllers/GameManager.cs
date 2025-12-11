@@ -63,6 +63,10 @@ namespace SamuraiStandoff
             gameData.currentDifficulty = EnemyDifficultyType.HardMode;
         }
 
+        public void ToggleMultiplayer(bool isMultiplayer)
+        {
+            gameData.isMultiplayer = isMultiplayer;
+        }
         #endregion
 
         #region Application Control

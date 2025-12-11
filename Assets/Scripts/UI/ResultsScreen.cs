@@ -30,11 +30,10 @@ namespace SamuraiStandoff
 
             if (playerData == null || gameData == null) return;
 
-            var playerSelectedCharacter = playerData.selectedCharacter =
-                gameData.allCharacters.FirstOrDefault(c => c.type == playerData.characterType);
-            if (playerSelectedCharacter != null)
+            var winningCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == gameData.winningCharacter);
+            if (winningCharacter != null)
             {
-                characterImage.sprite = playerSelectedCharacter.sprites[0];
+                characterImage.sprite = winningCharacter.sprites[0];
             }
 
             topTimeText.text = playerData.lastBestFrameCount.ToString(CultureInfo.CurrentCulture);

@@ -15074,9 +15074,9 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 1
       - m_Target: {fileID: 6396566245747988741}
-        m_TargetAssemblyTypeName: LevelController, Assembly-CSharp
+        m_TargetAssemblyTypeName: SamuraiStandoff.GameManager, SamuraiStandoff
         m_MethodName: ToggleMultiplayer
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15601,6 +15601,18 @@ MonoBehaviour:
           m_StringArgument: Click2
           m_BoolArgument: 1
         m_CallState: 1
+      - m_Target: {fileID: 6396566245747988741}
+        m_TargetAssemblyTypeName: SamuraiStandoff.GameManager, SamuraiStandoff
+        m_MethodName: ToggleMultiplayer
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2142336551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15788,6 +15800,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 17714311810124804, guid: 63e4215c678b7b24ea2abd09bf79cc11, type: 3}
+      propertyPath: player2Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 7072ee3ae7fe83a43a39b3cfd96b9967, type: 2}
     - target: {fileID: 2306770166669437204, guid: 63e4215c678b7b24ea2abd09bf79cc11, type: 3}
       propertyPath: m_RootOrder
       value: 0
