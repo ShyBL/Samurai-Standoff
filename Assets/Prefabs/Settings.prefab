@@ -61,6 +61,8 @@ MonoBehaviour:
   p2Key1Button: {fileID: 2041554986527864359}
   p2Key2Button: {fileID: 5487777208572672698}
   p2Key3Button: {fileID: 571892430941032822}
+  playerOneKeys: 000000000000000000000000
+  playerTwoKeys: 000000000000000000000000
 --- !u!1 &565084223263421321
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,8 +403,8 @@ RectTransform:
   - {fileID: 2862998359010110790}
   m_Father: {fileID: 2117864156186957413}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1052,8 +1054,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1484000048270492956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
@@ -3738,8 +3740,8 @@ RectTransform:
   - {fileID: 2117864156186957413}
   m_Father: {fileID: 1484000048270492956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4609,8 +4611,8 @@ RectTransform:
   - {fileID: 2617022024237930119}
   m_Father: {fileID: 1484000048270492956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
