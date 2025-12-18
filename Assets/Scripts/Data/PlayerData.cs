@@ -8,6 +8,7 @@ namespace SamuraiStandoff
     public class PlayerData : ScriptableObject
     {
         public int playerNumber;
+        public int faultCounter;
         public Character selectedCharacter;
         public CharacterType characterType;
         public int lastBestFrameCount = 10000;

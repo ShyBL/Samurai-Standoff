@@ -11,6 +11,7 @@ namespace SamuraiStandoff
         [SerializeField] Animator transition;
         [SerializeField] private GameData gameData;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private PlayerData player2Data;
 
         private void Awake()
         {
@@ -55,8 +56,18 @@ namespace SamuraiStandoff
 
         public void RestartDuel()
         {
+
             playerData.currentLevel = 1;
-            GameManager.instance.StartCoroutine(LoadScene(1));
+
+            if(gameData.isMultiplayer)
+            {
+                GameManager.instance.StartCoroutine(LoadScene(3));
+            }
+            else
+            {
+                GameManager.instance.StartCoroutine(LoadScene(1));
+            }
+            
             
             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
 
@@ -119,7 +130,7 @@ namespace SamuraiStandoff
         }
 
 
-        private IEnumerator LoadScene(int levelIndex) //
+        private IEnumerator LoadScene(int levelIndex)
         {
             transition.SetTrigger("Start");
 
@@ -145,7 +156,8 @@ namespace SamuraiStandoff
                 // {
                 //     if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
                 // }
-                gameData.faultCounter = 0;
+                playerData.faultCounter = 0;
+                player2Data.faultCounter = 0;
 
                 LoadDuel();
             }
@@ -153,7 +165,9 @@ namespace SamuraiStandoff
 
         public IEnumerator LoadResults()
         {
-            gameData.faultCounter = 0;
+            playerData.faultCounter = 0;
+            player2Data.faultCounter = 0;
+
             yield return new WaitForSeconds(3f);
             StartCoroutine(LoadScene(2));
 

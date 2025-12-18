@@ -88,16 +88,28 @@ namespace SamuraiStandoff
                 }
             }
 
+        
             if (DuelController.instance.winnerDeclared && !hasPlayerAttacked)
             {
-                playerImage.sprite = characterData.sprites[2]; // Lose sprite
-                MovePlayerToAttackPosition();
-
-                // Hide key prompt when round ends
-                if (keyPromptObject != null)
+                if(!DuelController.instance.signal)
                 {
-                    keyPromptObject.SetActive(false);
+                    return;
                 }
+                else
+                {
+                if(playerImage.sprite != characterData.sprites[2])
+                {
+                    playerImage.sprite = characterData.sprites[2]; // Lose sprite
+                    MovePlayerToAttackPosition();
+
+                    // Hide key prompt when round ends
+                    if (keyPromptObject != null)
+                    {
+                        keyPromptObject.SetActive(false);
+                    }
+                }
+                }
+                
             }
         }
 
@@ -118,15 +130,16 @@ namespace SamuraiStandoff
             }
 
             // Easy mode: always use first key
-            if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode)
+            if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode && gameData.isMultiplayer == false)
             {
                 _currentKey = gameData.attackKeys[0];
             }
-            else // Medium and Hard: random key from the list
+            else // Medium, Hard or Multiplayer: random key from the list
             {
                 int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
                 _currentKey = gameData.attackKeys[randomIndex];
             }
+            
 
             Debug.Log($"Player must press: {_currentKey}");
 
@@ -156,7 +169,7 @@ namespace SamuraiStandoff
 
         private void UpdateFaultUI()
         {
-            faultText.enabled = gameData.faultCounter >= 1;
+            faultText.enabled = playerData.faultCounter >= 1;
         }
 
         #endregion
@@ -166,10 +179,10 @@ namespace SamuraiStandoff
         // Handles fault registration and win condition logic.
         private void RegisterFault()
         {
-            gameData.faultCounter++;
+            playerData.faultCounter++;
             DuelController.instance.playerFault = true;
 
-            if (gameData.faultCounter < 2)
+            if (playerData.faultCounter < 2)
             {
                 StartCoroutine(DuelController.instance.FaultRestart());
             }
@@ -190,14 +203,15 @@ namespace SamuraiStandoff
 
         private void MovePlayerToAttackPosition()
         {
+            
             Vector3 newPosition = transform.localPosition;
-            if (newPosition.x == -600)
+            if (newPosition.x >= 600)
             {
-            newPosition.x = 600;
+            newPosition.x = -600;
             }
             else
             {
-            newPosition.x = -600;
+            newPosition.x = 600;
             }
             
             transform.localPosition = newPosition;

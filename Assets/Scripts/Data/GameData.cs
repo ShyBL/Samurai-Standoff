@@ -32,7 +32,7 @@ namespace SamuraiStandoff
         [Header("Audio Settings")] [Range(0.1f, 100f)]
         public float volume;
 
-        [Header("Game State")] public int faultCounter;
+        [Header("Game State")]
         
         public EnemyDifficultyType currentDifficulty;
 
