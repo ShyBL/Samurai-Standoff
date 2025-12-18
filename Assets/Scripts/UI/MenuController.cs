@@ -266,7 +266,7 @@ namespace SamuraiStandoff
 
         public void OpenDiscordServer()
         {
-            Application.OpenURL("https://discord.gg/bSrjGR6D6W");
+            Application.OpenURL("https://discord.gg/Jwt5a9W7Aq");
         }
 
         public void OpenGoogleForm()
