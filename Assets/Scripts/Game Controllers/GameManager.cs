@@ -6,11 +6,11 @@ namespace SamuraiStandoff
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private PlayerData playerData;
-
         [SerializeField] private PlayerData player2Data;
         [SerializeField] private GameData gameData;
         public static bool isTestMode = false;
-        
+        public bool IsMultiplayer;
+
         #region Singleton
 
         public static GameManager instance;
@@ -37,6 +37,7 @@ namespace SamuraiStandoff
 
         private void Start()
         {
+
         }
 
         #endregion
@@ -66,6 +67,7 @@ namespace SamuraiStandoff
         public void ToggleMultiplayer(bool isMultiplayer)
         {
             gameData.isMultiplayer = isMultiplayer;
+            IsMultiplayer =  gameData.isMultiplayer;
         }
         #endregion
 
@@ -94,9 +96,6 @@ namespace SamuraiStandoff
             playerData.reachedMediumDifficulty = false;
             playerData.reachedHardDifficulty = false;
             playerData.defeatedFraug = false;
-            playerData.easyStagesCompleted = 0;
-            playerData.mediumStagesCompleted = 0;
-            playerData.hardStagesCompleted = 0;
             playerData.m_perfectTimingWins = 0;
             playerData.m_totalEarlyAttacks = 0;
             playerData.m_currentWinStreak = 0;
@@ -182,7 +181,8 @@ namespace SamuraiStandoff
             {
                 UnlockCharacter(CharacterType.Chaolin);
             }
-        
+            
+            // Update Steam Achievements Flag
             //  SamuraiStandoffStats.instance.m_bStoreStats = true;
         }
 
@@ -250,6 +250,8 @@ namespace SamuraiStandoff
         }
     
         #endregion
+        
+
     }
     
 }

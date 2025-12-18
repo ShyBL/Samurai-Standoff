@@ -123,6 +123,8 @@ namespace SamuraiStandoff
         #region Game State
 
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private PlayerData player2Data;
+
         public GameObject pOne, pTwo;
         public bool winnerDeclared;
         public bool playerFault;
@@ -156,7 +158,7 @@ namespace SamuraiStandoff
         {
             AudioManager.instance.PlaySound("Clash");
             SceneLoader.instance.Clash();
-
+            var enemyType = FindFirstObjectByType<EnemyController>().selectedCharacter.type;
             if (!winnerDeclared)
             {
                 winnerDeclared = true;
@@ -172,12 +174,16 @@ namespace SamuraiStandoff
                 if (winner.TryGetComponent(out PlayerController player)) // Player wins
                 {
                     GameManager.instance.OnDuelWon(_frames, loser.name);
+                    
+                    RecordSinglePlayerDuel(true,enemyType, _frames);
 
                     CheckForDifficultyCompletionAfterWinningFinalDuel();
                 }
                 else // AI wins
                 {
                     GameManager.instance.OnDuelLost();
+                    
+                    RecordSinglePlayerDuel(false,enemyType, _frames);
                 }
                 
                 if(pTwo == gameObject.CompareTag("Player")) // Multiplayer Logic
@@ -186,10 +192,12 @@ namespace SamuraiStandoff
                     if (winner == pOne)
                     {
                         GameManager.instance.OnDuelWon(_frames, loser.name);
+                        RecordMultiplayerDuel(true,playerData.characterType,player2Data.characterType, _frames);
                     }
                     else
                     {
                         GameManager.instance.OnDuelLost();
+                        RecordMultiplayerDuel(false,playerData.characterType,player2Data.characterType, _frames);
                     }
                 }
 
@@ -273,5 +281,22 @@ namespace SamuraiStandoff
         }
 
         #endregion
+        
+        // Helper method to record single player duel result
+        public void RecordSinglePlayerDuel(bool playerWon, CharacterType enemyType, int frameCount)
+        {
+            gameData.lastDuelPlayerWon = playerWon;
+            gameData.lastEnemyCharacterType = enemyType;
+            gameData.lastDuelFrameCount = frameCount;
+            gameData.winningCharacter = playerWon ? playerData.characterType : enemyType; // Adjust based on player's character
+        }
+
+        // Helper method to record multiplayer duel result
+        public void RecordMultiplayerDuel(bool player1Won, CharacterType player1Char, CharacterType player2Char, int frameCount)
+        {
+            gameData.lastDuelPlayer1Won = player1Won;
+            gameData.winningCharacter = player1Won ? player1Char : player2Char;
+            gameData.lastDuelFrameCount = frameCount;
+        }
     }
 }

@@ -1318,17 +1318,6 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
   player2Data: {fileID: 11400000, guid: 7072ee3ae7fe83a43a39b3cfd96b9967, type: 2}
   gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
-  characterButtons:
-  - {fileID: 365634433}
-  - {fileID: 403699036}
-  - {fileID: 331400758}
-  - {fileID: 1747634178}
-  - {fileID: 204335076}
-  - {fileID: 1566987092}
-  - {fileID: 1408345981}
-  - {fileID: 1575663292}
-  - {fileID: 340693048}
-  - {fileID: 212904162}
   difficultyButtons:
   - {fileID: 1264860303}
   - {fileID: 879708202}
@@ -1337,12 +1326,18 @@ MonoBehaviour:
   - {fileID: 725261061}
   - {fileID: 258196912}
   - {fileID: 24364843}
-  selectedCharacterNameTest: {fileID: 341635355}
+  selectedCharacterNameText: {fileID: 341635355}
   activeTextColor: {r: 1, g: 1, b: 1, a: 1}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 0.49019608}
   characterSelectionPanel: {fileID: 1615976540}
   menuSelectionPanel: {fileID: 1910927436}
   characterImage: {fileID: 812923360}
+  player1MultiplayerCharacterImage: {fileID: 0}
+  player2MultiplayerCharacterImage: {fileID: 0}
+  player1MultiplayerCharacterNameText: {fileID: 0}
+  player2MultiplayerCharacterNameText: {fileID: 0}
+  startText: {fileID: 0}
+  playerChoosesText: {fileID: 0}
   volumeSlider: {fileID: 424163541}
   volumeValueText: {fileID: 1655136476}
   introFinished: 0
@@ -1807,7 +1802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterType: 5
   lockOverlay: {fileID: 1833930097}
-  characterPortrait: {fileID: 1217864164}
+  characterPortrait: {fileID: 0}
 --- !u!114 &212904162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3164,7 +3159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterType: 4
   lockOverlay: {fileID: 495294525}
-  characterPortrait: {fileID: 1819021928}
+  characterPortrait: {fileID: 0}
 --- !u!114 &340693048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9774,7 +9769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterType: 2
   lockOverlay: {fileID: 622727131}
-  characterPortrait: {fileID: 1279580155}
+  characterPortrait: {fileID: 0}
 --- !u!114 &1408345981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10983,7 +10978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterType: 1
   lockOverlay: {fileID: 113510920}
-  characterPortrait: {fileID: 1825959460}
+  characterPortrait: {fileID: 0}
 --- !u!114 &1566987092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11148,7 +11143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterType: 3
   lockOverlay: {fileID: 633054961}
-  characterPortrait: {fileID: 700981116}
+  characterPortrait: {fileID: 0}
 --- !u!114 &1575663292
 MonoBehaviour:
   m_ObjectHideFlags: 0
