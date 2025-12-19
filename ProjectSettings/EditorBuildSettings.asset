@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
-    guid: 6a3386bf79382404493ce4b898c466d6
+    guid: c0ff16c7b7b6dc040913d7618cd8c5b6
   - enabled: 1
     path: Assets/Scenes/DayLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MultiplayerLevel.unity
     guid: 4cfec4f15f5a4b8489dd5b97c754164f
+  - enabled: 1
+    path: Assets/Scenes/MultiplayerResults.unity
+    guid: 9dda2e6c2f41d76439a877369e0fcaa3
   m_configObjects: {}
