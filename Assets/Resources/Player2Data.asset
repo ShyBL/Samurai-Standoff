@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a991cbcabbf42b2b191ff7fd8499eb1, type: 3}
   m_Name: Player2Data
   m_EditorClassIdentifier: 
-  playerNumber: 2
-  faultCounter: 0
+  playerNumber: 0
   selectedCharacter:
     name: 
     type: 0
@@ -22,14 +21,14 @@ MonoBehaviour:
   lastBestFrameCount: 10000
   currentBestFrameCount: 10000
   currentLevel: 1
-  completedEasyMode: 0
-  completedMediumMode: 0
-  completedHardMode: 0
+  completedEasyMode: 1
+  completedMediumMode: 1
+  completedHardMode: 1
   startedFirstDuel: 0
   wonFirstDuel: 0
   reachedMediumDifficulty: 0
   reachedHardDifficulty: 0
-  defeatedFraug: 0
+  defeatedFraug: 1
   m_perfectTimingWins: 0
   m_totalEarlyAttacks: 0
   m_currentWinStreak: 0

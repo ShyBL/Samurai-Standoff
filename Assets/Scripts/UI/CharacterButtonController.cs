@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,15 @@ namespace SamuraiStandoff
         [SerializeField] private GameObject lockOverlay;
         [SerializeField] private GameObject characterPortrait;
 
-        public void SetLockedVisual(bool isLocked)
+        private void Start()
+        {
+            var unlocked = GameManager.instance.IsCharacterUnlocked(characterType);
+            var button = GetComponent<Button>();
+            button.interactable = unlocked;
+            SetLockedVisual(!unlocked);
+        }
+
+        private void SetLockedVisual(bool isLocked)
         {
             if (lockOverlay != null)
             {

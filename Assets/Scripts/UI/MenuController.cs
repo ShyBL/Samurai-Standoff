@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SamuraiStandoff
@@ -14,31 +15,14 @@ namespace SamuraiStandoff
         [SerializeField] private GameData gameData;
 
         #region Unity Methods
-
-        bool player2pick = false;
-        [SerializeField] private List<Button> characterButtons;
-
         
-
         private void Start()
         {
-            UpdateCharacterButtons();
-            UpdateCharacterImage();
+            UpdateCharacterDisplay();
+
             UpdateDifficultyButtons();
+            
             UpdateAudio();
-        }
-
-        private void UpdateCharacterButtons()
-        {
-            foreach (var button in characterButtons)
-            {
-                var controller = button.GetComponent<CharacterButtonController>();
-                var type = controller.characterType;
-
-                var unlocked = GameManager.instance.IsCharacterUnlocked(type);
-                button.interactable = unlocked;
-                controller.SetLockedVisual(!unlocked);
-            }
         }
 
         #endregion
@@ -49,19 +33,83 @@ namespace SamuraiStandoff
         private List<Button> difficultyButtons;
 
         [SerializeField] private List<TextMeshProUGUI> difficultyText;
-        [SerializeField] private TextMeshProUGUI selectedCharacterNameTest;
+        [SerializeField] private TextMeshProUGUI selectedCharacterNameText;
 
         [Header("Difficulty Text Colors")] [SerializeField]
         private Color activeTextColor = new Color32(255, 255, 255, 255);
 
         [SerializeField] private Color inactiveTextColor = new Color32(255, 255, 255, 125);
 
-        [Header("Character Selection")] [SerializeField]
-        private GameObject characterSelectionPanel;
-
+        [Header("Character Selection")]
+        [SerializeField] private GameObject characterSelectionPanel;
         [SerializeField] private GameObject menuSelectionPanel;
         [SerializeField] private Image characterImage;
+        [SerializeField] private Image player1MultiplayerCharacterImage;
+        [SerializeField] private Image player2MultiplayerCharacterImage;
+        [SerializeField] private TextMeshProUGUI player1MultiplayerCharacterNameText;
+        [SerializeField] private TextMeshProUGUI player2MultiplayerCharacterNameText;
 
+        public void SelectCharacterSinglePlayer(int index)
+        {
+            if (playerData == null || gameData == null) return;
+
+            CharacterType type = (CharacterType)index;
+            var selected = gameData.allCharacters.FirstOrDefault(c => c.type == type);
+
+            if (selected != null)
+            {
+                playerData.selectedCharacter = selected;
+                playerData.characterType = selected.type;
+
+                selectedCharacterNameText.text = selected.name;
+                characterImage.sprite = selected.sprites[0];
+
+                Debug.Log($"[SinglePlayer] Selected character: {selected.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"Character with index {index} not found.");
+                return;
+            }
+        }
+
+        public void SelectCharacterMultiplayer(int index)
+        {
+            if (playerData == null || player2Data == null || gameData == null) return;
+
+            CharacterType type = (CharacterType)index;
+            var selected = gameData.allCharacters.FirstOrDefault(c => c.type == type);
+
+            if (selected != null)
+            {
+                if (!player2pick)
+                {
+                    playerData.selectedCharacter = selected;
+                    playerData.characterType = selected.type;
+
+                    player1MultiplayerCharacterNameText.text = selected.name;
+                    player1MultiplayerCharacterImage.sprite = selected.sprites[0];
+
+                    Debug.Log($"[Multiplayer] Player 1 selected character: {selected.name}");
+                }
+                else
+                {
+                    player2Data.selectedCharacter = selected;
+                    player2Data.characterType = selected.type;
+
+                    player2MultiplayerCharacterNameText.text = selected.name;
+                    player2MultiplayerCharacterImage.sprite = selected.sprites[0];
+
+                    Debug.Log($"[Multiplayer] Player 2 selected character: {selected.name}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Character with index {index} not found.");
+                return;
+            }
+        }
+        
         public void SelectCharacterByIndex(int index)
         {
             if (playerData == null || gameData == null) return;
@@ -76,7 +124,7 @@ namespace SamuraiStandoff
                     playerData.selectedCharacter = selected;
                     playerData.characterType = selected.type;
 
-                    selectedCharacterNameTest.text = selected.name;
+                    selectedCharacterNameText.text = selected.name;
                     characterImage.sprite = selected.sprites[0];
 
                     Debug.Log($"Selected character: {selected.name}");
@@ -86,13 +134,11 @@ namespace SamuraiStandoff
                     player2Data.selectedCharacter = selected;
                     player2Data.characterType = selected.type;
 
-                    selectedCharacterNameTest.text = selected.name;
+                    selectedCharacterNameText.text = selected.name;
                     characterImage.sprite = selected.sprites[0];
 
                     Debug.Log($"Selected character: {selected.name}");
                 }
-
-                
             }
             else
             {
@@ -129,12 +175,22 @@ namespace SamuraiStandoff
             SceneLoader.instance.LoadDuel();
         }
 
-        public void multiplayerPlayButton(Button multiplayerButton)
+        [SerializeField] private TextMeshProUGUI startText;
+        [SerializeField] private TextMeshProUGUI playerChoosesText;
+        private bool playersReady;
+        private bool player2pick;
+        
+        public void MultiplayerPlayButton()
         {
-            if (player2pick == false)
+            if (!player2pick)
             {
                 player2pick = true;
-                multiplayerButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start";
+                playerChoosesText.text = "Player 2 Chooses";
+            }
+            else if (!playersReady)
+            {
+                startText.text = "Start";
+                playersReady = true;
             }
             else
             {
@@ -275,7 +331,7 @@ namespace SamuraiStandoff
 
         #endregion
 
-        private void UpdateCharacterImage()
+        private void UpdateCharacterDisplay()
         {
             if (playerData != null && gameData != null)
             {
@@ -285,7 +341,7 @@ namespace SamuraiStandoff
                 if (playerSelectedCharacter != null)
                 {
                     characterImage.sprite = playerSelectedCharacter.sprites[0];
-                    selectedCharacterNameTest.text = playerSelectedCharacter.name;
+                    selectedCharacterNameText.text = playerSelectedCharacter.name;
                 }
             }
         }

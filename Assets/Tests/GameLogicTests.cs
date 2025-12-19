@@ -214,7 +214,6 @@ public class GameLogicTests
         playerData.completedEasyMode = true;
         playerData.wonFirstDuel = true;
         playerData.m_totalLosses = 5; 
-        playerData.easyStagesCompleted = 2;
         
         // Act
         gameManager.ResetProgression();
@@ -222,7 +221,6 @@ public class GameLogicTests
         // Assert
         Assert.IsFalse(playerData.completedEasyMode, "completedEasyMode");
         Assert.IsFalse(playerData.wonFirstDuel, "wonFirstDuel");
-        Assert.AreEqual(0, playerData.easyStagesCompleted, "easyStagesCompleted");
         // NOTE: This test will still fail until you add the m_totalLosses to the ResetProgression method in GameManager.cs
         Assert.AreEqual(0, playerData.m_totalLosses, "m_totalLosses"); 
     }
