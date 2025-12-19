@@ -983,9 +983,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4640083574946064638, guid: 5184fb45b0a6dd84c8a45d29bfe8d0cd, type: 3}
-      propertyPath: transitionGameObject
+      propertyPath: transition
       value: 
       objectReference: {fileID: 633666284}
+    - target: {fileID: 4640083574946064638, guid: 5184fb45b0a6dd84c8a45d29bfe8d0cd, type: 3}
+      propertyPath: player2Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 7072ee3ae7fe83a43a39b3cfd96b9967, type: 2}
+    - target: {fileID: 4640083574946064638, guid: 5184fb45b0a6dd84c8a45d29bfe8d0cd, type: 3}
+      propertyPath: transitionGameObject
+      value: 
+      objectReference: {fileID: 633666285}
     - target: {fileID: 4768080628951165102, guid: 5184fb45b0a6dd84c8a45d29bfe8d0cd, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -1056,7 +1064,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5184fb45b0a6dd84c8a45d29bfe8d0cd, type: 3}
---- !u!1 &633666284 stripped
+--- !u!95 &633666284 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5036610399679144369, guid: 5184fb45b0a6dd84c8a45d29bfe8d0cd, type: 3}
+  m_PrefabInstance: {fileID: 633666283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &633666285 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4351609359021283082, guid: 5184fb45b0a6dd84c8a45d29bfe8d0cd, type: 3}
   m_PrefabInstance: {fileID: 633666283}
@@ -2484,7 +2497,6 @@ GameObject:
   - component: {fileID: 1550517517}
   - component: {fileID: 1550517520}
   - component: {fileID: 1550517519}
-  - component: {fileID: 1550517518}
   m_Layer: 5
   m_Name: Bridge
   m_TagString: Untagged
@@ -2511,25 +2523,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -90}
   m_SizeDelta: {x: 1920, y: 309}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1550517518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550517516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30487b8b8cb796a499aac10d17f4a0b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backgrounds:
-  - {fileID: 8866965117667038474, guid: ed7c9f15c9fca8349ab6c2e9f3cc6efd, type: 3}
-  - {fileID: 8866965117667038474, guid: ed7c9f15c9fca8349ab6c2e9f3cc6efd, type: 3}
-  - {fileID: 8866965117667038474, guid: ed7c9f15c9fca8349ab6c2e9f3cc6efd, type: 3}
-  background: {fileID: 1550517519}
-  GreenFX: {fileID: 0}
-  PinkFX: {fileID: 0}
 --- !u!114 &1550517519
 MonoBehaviour:
   m_ObjectHideFlags: 0

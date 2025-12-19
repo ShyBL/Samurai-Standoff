@@ -13,34 +13,32 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerNumber: 1
+  faultCounter: 0
   selectedCharacter:
-    name: Ichi
-    type: 1
-    sprites:
-    - {fileID: 21300000, guid: c49b360edb8e21b4eae75579f5a79f44, type: 3}
-    - {fileID: 21300000, guid: 0547a55946867e243aafcf698763898b, type: 3}
-    - {fileID: 21300000, guid: 3fb90b9838986e947b91e2212170532a, type: 3}
+    name: 
+    type: 0
+    sprites: []
   characterType: 0
-  lastBestFrameCount: 525
-  currentBestFrameCount: 206
-  currentLevel: 4
-  completedEasyMode: 1
-  completedMediumMode: 1
-  completedHardMode: 1
-  startedFirstDuel: 1
-  wonFirstDuel: 1
-  reachedMediumDifficulty: 1
-  reachedHardDifficulty: 1
-  defeatedFraug: 1
+  lastBestFrameCount: 10000
+  currentBestFrameCount: 10000
+  currentLevel: 1
+  completedEasyMode: 0
+  completedMediumMode: 0
+  completedHardMode: 0
+  startedFirstDuel: 0
+  wonFirstDuel: 0
+  reachedMediumDifficulty: 0
+  reachedHardDifficulty: 0
+  defeatedFraug: 0
   m_perfectTimingWins: 0
-  m_totalEarlyAttacks: 1
+  m_totalEarlyAttacks: 0
   m_currentWinStreak: 0
-  m_bestWinStreak: 7
-  m_totalDuels: 7
-  m_totalWins: 7
+  m_bestWinStreak: 0
+  m_totalDuels: 0
+  m_totalWins: 0
   m_totalLosses: 0
   m_totalDraws: 0
-  m_maxWinStreak: 7
+  m_maxWinStreak: 0
   easyStagesCompleted: 0
   mediumStagesCompleted: 0
   hardStagesCompleted: 0

@@ -13,26 +13,23 @@ MonoBehaviour:
   m_Name: Player2Data
   m_EditorClassIdentifier: 
   playerNumber: 2
-  faultCounter: 1
+  faultCounter: 0
   selectedCharacter:
-    name: Fraug
-    type: 5
-    sprites:
-    - {fileID: 21300000, guid: 7ea3494648b0bb24da60374c3ac6a0d1, type: 3}
-    - {fileID: 21300000, guid: 0cccaf586a372fc42a22f1bab9482468, type: 3}
-    - {fileID: 21300000, guid: 3e78d1f881a83774ca9fa20e2a47520c, type: 3}
-  characterType: 5
+    name: 
+    type: 0
+    sprites: []
+  characterType: 0
   lastBestFrameCount: 10000
   currentBestFrameCount: 10000
   currentLevel: 1
-  completedEasyMode: 1
-  completedMediumMode: 1
-  completedHardMode: 1
-  startedFirstDuel: 1
-  wonFirstDuel: 1
-  reachedMediumDifficulty: 1
-  reachedHardDifficulty: 1
-  defeatedFraug: 1
+  completedEasyMode: 0
+  completedMediumMode: 0
+  completedHardMode: 0
+  startedFirstDuel: 0
+  wonFirstDuel: 0
+  reachedMediumDifficulty: 0
+  reachedHardDifficulty: 0
+  defeatedFraug: 0
   m_perfectTimingWins: 0
   m_totalEarlyAttacks: 0
   m_currentWinStreak: 0
