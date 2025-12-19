@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a991cbcabbf42b2b191ff7fd8499eb1, type: 3}
-  m_Name: PlayerData
+  m_Name: Player2Data
   m_EditorClassIdentifier: 
-  playerNumber: 1
+  playerNumber: 2
+  faultCounter: 1
   selectedCharacter:
-    name: Ichi
-    type: 1
+    name: Fraug
+    type: 5
     sprites:
-    - {fileID: 21300000, guid: c49b360edb8e21b4eae75579f5a79f44, type: 3}
-    - {fileID: 21300000, guid: 0547a55946867e243aafcf698763898b, type: 3}
-    - {fileID: 21300000, guid: 3fb90b9838986e947b91e2212170532a, type: 3}
-  characterType: 0
-  lastBestFrameCount: 525
-  currentBestFrameCount: 206
-  currentLevel: 4
+    - {fileID: 21300000, guid: 7ea3494648b0bb24da60374c3ac6a0d1, type: 3}
+    - {fileID: 21300000, guid: 0cccaf586a372fc42a22f1bab9482468, type: 3}
+    - {fileID: 21300000, guid: 3e78d1f881a83774ca9fa20e2a47520c, type: 3}
+  characterType: 5
+  lastBestFrameCount: 10000
+  currentBestFrameCount: 10000
+  currentLevel: 1
   completedEasyMode: 1
   completedMediumMode: 1
   completedHardMode: 1
@@ -33,14 +34,14 @@ MonoBehaviour:
   reachedHardDifficulty: 1
   defeatedFraug: 1
   m_perfectTimingWins: 0
-  m_totalEarlyAttacks: 1
+  m_totalEarlyAttacks: 0
   m_currentWinStreak: 0
-  m_bestWinStreak: 7
-  m_totalDuels: 7
-  m_totalWins: 7
+  m_bestWinStreak: 0
+  m_totalDuels: 0
+  m_totalWins: 0
   m_totalLosses: 0
   m_totalDraws: 0
-  m_maxWinStreak: 7
+  m_maxWinStreak: 0
   easyStagesCompleted: 0
   mediumStagesCompleted: 0
   hardStagesCompleted: 0

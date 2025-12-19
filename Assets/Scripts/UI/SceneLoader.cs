@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -9,11 +8,10 @@ namespace SamuraiStandoff
     public class SceneLoader : MonoBehaviour
     {
         public static SceneLoader instance;
-        [SerializeField] private Animator transition;
-        [SerializeField] private GameObject transitionGameObject;
+        [SerializeField] Animator transition;
         [SerializeField] private GameData gameData;
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private GameObject fx;
+        [SerializeField] private PlayerData player2Data;
 
         private void Awake()
         {
@@ -28,26 +26,9 @@ namespace SamuraiStandoff
             }
         }
 
-        private void Update()
-        {
-            if (SceneManager.GetActiveScene().buildIndex != 1) return;
-        
-            // if (!fx.IsAlive())
-            // {
-            //     fx.gameObject.SetActive(false);
-            // }
-        
-            // if (!particlesTop.IsAlive())
-            // {
-            //     particlesTop.gameObject.SetActive(false);
-            // }
-        }
-
         public void Clash()
         {
-            transitionGameObject.SetActive(true);
-            //transition.SetTrigger("Clash");
-            fx.gameObject.SetActive(true);
+            transition.SetTrigger("Clash");
         }
 
         //----Scene Transitions-----
@@ -75,9 +56,19 @@ namespace SamuraiStandoff
 
         public void RestartDuel()
         {
-            playerData.currentLevel = 1;
-            StartCoroutine(LoadScene(1));
 
+            playerData.currentLevel = 1;
+
+            if(gameData.isMultiplayer)
+            {
+                GameManager.instance.StartCoroutine(LoadScene(3));
+            }
+            else
+            {
+                GameManager.instance.StartCoroutine(LoadScene(1));
+            }
+            
+            
             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
 
             if (menuSound == null || !menuSound.source.isPlaying)
@@ -116,10 +107,32 @@ namespace SamuraiStandoff
             }
         }
 
-
-        private IEnumerator LoadScene(int levelIndex) //
+        public void LoadMultiplayer() //Enter Multiplayer
         {
-            transition.SetTrigger("TransitionIn");
+            GameManager.instance.StartCoroutine(LoadScene(3));
+
+            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
+
+            if (menuSound == null || !menuSound.source.isPlaying)
+            {
+                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
+                return;
+            }
+
+            Debug.Log("Menu music is playing. Proceeding to load game.");
+
+            AudioManager.instance.StopSound("Menu");
+            AudioManager.instance.PlaySound("Fight");
+
+
+            //AudioManager.instance.StopSound("Waterfall");
+            //AudioManager.instance.PlaySound("Waterfall");
+        }
+
+
+        private IEnumerator LoadScene(int levelIndex)
+        {
+            transition.SetTrigger("Start");
 
             yield return new WaitForSeconds(3f);
             SceneManager.LoadScene(levelIndex);
@@ -143,7 +156,8 @@ namespace SamuraiStandoff
                 // {
                 //     if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
                 // }
-                gameData.faultCounter = 0;
+                playerData.faultCounter = 0;
+                player2Data.faultCounter = 0;
 
                 LoadDuel();
             }
@@ -151,7 +165,9 @@ namespace SamuraiStandoff
 
         public IEnumerator LoadResults()
         {
-            gameData.faultCounter = 0;
+            playerData.faultCounter = 0;
+            player2Data.faultCounter = 0;
+
             yield return new WaitForSeconds(3f);
             StartCoroutine(LoadScene(2));
 

@@ -6,6 +6,8 @@ namespace SamuraiStandoff
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private PlayerData playerData;
+
+        [SerializeField] private PlayerData player2Data;
         [SerializeField] private GameData gameData;
         public static bool isTestMode = false;
         
@@ -63,13 +65,11 @@ namespace SamuraiStandoff
             totalLevels = gameData.hardTotalLevels; 
             gameData.currentDifficulty = EnemyDifficultyType.HardMode;
         }
-    
-        // Toggles multiplayer mode on or off.
-        public void ToggleMultiplayer()
-        {
-            gameData.isMultiplayer = !gameData.isMultiplayer;
-        }
 
+        public void ToggleMultiplayer(bool isMultiplayer)
+        {
+            gameData.isMultiplayer = isMultiplayer;
+        }
         #endregion
 
         #region Application Control
