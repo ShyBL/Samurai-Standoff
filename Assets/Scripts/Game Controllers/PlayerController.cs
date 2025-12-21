@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace SamuraiStandoff
 {
@@ -23,7 +24,9 @@ namespace SamuraiStandoff
         [SerializeField] private GameData gameData;
 
         public Character characterData;
-        public KeyCode _currentKey; // The key the player needs to press this round
+        public KeyCode currentKey; // The key the player needs to press this round
+
+        public List<KeyCode> faultKeys = new List<KeyCode>();
         
         #endregion
 
@@ -62,14 +65,14 @@ namespace SamuraiStandoff
                 keyPromptObject.SetActive(true);
             }
 
-            if (Input.GetKeyDown(_currentKey) && !hasPlayerAttacked)
+            if (Input.GetKeyDown(currentKey) && !hasPlayerAttacked)
             {
                 if (!DuelController.instance.winnerDeclared)
                 {
                     Debug.Log("Player Attacked");
                     hasPlayerAttacked = true;
 
-                    if (!DuelController.instance.signal)
+                    if (!DuelController.instance.signal || Input.GetKeyDown(faultKeys[0]) || Input.GetKeyDown(faultKeys[1]))
                     {
                         RegisterFault();
                     }
@@ -119,36 +122,54 @@ namespace SamuraiStandoff
 
         private void AssignKey()
         {
+            faultKeys.Clear();
+
             if(playerData.playerNumber == 1)
             {
             // Get the list of keys from GameData
             if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
             {
                 Debug.LogWarning("No attack keys defined in GameData! Defaulting to A.");
-                _currentKey = KeyCode.A;
+                currentKey = KeyCode.A;
                 return;
             }
 
             // Easy mode: always use first key
             if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode && gameData.isMultiplayer == false)
             {
-                _currentKey = gameData.attackKeys[0];
+                currentKey = gameData.attackKeys[0];
             }
             else // Medium, Hard or Multiplayer: random key from the list
             {
                 int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
-                _currentKey = gameData.attackKeys[randomIndex];
+                currentKey = gameData.attackKeys[randomIndex];
+
+                foreach(KeyCode key in gameData.attackKeys)
+                {
+                    if(key != currentKey)
+                    {
+                        faultKeys.Add(key);
+                    }
+                }
             }
             
 
-            Debug.Log($"Player must press: {_currentKey}");
+            Debug.Log($"Player must press: {currentKey}");
 
             }
             else if(playerData.playerNumber == 2)
             {
                 int randomIndex = UnityEngine.Random.Range(0, gameData.p2AttackKeys.Count);
-                _currentKey = gameData.p2AttackKeys[randomIndex];
-                Debug.Log($"Player 2 must press: {_currentKey}");
+                currentKey = gameData.p2AttackKeys[randomIndex];
+                Debug.Log($"Player 2 must press: {currentKey}");
+
+                foreach(KeyCode key in gameData.p2AttackKeys)
+                {
+                    if(key != currentKey)
+                    {
+                        faultKeys.Add(key);
+                    }
+                }
             }
 
             // Update the key prompt text if it has a TextMeshProUGUI component
@@ -157,7 +178,7 @@ namespace SamuraiStandoff
                 TextMeshProUGUI promptText = keyPromptObject.GetComponentInChildren<TextMeshProUGUI>();
                 if (promptText != null)
                 {
-                    promptText.text = _currentKey.ToString();
+                    promptText.text = currentKey.ToString();
                 }
             }
               

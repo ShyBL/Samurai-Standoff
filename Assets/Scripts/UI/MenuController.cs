@@ -186,14 +186,11 @@ namespace SamuraiStandoff
             {
                 player2pick = true;
                 playerChoosesText.text = "Player 2 Chooses";
+                startText.text = "Start";
             }
             else if (!playersReady)
             {
-                startText.text = "Start";
                 playersReady = true;
-            }
-            else
-            {
                 SceneLoader.instance.LoadMultiplayer();
             }
         }

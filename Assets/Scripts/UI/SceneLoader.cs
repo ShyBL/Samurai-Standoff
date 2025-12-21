@@ -97,10 +97,10 @@ namespace SamuraiStandoff
         private IEnumerator LoadMainMenuScene()
         {
             yield return StartCoroutine(LoadScene(0));
-
+            gameData.isMultiplayer = false;
             // Wait one frame to ensure scene objects are initialized
             yield return null;
-
+            
             // Find MenuController and update panels
             MenuController menuController = FindObjectOfType<MenuController>();
             if (menuController != null)
@@ -171,11 +171,21 @@ namespace SamuraiStandoff
             player2Data.faultCounter = 0;
 
             yield return new WaitForSeconds(3f);
-            StartCoroutine(LoadScene(2));
+
+            if(!gameData.isMultiplayer)
+            {
+                StartCoroutine(LoadScene(2));    
+            }
+            else
+            {
+                StartCoroutine(LoadScene(4));
+            }
 
             AudioManager.instance.StopSound("Fight");
             AudioManager.instance.PlaySound("Menu");
             // AudioManager.instance.StopSound("Waterfall");
         }
+
+        
     }
 }

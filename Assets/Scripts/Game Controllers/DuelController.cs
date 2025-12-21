@@ -158,60 +158,66 @@ namespace SamuraiStandoff
         {
             AudioManager.instance.PlaySound("Clash");
             SceneLoader.instance.Clash();
-            var enemyType = FindFirstObjectByType<EnemyController>().selectedCharacter.type;
+           
+                
             if (!winnerDeclared)
             {
                 winnerDeclared = true;
-
                 GameObject loser = (winner == pOne) ? pTwo : pOne;
 
-                if (winByFault)
-                {
-                    // This call handles the second, loss-inducing fault. The first is in FaultRestart.
-                    GameManager.instance.OnEarlyAttack();
-                } // Fault
-            
-                if (winner.TryGetComponent(out PlayerController player)) // Player wins
-                {
-                    GameManager.instance.OnDuelWon(_frames, loser.name);
-                    
-                    RecordSinglePlayerDuel(true,enemyType, _frames);
+                if(gameData.isMultiplayer == false)
+                {             
+                    var enemyType = FindFirstObjectByType<EnemyController>().selectedCharacter.type;
 
-                    CheckForDifficultyCompletionAfterWinningFinalDuel();
-                }
-                else // AI wins
-                {
-                    GameManager.instance.OnDuelLost();
-                    
-                    RecordSinglePlayerDuel(false,enemyType, _frames);
-                }
-                
-                if(pTwo == gameObject.CompareTag("Player")) // Multiplayer Logic
-                {
-                    // Assuming progression is tracked from the perspective of Player 1 (pOne).
-                    if (winner == pOne)
+                    if (winByFault)// Fault
                     {
-                        GameManager.instance.OnDuelWon(_frames, loser.name);
-                        RecordMultiplayerDuel(true,playerData.characterType,player2Data.characterType, _frames);
+                        // This call handles the second, loss-inducing fault. The first is in FaultRestart.
+                        GameManager.instance.OnEarlyAttack();
+                    }       
+            
+                    if (winner.TryGetComponent(out PlayerController player)) // Player wins
+                    {
+                        GameManager.instance.OnDuelWon(_frames, loser.name);                 
+                        RecordSinglePlayerDuel(true,enemyType, _frames);
+
+                        CheckForDifficultyCompletionAfterWinningFinalDuel();
                     }
-                    else
+                    else // AI wins
                     {
                         GameManager.instance.OnDuelLost();
+                    
+                        RecordSinglePlayerDuel(false,enemyType, _frames);
+                    }
+                }
+                else
+                {    
+                    if(pTwo == gameObject.CompareTag("Player")) // Multiplayer Logic
+                    {
+                        // Assuming progression is tracked from the perspective of Player 1 (pOne).
+                        if (winner == pOne)
+                        {
+                        GameManager.instance.OnDuelWon(_frames, loser.name);
+                        RecordMultiplayerDuel(true,playerData.characterType,player2Data.characterType, _frames);
+                        }
+                        else
+                        {
+                        GameManager.instance.OnDuelLost();
                         RecordMultiplayerDuel(false,playerData.characterType,player2Data.characterType, _frames);
+                        }
                     }
                 }
 
                 ShowWinner(winner);
-            }
-
-            if (winner.TryGetComponent(out PlayerController _playerController))
-            {
-                _playerController.playerData.lastBestFrameCount = 10000;
-                StartCoroutine(SceneLoader.instance.NextLevel());
-            }
-            else
-            {
-                StartCoroutine(SceneLoader.instance.LoadResults());
+        
+                if (winner.TryGetComponent(out PlayerController _playerController))
+                {
+                    _playerController.playerData.lastBestFrameCount = 10000;
+                    StartCoroutine(SceneLoader.instance.NextLevel());
+                }
+                else
+                {
+                    StartCoroutine(SceneLoader.instance.LoadResults());
+                }
             }
         }
 
