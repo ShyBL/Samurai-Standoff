@@ -33,7 +33,7 @@ namespace SamuraiStandoff
         [Range(1f, 100f)]
         public float masterVolume = 80;
         [Range(1f, 100f)]
-        public float backgroundVolume = 50;
+        public float backgroundVolume = 100;
 
         [Header("Game State")] 
         public int faultCounter;
