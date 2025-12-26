@@ -50,16 +50,17 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 0cccaf586a372fc42a22f1bab9482468, type: 3}
     - {fileID: 21300000, guid: 3e78d1f881a83774ca9fa20e2a47520c, type: 3}
   attackKeys: 610000007300000064000000
-  easy:
+  p2AttackKeys: 6a0000006b0000006c000000
+  easyReactionTimes:
   - 1
   - 0.75
   - 0.5
   - 0.25
-  medium:
+  mediumReactionTimes:
   - 0.75
   - 0.5
   - 0.3
-  hard:
+  hardReactionTimes:
   - 0.5
   - 0.4
   - 0.3
@@ -68,7 +69,13 @@ MonoBehaviour:
   easyTotalLevels: 3
   mediumTotalLevels: 3
   hardTotalLevels: 4
-  volume: 80
+  masterVolume: 80
+  backgroundVolume: 80
   faultCounter: 0
-  isMultiplayer: 0
   currentDifficulty: 0
+  isMultiplayer: 0
+  lastDuelPlayerWon: 0
+  lastDuelPlayer1Won: 0
+  lastEnemyCharacterType: 1
+  winningCharacter: 1
+  lastDuelFrameCount: 30

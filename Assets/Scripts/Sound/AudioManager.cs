@@ -10,6 +10,7 @@ namespace SamuraiStandoff
 
         public AudioMixer audioMixer;
         public Sound[] sounds;
+        [SerializeField] private GameData gameData;
 
         //To add a sound effect: AudioManager.instance.PlaySound("");
         private void Awake()
@@ -17,6 +18,10 @@ namespace SamuraiStandoff
             if (instance == null)
             {
                 instance = this;
+                
+                LoadVolumeFromPlayerData("MasterVolume", gameData.masterVolume);
+                LoadVolumeFromPlayerData("BackgroundVolume", gameData.backgroundVolume);
+                
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -24,7 +29,7 @@ namespace SamuraiStandoff
                 Destroy(gameObject);
                 return;
             }
-
+            
             foreach (Sound s in sounds)
             {
                 s.source = gameObject.AddComponent<AudioSource>();
@@ -34,11 +39,12 @@ namespace SamuraiStandoff
                 s.source.pitch = s.pitch;
                 s.source.loop = s.loop;
             }
+            
         }
 
         private void Start()
         {
-            PlaySound("Intro");
+          //  PlaySound("Intro");
             // FindFirstObjectByType<AudioManager>().PlaySound("Wind");
         }
 
@@ -67,10 +73,20 @@ namespace SamuraiStandoff
 
             s.source.Stop();
         }
-
-        public void SetVolume(float volume)
+        
+        private void LoadVolumeFromPlayerData(string mixerParam, float savedValue)
         {
-            audioMixer.SetFloat("volume", volume);
+            float linearVolume = Mathf.Clamp(savedValue, 1f, 100f); // Clamp to avoid invalid values
+            float normalized = linearVolume / 100f; // Normalize to 0–1
+
+            // Convert to decibels:
+            // At normalized = 1 → 0 dB
+            // At normalized = 0.0001 → about -80 dB (we’ll clamp to -60)
+            float dB = Mathf.Log10(normalized) * 20f;
+            
+            dB = Mathf.Clamp(dB, -60f, 0f); // Clamp to your desired range (-60 dB to 0 dB)
+
+            audioMixer.SetFloat(mixerParam, dB);
         }
     }
 }

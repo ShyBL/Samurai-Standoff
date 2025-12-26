@@ -1,17 +1,82 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace SamuraiStandoff
 {
-
-    
-    public class KeyRebinder : MonoBehaviour
+    public class SettingsController : MonoBehaviour
     {
+        #region Audio Settings
+
+        [Header("Audio Settings")]
+        [SerializeField] private Slider masterVolumeSlider;
+        [SerializeField] private TextMeshProUGUI masterVolumeValueText;
+
+        [SerializeField] private Slider backgroundVolumeSlider;
+        [SerializeField] private TextMeshProUGUI backgroundVolumeValueText;
+
+        private AudioManager _audioManager;
+
+        private void Start()
+        {
+            _audioManager = AudioManager.instance;
+
+            // Initialize both sliders
+            UpdateAudio(masterVolumeSlider, masterVolumeValueText, "MasterVolume", gameData.masterVolume);
+            UpdateAudio(backgroundVolumeSlider, backgroundVolumeValueText, "BackgroundVolume", gameData.backgroundVolume);
+        }
+
+        private void UpdateAudio(Slider slider, TextMeshProUGUI label, string mixerParam, float savedValue)
+        {
+            LoadVolumeFromPlayerData(slider, mixerParam, savedValue);
+            UpdateVolumeLabel(slider, label);
+
+            slider.onValueChanged.AddListener(value => ApplyVolume(value, slider, label, mixerParam));
+        }
+
+        private void LoadVolumeFromPlayerData(Slider slider, string mixerParam, float savedValue)
+        {
+            var clamped = Mathf.Clamp(savedValue, 1f, 100f);
+            slider.value = clamped;
+
+            var normalized = clamped / 100f;
+            var curved = Mathf.Pow(normalized, 2f);
+            var volumeDb = Mathf.Lerp(-60f, 0f, curved);
+
+            _audioManager.audioMixer.SetFloat(mixerParam, volumeDb);
+        }
+
+        private void ApplyVolume(float value, Slider slider, TextMeshProUGUI label, string mixerParam)
+        {
+            var normalized = value / 100f;
+            var curved = Mathf.Pow(normalized, 2f);
+            var volumeDb = Mathf.Lerp(-60f, 0f, curved);
+
+            _audioManager.audioMixer.SetFloat(mixerParam, volumeDb);
+
+            // Save to gameData depending on which slider
+            if (mixerParam == "MasterVolume")
+                gameData.masterVolume = value;
+            else if (mixerParam == "BackgroundVolume")
+                gameData.backgroundVolume = value;
+
+            Debug.Log($"Applied and saved {mixerParam}: {value} → {volumeDb} dB");
+            UpdateVolumeLabel(slider, label);
+        }
+
+        private void UpdateVolumeLabel(Slider slider, TextMeshProUGUI label)
+        {
+            if (label != null)
+            {
+                label.text = $"{Mathf.RoundToInt(slider.value)}";
+            }
+        }
+
+        #endregion
+        
+        #region Key Bindings
+        
         [Header("References")] 
         [SerializeField] private GameData gameData;
         [SerializeField] private GameObject keybindPanel;
@@ -77,7 +142,7 @@ namespace SamuraiStandoff
             }
         }
         
-         private bool IsValidKey(KeyCode code)
+        private bool IsValidKey(KeyCode code)
         {
             // Exclude mouse buttons
             if (code >= KeyCode.Mouse0 && code <= KeyCode.Mouse6)
@@ -253,5 +318,6 @@ namespace SamuraiStandoff
                 keybindPanel.SetActive(false);
             }
         }
+        #endregion
     }
 }

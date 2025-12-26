@@ -376,11 +376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5e61b9615378e49bffb37a3f95f860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition: {fileID: 5036610399679144369}
   transitionGameObject: {fileID: 0}
+  transition: {fileID: 5036610399679144369}
   gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
   playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
-  fx: {fileID: 0}
+  player2Data: {fileID: 11400000, guid: 7072ee3ae7fe83a43a39b3cfd96b9967, type: 2}
 --- !u!1001 &463397496916809963
 PrefabInstance:
   m_ObjectHideFlags: 0

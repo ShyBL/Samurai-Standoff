@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace SamuraiStandoff
 {
-    public class BackgroundSwitch : MonoBehaviour
+    public class BackgroundController : MonoBehaviour
     {
         [SerializeField] private List<Sprite> backgrounds;
         [SerializeField] private Image background;

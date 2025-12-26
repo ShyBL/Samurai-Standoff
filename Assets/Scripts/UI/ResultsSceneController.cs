@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace SamuraiStandoff
 {
-    public class ResultsScreen : MonoBehaviour
+    public class ResultsSceneController : MonoBehaviour
     {
         [Header("Single Player UI")]
         [SerializeField] private GameObject soloPanel;
