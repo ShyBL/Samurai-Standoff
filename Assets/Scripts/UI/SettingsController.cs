@@ -41,19 +41,21 @@ namespace SamuraiStandoff
             slider.value = clamped;
 
             var normalized = clamped / 100f;
-            var curved = Mathf.Pow(normalized, 2f);
-            var volumeDb = Mathf.Lerp(-60f, 0f, curved);
+            float dB = Mathf.Log10(normalized) * 20f;
+            
+            dB = Mathf.Clamp(dB, -60f, 0f);
 
-            _audioManager.audioMixer.SetFloat(mixerParam, volumeDb);
+            _audioManager.audioMixer.SetFloat(mixerParam, dB);
         }
 
         private void ApplyVolume(float value, Slider slider, TextMeshProUGUI label, string mixerParam)
         {
             var normalized = value / 100f;
-            var curved = Mathf.Pow(normalized, 2f);
-            var volumeDb = Mathf.Lerp(-60f, 0f, curved);
+            float dB = Mathf.Log10(normalized) * 20f;
+            
+            dB = Mathf.Clamp(dB, -60f, 0f);
 
-            _audioManager.audioMixer.SetFloat(mixerParam, volumeDb);
+            _audioManager.audioMixer.SetFloat(mixerParam, dB);
 
             // Save to gameData depending on which slider
             if (mixerParam == "MasterVolume")
@@ -61,7 +63,7 @@ namespace SamuraiStandoff
             else if (mixerParam == "BackgroundVolume")
                 gameData.backgroundVolume = value;
 
-            Debug.Log($"Applied and saved {mixerParam}: {value} → {volumeDb} dB");
+            Debug.Log($"Applied and saved {mixerParam}: {value} → {dB} dB");
             UpdateVolumeLabel(slider, label);
         }
 
@@ -113,8 +115,6 @@ namespace SamuraiStandoff
             SetupButtonListeners();
             UpdateUI();
         }
-
-        
         
         private void Update()
         {
