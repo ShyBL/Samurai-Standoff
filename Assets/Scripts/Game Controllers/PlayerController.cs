@@ -72,7 +72,7 @@ namespace SamuraiStandoff
                     Debug.Log("Player Attacked");
                     hasPlayerAttacked = true;
 
-                    if (!DuelController.instance.signal || Input.GetKeyDown(faultKeys[0]) || Input.GetKeyDown(faultKeys[1]))
+                    if (!DuelController.instance.signal)
                     {
                         RegisterFault();
                     }
@@ -90,7 +90,29 @@ namespace SamuraiStandoff
                     }
                 }
             }
+            //mis-press occurs
+            else if(Input.GetKeyDown(faultKeys[0]) || Input.GetKeyDown(faultKeys[1]) && !hasPlayerAttacked)
+            {
+                if (DuelController.instance.signal)
+                {
+                    if (DuelController.instance.pOne == gameObject)
+                    {
+                        // The second parameter 'true' indicates this win was caused by a fault.
+                        DuelController.instance.DeclareWinner(DuelController.instance.pTwo, true);
+                    }
+                    else if (DuelController.instance.pTwo == gameObject)
+                    {
+                        // The second parameter 'true' indicates this win was caused by a fault.
+                        DuelController.instance.DeclareWinner(DuelController.instance.pOne, true);
+                    }
+                }
+                else
+                {
+                    RegisterFault();
+                }
+                
 
+            }
         
             if (DuelController.instance.winnerDeclared && !hasPlayerAttacked)
             {
@@ -122,38 +144,39 @@ namespace SamuraiStandoff
 
         private void AssignKey()
         {
-            faultKeys.Clear();
+            
 
             if(playerData.playerNumber == 1)
             {
             // Get the list of keys from GameData
-            if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
-            {
-                Debug.LogWarning("No attack keys defined in GameData! Defaulting to A.");
-                currentKey = KeyCode.A;
-                return;
-            }
+                if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
+                {
+                    Debug.LogWarning("No attack keys defined in GameData! Defaulting to A.");
+                    currentKey = KeyCode.A;
+                    return;
+                }
 
             // Easy mode: always use first key
-            if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode && gameData.isMultiplayer == false)
-            {
-                currentKey = gameData.attackKeys[0];
-            }
-            else // Medium, Hard or Multiplayer: random key from the list
-            {
-                int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
-                currentKey = gameData.attackKeys[randomIndex];
-
-                foreach(KeyCode key in gameData.attackKeys)
+                if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode && gameData.isMultiplayer == false)
                 {
-                    if(key != currentKey)
-                    {
-                        faultKeys.Add(key);
-                    }
-                }
-            }
-            
+                    currentKey = gameData.attackKeys[0];
 
+                }
+            // Medium, Hard or Multiplayer: random key from the list
+                else 
+                {
+                    int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
+                    currentKey = gameData.attackKeys[randomIndex];
+                }
+            //add fault keys
+                faultKeys.Clear();
+                foreach(KeyCode key in gameData.attackKeys)
+                    {
+                        if(key != currentKey)
+                        {
+                        faultKeys.Add(key);
+                        }
+                    }
             Debug.Log($"Player must press: {currentKey}");
 
             }

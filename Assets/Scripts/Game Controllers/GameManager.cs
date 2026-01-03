@@ -110,7 +110,16 @@ namespace SamuraiStandoff
             playerData.m_maxWinStreak = 0;
             Debug.Log("Player Progression Data has been reset.");
         }
-    
+
+        public void CleanUp()//Resets values for new game
+        {
+            playerData.faultCounter = 0;
+            
+            if(gameData.isMultiplayer)
+            {
+                player2Data.faultCounter = 0;
+            }
+        }
         #endregion
     
         #region Progression Control
