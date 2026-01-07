@@ -14,6 +14,8 @@ namespace SamuraiStandoff
         [SerializeField] private PlayerData playerData;
         [SerializeField] private PlayerData player2Data;
 
+        [SerializeField] private GameManager gameManager;
+
         private void Awake()
         {
             if (instance == null)
@@ -25,6 +27,8 @@ namespace SamuraiStandoff
                 Destroy(gameObject);
                 return;
             }
+
+            gameManager = FindObjectOfType<GameManager>();      
         }
 
         public void Clash()
@@ -36,6 +40,8 @@ namespace SamuraiStandoff
         //----Scene Transitions-----
         public void LoadDuel() //Enter Game
         {
+            gameManager.CleanUp();
+
             GameManager.instance.StartCoroutine(LoadScene(1));
 
             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
@@ -51,7 +57,7 @@ namespace SamuraiStandoff
             AudioManager.instance.StopSound("Menu");
             AudioManager.instance.PlaySound("Fight");
 
-
+            
             //AudioManager.instance.StopSound("Waterfall");
             //AudioManager.instance.PlaySound("Waterfall");
         }
@@ -111,6 +117,7 @@ namespace SamuraiStandoff
 
         public void LoadMultiplayer() //Enter Multiplayer
         {
+            gameManager.CleanUp();
             GameManager.instance.StartCoroutine(LoadScene(3));
 
             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
@@ -158,8 +165,7 @@ namespace SamuraiStandoff
                 // {
                 //     if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
                 // }
-                playerData.faultCounter = 0;
-                player2Data.faultCounter = 0;
+                
 
                 LoadDuel();
             }

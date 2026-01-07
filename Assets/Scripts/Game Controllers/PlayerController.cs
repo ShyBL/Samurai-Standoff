@@ -72,7 +72,7 @@ namespace SamuraiStandoff
                     Debug.Log("Player Attacked");
                     hasPlayerAttacked = true;
 
-                    if (!DuelController.instance.signal || Input.GetKeyDown(faultKeys[0]) || Input.GetKeyDown(faultKeys[1]))
+                    if (!DuelController.instance.signal)
                     {
                         RegisterFault();
                     }
@@ -90,7 +90,29 @@ namespace SamuraiStandoff
                     }
                 }
             }
+            //mis-press occurs
+            else if(Input.GetKeyDown(faultKeys[0]) || Input.GetKeyDown(faultKeys[1]) && !hasPlayerAttacked)
+            {
+                if (DuelController.instance.signal)
+                {
+                    if (DuelController.instance.pOne == gameObject)
+                    {
+                        // The second parameter 'true' indicates this win was caused by a fault.
+                        DuelController.instance.DeclareWinner(DuelController.instance.pTwo, true);
+                    }
+                    else if (DuelController.instance.pTwo == gameObject)
+                    {
+                        // The second parameter 'true' indicates this win was caused by a fault.
+                        DuelController.instance.DeclareWinner(DuelController.instance.pOne, true);
+                    }
+                }
+                else
+                {
+                    RegisterFault();
+                }
+                
 
+            }
         
             if (DuelController.instance.winnerDeclared && !hasPlayerAttacked)
             {
@@ -100,17 +122,17 @@ namespace SamuraiStandoff
                 }
                 else
                 {
-                    if(playerImage.sprite != characterData.sprites[2])
-                    {
-                        playerImage.sprite = characterData.sprites[2]; // Lose sprite
-                        MovePlayerToAttackPosition();
+                if(playerImage.sprite != characterData.sprites[2])
+                {
+                    playerImage.sprite = characterData.sprites[2]; // Lose sprite
+                    MovePlayerToAttackPosition();
 
-                        // Hide key prompt when round ends
-                        if (keyPromptObject != null)
-                        {
-                            keyPromptObject.SetActive(false);
-                        }
+                    // Hide key prompt when round ends
+                    if (keyPromptObject != null)
+                    {
+                        keyPromptObject.SetActive(false);
                     }
+                }
                 }
                 
             }
@@ -122,11 +144,11 @@ namespace SamuraiStandoff
 
         private void AssignKey()
         {
-            faultKeys.Clear();
+            
 
             if(playerData.playerNumber == 1)
             {
-                // Get the list of keys from GameData
+            // Get the list of keys from GameData
                 if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
                 {
                     Debug.LogWarning("No attack keys defined in GameData! Defaulting to A.");
@@ -134,33 +156,28 @@ namespace SamuraiStandoff
                     return;
                 }
 
-                // Easy mode: always use first key
+            // Easy mode: always use first key
                 if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode && gameData.isMultiplayer == false)
                 {
                     currentKey = gameData.attackKeys[0];
-                    // Add all other keys as fault keys
-                    for (int i = 1; i < gameData.attackKeys.Count; i++)
-                    {
-                        faultKeys.Add(gameData.attackKeys[i]);
-                    }
 
                 }
-                else // Medium, Hard or Multiplayer: random key from the list
+            // Medium, Hard or Multiplayer: random key from the list
+                else 
                 {
                     int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
                     currentKey = gameData.attackKeys[randomIndex];
-
-                    foreach(KeyCode key in gameData.attackKeys)
+                }
+            //add fault keys
+                faultKeys.Clear();
+                foreach(KeyCode key in gameData.attackKeys)
                     {
                         if(key != currentKey)
                         {
-                            faultKeys.Add(key);
+                        faultKeys.Add(key);
                         }
                     }
-                }
-            
-
-                Debug.Log($"Player must press: {currentKey}");
+            Debug.Log($"Player must press: {currentKey}");
 
             }
             else if(playerData.playerNumber == 2)
@@ -234,11 +251,11 @@ namespace SamuraiStandoff
             Vector3 newPosition = transform.localPosition;
             if (newPosition.x >= 600)
             {
-                newPosition.x = -600;
+            newPosition.x = -600;
             }
             else
             {
-                newPosition.x = 600;
+            newPosition.x = 600;
             }
             
             transform.localPosition = newPosition;
