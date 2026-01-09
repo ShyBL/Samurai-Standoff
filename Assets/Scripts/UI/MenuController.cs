@@ -243,17 +243,8 @@ namespace SamuraiStandoff
                 var playerSelectedCharacter = playerData.selectedCharacter =
                     gameData.allCharacters.FirstOrDefault(c => c.type == playerData.characterType);
 
-                if (playerSelectedCharacter != null)
-                {
-                    characterImage.sprite = playerSelectedCharacter.sprites[0];
-                    selectedCharacterNameText.text = playerSelectedCharacter.name;
-                }
-                else
-                {
-                    playerData.selectedCharacter = gameData.allCharacters[0];
-                    characterImage.sprite = gameData.allCharacters[0].sprites[0];
-                    selectedCharacterNameText.text = playerSelectedCharacter.name;
-                }
+                characterImage.sprite = playerSelectedCharacter.sprites[0];
+                selectedCharacterNameText.text = playerSelectedCharacter.name;
             }
         }
 
