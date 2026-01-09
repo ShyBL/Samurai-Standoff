@@ -49,8 +49,16 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 7ea3494648b0bb24da60374c3ac6a0d1, type: 3}
     - {fileID: 21300000, guid: 0cccaf586a372fc42a22f1bab9482468, type: 3}
     - {fileID: 21300000, guid: 3e78d1f881a83774ca9fa20e2a47520c, type: 3}
+  - name: Bamboo
+    type: 6
+    sprites:
+    - {fileID: -597923343, guid: 3c72b28ca25dd2a458cfe5c9bd12f53b, type: 3}
+    - {fileID: -597923343, guid: 3c72b28ca25dd2a458cfe5c9bd12f53b, type: 3}
+    - {fileID: -597923343, guid: 3c72b28ca25dd2a458cfe5c9bd12f53b, type: 3}
   attackKeys: 610000007300000064000000
   p2AttackKeys: 6a0000006b0000006c000000
+  tutorialReactionTimes:
+  - 1
   easyReactionTimes:
   - 1
   - 0.75
@@ -66,6 +74,7 @@ MonoBehaviour:
   - 0.3
   - 0.2
   - 0.1
+  tutorialTotalLevels: 1
   easyTotalLevels: 3
   mediumTotalLevels: 3
   hardTotalLevels: 4

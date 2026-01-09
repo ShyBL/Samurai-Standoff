@@ -8,5 +8,6 @@ namespace SamuraiStandoff
         Macaroni,
         Chaolin,
         Fraug,
+        Bamboo
     }
 }

@@ -113,7 +113,7 @@ namespace SamuraiStandoff
             if (playerData == null || gameData == null) return;
 
             CharacterType type = (CharacterType)index;
-            var selected = gameData.allCharacters.FirstOrDefault(c => c.type == type);
+            Character selected = gameData.allCharacters.FirstOrDefault(c => c.type == type);
 
             if (selected != null)
             {
@@ -163,6 +163,9 @@ namespace SamuraiStandoff
                     if (!playerData.completedEasyMode) return;
                     GameManager.instance.SetHardMode();
                     break;
+                case 3: // Tutorial
+                    GameManager.instance.SetTutorialMode();
+                    break;
 
                 default:
                     Debug.LogWarning($"Invalid difficulty index: {index}");
@@ -170,7 +173,15 @@ namespace SamuraiStandoff
             }
 
             DisableDifficultyButtons();
-            SceneLoader.instance.LoadDuel();
+            if (index == 3)
+            {
+                SceneLoader.instance.LoadTutorialDuel();
+            }
+            else
+            {
+                SceneLoader.instance.LoadDuel();
+            }
+            
         }
 
         [SerializeField] private TextMeshProUGUI startText;

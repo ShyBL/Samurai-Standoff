@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Main Menu_Build_0.2.unity
-    guid: c0ff16c7b7b6dc040913d7618cd8c5b6
+  - enabled: 1
+    path: Assets/Scenes/Main Menu_New.unity
+    guid: 330556618da8d304b906f525cb64baa5
   - enabled: 1
     path: Assets/Scenes/DayLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -22,5 +22,5 @@ EditorBuildSettings:
     guid: c7f1d15be4d2ace49b33e901bdf13598
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
-    guid: 6c97cf8a9a304e84aa44cde40db7e719
+    guid: 8759bf8cd24efb340baaabf926d1e8b0
   m_configObjects: {}

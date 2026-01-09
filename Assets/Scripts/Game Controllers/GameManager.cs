@@ -49,6 +49,12 @@ namespace SamuraiStandoff
 
         public int totalLevels;
     
+        public void SetTutorialMode()
+        {
+            totalLevels = gameData.tutorialTotalLevels; 
+            gameData.currentDifficulty = EnemyDifficultyType.Tutorial;
+        }
+        
         public void SetEasyMode()
         {
             totalLevels = gameData.easyTotalLevels; 
