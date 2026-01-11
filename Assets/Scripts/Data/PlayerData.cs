@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -73,7 +74,7 @@ namespace SamuraiStandoff
                 characterType = CharacterType.Monk;
             }
 
-            if (selectedCharacter == null)
+            if (selectedCharacter.sprites.Count == 0)
             {
                 var gameData = Resources.Load("GameData") as GameData;
                 if (gameData != null && gameData.allCharacters != null)

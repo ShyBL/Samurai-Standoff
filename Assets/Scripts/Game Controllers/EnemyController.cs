@@ -65,6 +65,13 @@ namespace SamuraiStandoff
             _difficultyCharacterMap = new()
             {
                 {
+                    EnemyDifficultyType.Tutorial,
+                    new List<CharacterType>()
+                    {
+                        CharacterType.Bamboo
+                    }
+                },
+                {
                     EnemyDifficultyType.EasyMode,
                     new List<CharacterType>
                     {
@@ -97,7 +104,7 @@ namespace SamuraiStandoff
             Debug.Log("Assign Enemy Traits Called");
 
             int levelIndex = playerData.currentLevel - 1;
-            var difficulty = gameData.currentDifficulty;
+            EnemyDifficultyType difficulty = gameData.currentDifficulty;
 
             // Set reaction time based on difficulty
             _reactionTime = difficulty switch
@@ -105,18 +112,20 @@ namespace SamuraiStandoff
                 EnemyDifficultyType.EasyMode => gameData.easyReactionTimes[levelIndex],
                 EnemyDifficultyType.MediumMode => gameData.mediumReactionTimes[levelIndex],
                 EnemyDifficultyType.HardMode => gameData.hardReactionTimes[levelIndex],
+                EnemyDifficultyType.Tutorial => gameData.tutorialReactionTimes[levelIndex],
                 _ => throw new ArgumentOutOfRangeException()
             };
 
             // Select character for this level and difficulty
-            var characterOrder = _difficultyCharacterMap[difficulty];
+            List<CharacterType> characterOrder = _difficultyCharacterMap[difficulty];
+            
             if (levelIndex >= characterOrder.Count)
             {
                 Debug.LogWarning("Level index exceeds character list for difficulty.");
                 return;
             }
 
-            var characterType = characterOrder[levelIndex];
+            CharacterType characterType = characterOrder[levelIndex];
             selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == characterType);
 
             // Set UI elements
@@ -143,6 +152,7 @@ namespace SamuraiStandoff
 
                 if (!hasEnemyAttacked && _attackTimer <= 0)
                 {
+
                     enemyImage.sprite = selectedCharacter.sprites[1]; // Attack sprite
 
                     MoveEnemyToAttackPosition();
@@ -150,6 +160,8 @@ namespace SamuraiStandoff
 
                     hasEnemyAttacked = true;
                     DuelController.instance.DeclareWinner(gameObject);
+                    
+                   
                 }
             }
             else if (DuelController.instance.winnerDeclared && !hasEnemyAttacked)
@@ -159,11 +171,25 @@ namespace SamuraiStandoff
             }
         }
 
+        private void PlayTutorialAnimation()
+        {
+            var animator = GetComponentInChildren<Animator>();
+            animator.SetTrigger("Tutorial");
+        }
+
         private void MoveEnemyToAttackPosition()
         {
-            Vector3 newPosition = transform.localPosition;
-            newPosition.x = -600;
-            transform.localPosition = newPosition;
+            if (selectedCharacter.type == CharacterType.Bamboo)
+            {
+                PlayTutorialAnimation();
+            }
+            else
+            {
+                Vector3 newPosition = transform.localPosition;
+                newPosition.x = -600;
+                transform.localPosition = newPosition;
+            }
+            
         }
 
         #endregion

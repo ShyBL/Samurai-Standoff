@@ -122,17 +122,17 @@ namespace SamuraiStandoff
                 }
                 else
                 {
-                if(playerImage.sprite != characterData.sprites[2])
-                {
-                    playerImage.sprite = characterData.sprites[2]; // Lose sprite
-                    MovePlayerToAttackPosition();
-
-                    // Hide key prompt when round ends
-                    if (keyPromptObject != null)
+                    if(playerImage.sprite != characterData.sprites[2])
                     {
-                        keyPromptObject.SetActive(false);
+                        playerImage.sprite = characterData.sprites[2]; // Lose sprite
+                        MovePlayerToAttackPosition();
+
+                        // Hide key prompt when round ends
+                        if (keyPromptObject != null)
+                        {
+                            keyPromptObject.SetActive(false);
+                        }
                     }
-                }
                 }
                 
             }
@@ -144,11 +144,9 @@ namespace SamuraiStandoff
 
         private void AssignKey()
         {
-            
-
             if(playerData.playerNumber == 1)
             {
-            // Get the list of keys from GameData
+                // Get the list of keys from GameData
                 if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
                 {
                     Debug.LogWarning("No attack keys defined in GameData! Defaulting to A.");
@@ -156,28 +154,34 @@ namespace SamuraiStandoff
                     return;
                 }
 
-            // Easy mode: always use first key
-                if (gameData.currentDifficulty == EnemyDifficultyType.EasyMode && gameData.isMultiplayer == false)
+                switch (gameData.currentDifficulty)
                 {
-                    currentKey = gameData.attackKeys[0];
+                    // Tutorial / Easy mode: always use first key
+                    case EnemyDifficultyType.EasyMode when gameData.isMultiplayer == false:
+                    case EnemyDifficultyType.Tutorial when gameData.isMultiplayer == false:
+                        currentKey = gameData.attackKeys[0];
+                        break;
+                    
+                    // Medium, Hard or Multiplayer: random key from the list
+                    case EnemyDifficultyType.MediumMode:
+                    case EnemyDifficultyType.HardMode:
+                        int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
+                        currentKey = gameData.attackKeys[randomIndex];
+                        break;
 
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
-            // Medium, Hard or Multiplayer: random key from the list
-                else 
-                {
-                    int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
-                    currentKey = gameData.attackKeys[randomIndex];
-                }
-            //add fault keys
+                //add fault keys
                 faultKeys.Clear();
                 foreach(KeyCode key in gameData.attackKeys)
+                {
+                    if(key != currentKey)
                     {
-                        if(key != currentKey)
-                        {
                         faultKeys.Add(key);
-                        }
                     }
-            Debug.Log($"Player must press: {currentKey}");
+                }
+                Debug.Log($"Player must press: {currentKey}");
 
             }
             else if(playerData.playerNumber == 2)
@@ -251,11 +255,11 @@ namespace SamuraiStandoff
             Vector3 newPosition = transform.localPosition;
             if (newPosition.x >= 600)
             {
-            newPosition.x = -600;
+                newPosition.x = -600;
             }
             else
             {
-            newPosition.x = 600;
+                newPosition.x = 600;
             }
             
             transform.localPosition = newPosition;

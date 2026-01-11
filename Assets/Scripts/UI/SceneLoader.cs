@@ -1,197 +1,221 @@
-// using System.Collections;
-// using System.Linq;
-// using UnityEngine;
-// using UnityEngine.SceneManagement;
-//
-// namespace SamuraiStandoff
-// {
-//     public class SceneLoader : MonoBehaviour
-//     {
-//         public static SceneLoader instance;
-//         [SerializeField] private GameObject transitionGameObject;
-//         [SerializeField] Animator transition;
-//         [SerializeField] private GameData gameData;
-//         [SerializeField] private PlayerData playerData;
-//         [SerializeField] private PlayerData player2Data;
-//
-//         [SerializeField] private GameManager gameManager;
-//
-//         private void Awake()
-//         {
-//             if (instance == null)
-//             {
-//                 instance = this;
-//             }
-//             else
-//             {
-//                 Destroy(gameObject);
-//                 return;
-//             }
-//
-//             gameManager = FindObjectOfType<GameManager>();      
-//         }
-//
-//         public void Clash()
-//         {
-//             transitionGameObject.SetActive(true);
-//            // transition.SetTrigger("Clash");
-//         }
-//
-//         //----Scene Transitions-----
-//         public void LoadDuel() //Enter Game
-//         {
-//             gameManager.CleanUp();
-//
-//             GameManager.instance.StartCoroutine(LoadScene(1));
-//
-//             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
-//
-//             if (menuSound == null || !menuSound.source.isPlaying)
-//             {
-//                 Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
-//                 return;
-//             }
-//
-//             Debug.Log("Menu music is playing. Proceeding to load game.");
-//
-//             AudioManager.instance.StopSound("Menu");
-//             AudioManager.instance.PlaySound("Fight");
-//
-//             
-//             //AudioManager.instance.StopSound("Waterfall");
-//             //AudioManager.instance.PlaySound("Waterfall");
-//         }
-//
-//         public void RestartDuel()
-//         {
-//
-//             playerData.currentLevel = 1;
-//
-//             if(gameData.isMultiplayer)
-//             {
-//                 GameManager.instance.StartCoroutine(LoadScene(3));
-//             }
-//             else
-//             {
-//                 GameManager.instance.StartCoroutine(LoadScene(1));
-//             }
-//             
-//             
-//             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
-//
-//             if (menuSound == null || !menuSound.source.isPlaying)
-//             {
-//                 Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
-//                 return;
-//             }
-//
-//             Debug.Log("Menu music is playing. Proceeding to load game.");
-//
-//             AudioManager.instance.StopSound("Menu");
-//             AudioManager.instance.PlaySound("Fight");
-//
-//             // AudioManager.instance.StopSound("Waterfall");
-//             // AudioManager.instance.PlaySound("Waterfall");
-//         }
-//
-//         public void LoadMainMenu()
-//         {
-//             playerData.currentLevel = 1;
-//             StartCoroutine(LoadMainMenuScene());
-//         }
-//
-//         private IEnumerator LoadMainMenuScene()
-//         {
-//             yield return StartCoroutine(LoadScene(0));
-//             gameData.isMultiplayer = false;
-//             // Wait one frame to ensure scene objects are initialized
-//             yield return null;
-//             
-//             // Find MenuController and update panels
-//             MenuController menuController = FindObjectOfType<MenuController>();
-//             if (menuController != null)
-//             {
-//                 menuController.ShowCharacterSelection();
-//             }
-//         }
-//
-//         public void LoadMultiplayer() //Enter Multiplayer
-//         {
-//             gameManager.CleanUp();
-//             GameManager.instance.StartCoroutine(LoadScene(3));
-//
-//             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
-//
-//             if (menuSound == null || !menuSound.source.isPlaying)
-//             {
-//                 Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
-//                 return;
-//             }
-//
-//             Debug.Log("Menu music is playing. Proceeding to load game.");
-//
-//             AudioManager.instance.StopSound("Menu");
-//             AudioManager.instance.PlaySound("Fight");
-//
-//
-//             //AudioManager.instance.StopSound("Waterfall");
-//             //AudioManager.instance.PlaySound("Waterfall");
-//         }
-//
-//
-//         private IEnumerator LoadScene(int levelIndex)
-//         {
-//             transition.SetTrigger("TransitionIn");
-//
-//             yield return new WaitForSeconds(3f);
-//             SceneManager.LoadScene(levelIndex);
-//         }
-//
-//         public IEnumerator NextLevel()
-//         {
-//             yield return new WaitForSeconds(3f);
-//             Debug.Log("Next Level");
-//             // transition.SetTrigger("Start");
-//             playerData.currentLevel++;
-//
-//             if (playerData.currentLevel > GameManager.instance.totalLevels)
-//             {
-//                 StartCoroutine(LoadResults());
-//             }
-//             else
-//             {
-//                 // GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-//                 // foreach (GameObject player in players)
-//                 // {
-//                 //     if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
-//                 // }
-//                 
-//
-//                 LoadDuel();
-//             }
-//         }
-//
-//         public IEnumerator LoadResults()
-//         {
-//             playerData.faultCounter = 0;
-//             player2Data.faultCounter = 0;
-//
-//             yield return new WaitForSeconds(3f);
-//
-//             if(!gameData.isMultiplayer)
-//             {
-//                 StartCoroutine(LoadScene(2));    
-//             }
-//             else
-//             {
-//                 StartCoroutine(LoadScene(4));
-//             }
-//
-//             AudioManager.instance.StopSound("Fight");
-//             AudioManager.instance.PlaySound("Menu");
-//             // AudioManager.instance.StopSound("Waterfall");
-//         }
-//
-//         
-//     }
-// }
+using System.Collections;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace SamuraiStandoff
+{
+    public class SceneLoader : MonoBehaviour
+    {
+        public static SceneLoader instance;
+        [SerializeField] private GameObject transitionGameObject;
+        [SerializeField] Animator transition;
+        [SerializeField] private GameData gameData;
+        [SerializeField] private PlayerData playerData;
+        [SerializeField] private PlayerData player2Data;
+
+        [SerializeField] private GameManager gameManager;
+
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            gameManager = FindObjectOfType<GameManager>();      
+        }
+
+        public void Clash()
+        {
+            transitionGameObject.SetActive(true);
+           // transition.SetTrigger("Clash");
+        }
+
+        //----Scene Transitions-----
+        public void LoadDuel() //Enter Game
+        {
+            gameManager.CleanUp();
+
+            GameManager.instance.StartCoroutine(LoadScene(1));
+
+            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
+
+            if (menuSound == null || !menuSound.source.isPlaying)
+            {
+                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
+                return;
+            }
+
+            Debug.Log("Menu music is playing. Proceeding to load game.");
+
+            AudioManager.instance.StopSound("Menu");
+            AudioManager.instance.PlaySound("Fight");
+
+            
+            //AudioManager.instance.StopSound("Waterfall");
+            //AudioManager.instance.PlaySound("Waterfall");
+        }
+        
+        public void LoadTutorialDuel() //Enter Tutorial
+        {
+            gameManager.CleanUp();
+
+            GameManager.instance.StartCoroutine(LoadScene(5));
+
+            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
+
+            if (menuSound == null || !menuSound.source.isPlaying)
+            {
+                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
+                return;
+            }
+
+            Debug.Log("Menu music is playing. Proceeding to load game.");
+
+            AudioManager.instance.StopSound("Menu");
+            AudioManager.instance.PlaySound("Fight");
+
+            
+            //AudioManager.instance.StopSound("Waterfall");
+            //AudioManager.instance.PlaySound("Waterfall");
+        }
+
+        public void RestartDuel()
+        {
+
+            playerData.currentLevel = 1;
+
+            if(gameData.isMultiplayer)
+            {
+                GameManager.instance.StartCoroutine(LoadScene(3));
+            }
+            else
+            {
+                GameManager.instance.StartCoroutine(LoadScene(1));
+            }
+            
+            
+            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
+
+            if (menuSound == null || !menuSound.source.isPlaying)
+            {
+                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
+                return;
+            }
+
+            Debug.Log("Menu music is playing. Proceeding to load game.");
+
+            AudioManager.instance.StopSound("Menu");
+            AudioManager.instance.PlaySound("Fight");
+
+            // AudioManager.instance.StopSound("Waterfall");
+            // AudioManager.instance.PlaySound("Waterfall");
+        }
+
+        public void LoadMainMenu()
+        {
+            playerData.currentLevel = 1;
+            StartCoroutine(LoadMainMenuScene());
+        }
+
+        private IEnumerator LoadMainMenuScene()
+        {
+            yield return StartCoroutine(LoadScene(0));
+            gameData.isMultiplayer = false;
+            // Wait one frame to ensure scene objects are initialized
+            yield return null;
+            
+            // Find MenuController and update panels
+            MenuController menuController = FindObjectOfType<MenuController>();
+            if (menuController != null)
+            {
+                menuController.ShowCharacterSelection();
+            }
+        }
+
+        public void LoadMultiplayer() //Enter Multiplayer
+        {
+            gameManager.CleanUp();
+            GameManager.instance.StartCoroutine(LoadScene(3));
+
+            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
+
+            if (menuSound == null || !menuSound.source.isPlaying)
+            {
+                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
+                return;
+            }
+
+            Debug.Log("Menu music is playing. Proceeding to load game.");
+
+            AudioManager.instance.StopSound("Menu");
+            AudioManager.instance.PlaySound("Fight");
+
+
+            //AudioManager.instance.StopSound("Waterfall");
+            //AudioManager.instance.PlaySound("Waterfall");
+        }
+
+
+        private IEnumerator LoadScene(int levelIndex)
+        {
+            transition.SetTrigger("TransitionIn");
+
+            yield return new WaitForSeconds(3f);
+            SceneManager.LoadScene(levelIndex);
+        }
+
+        public IEnumerator NextLevel()
+        {
+            yield return new WaitForSeconds(3f);
+            Debug.Log("Next Level");
+            // transition.SetTrigger("Start");
+            playerData.currentLevel++;
+
+            if (playerData.currentLevel > GameManager.instance.totalLevels)
+            {
+                StartCoroutine(LoadResults());
+            }
+            else
+            {
+                // GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                // foreach (GameObject player in players)
+                // {
+                //     if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
+                // }
+                
+
+                LoadDuel();
+            }
+        }
+
+        public IEnumerator LoadResults()
+        {
+            playerData.faultCounter = 0;
+            player2Data.faultCounter = 0;
+
+            yield return new WaitForSeconds(3f);
+
+            if(!gameData.isMultiplayer)
+            {
+                StartCoroutine(LoadScene(2));    
+            }
+            else
+            {
+                StartCoroutine(LoadScene(4));
+            }
+
+            AudioManager.instance.StopSound("Fight");
+            AudioManager.instance.PlaySound("Menu");
+            // AudioManager.instance.StopSound("Waterfall");
+        }
+
+        
+    }
+}

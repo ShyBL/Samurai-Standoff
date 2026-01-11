@@ -4,6 +4,7 @@
     {
         EasyMode,
         MediumMode,
-        HardMode
+        HardMode,
+        Tutorial
     }
 }

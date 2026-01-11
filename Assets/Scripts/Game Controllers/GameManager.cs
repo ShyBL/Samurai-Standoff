@@ -49,6 +49,12 @@ namespace SamuraiStandoff
 
         public int totalLevels;
     
+        public void SetTutorialMode()
+        {
+            totalLevels = gameData.tutorialTotalLevels; 
+            gameData.currentDifficulty = EnemyDifficultyType.Tutorial;
+        }
+        
         public void SetEasyMode()
         {
             totalLevels = gameData.easyTotalLevels; 
@@ -114,12 +120,18 @@ namespace SamuraiStandoff
         public void CleanUp()//Resets values for new game
         {
             playerData.faultCounter = 0;
-            
+           
             if(gameData.isMultiplayer)
             {
                 player2Data.faultCounter = 0;
             }
         }
+
+        private void OnDestroy()
+        {
+            playerData.currentLevel = 1;
+        }
+
         #endregion
     
         #region Progression Control

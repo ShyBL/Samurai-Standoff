@@ -22,9 +22,12 @@ namespace SamuraiStandoff
         };
 
         [Header("Difficulty Settings")] 
+        public List<float> tutorialReactionTimes = new() { 1f };
         public List<float> easyReactionTimes = new() { 1f, 0.75f, 0.5f, 0.25f };
         public List<float> mediumReactionTimes = new() { 0.75f, 0.5f, 0.3f };
         public List<float> hardReactionTimes = new() { 0.5f, 0.4f, 0.3f, 0.2f, 0.1f };
+        
+        public int tutorialTotalLevels;
         public int easyTotalLevels;
         public int mediumTotalLevels;
         public int hardTotalLevels;
