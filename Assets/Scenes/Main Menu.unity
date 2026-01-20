@@ -1504,9 +1504,6 @@ MonoBehaviour:
   player2MultiplayerCharacterNameText: {fileID: 1349087304}
   startText: {fileID: 1612717556}
   playerChoosesText: {fileID: 1434110214}
-  volumeSlider: {fileID: 424163541}
-  volumeValueText: {fileID: 1655136476}
-  introFinished: 0
 --- !u!1 &188892736
 GameObject:
   m_ObjectHideFlags: 0
@@ -10029,7 +10026,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 200, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 25.92, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
 --- !u!1 &1193716297
@@ -14960,7 +14957,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Playtest Build
+  m_text: Early Acess Build
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 588261a4840a0cf4e808cf1057fa2945, type: 2}
   m_sharedMaterial: {fileID: -8033519224638412943, guid: 588261a4840a0cf4e808cf1057fa2945, type: 2}
@@ -14987,7 +14984,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 18.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
