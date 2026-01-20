@@ -144,9 +144,59 @@ namespace SamuraiStandoff
 
         private void AssignKey()
         {
-            if(playerData.playerNumber == 1)
+            // Multiplayer mode - both players get random keys from their respective lists
+            if (gameData.isMultiplayer)
             {
-                // Get the list of keys from GameData
+                if (playerData.playerNumber == 1)
+                {
+                    if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
+                    {
+                        Debug.LogWarning("No attack keys defined in GameData! Defaulting to A.");
+                        currentKey = KeyCode.A;
+                        return;
+                    }
+
+                    int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
+                    currentKey = gameData.attackKeys[randomIndex];
+
+                    // Add fault keys
+                    faultKeys.Clear();
+                    foreach (KeyCode key in gameData.attackKeys)
+                    {
+                        if (key != currentKey)
+                        {
+                            faultKeys.Add(key);
+                        }
+                    }
+                    Debug.Log($"Player 1 (Multiplayer) must press: {currentKey}");
+                }
+                else if (playerData.playerNumber == 2)
+                {
+                    if (gameData.p2AttackKeys == null || gameData.p2AttackKeys.Count == 0)
+                    {
+                        Debug.LogWarning("No P2 attack keys defined in GameData! Defaulting to J.");
+                        currentKey = KeyCode.J;
+                        return;
+                    }
+
+                    int randomIndex = UnityEngine.Random.Range(0, gameData.p2AttackKeys.Count);
+                    currentKey = gameData.p2AttackKeys[randomIndex];
+
+                    // Add fault keys
+                    faultKeys.Clear();
+                    foreach (KeyCode key in gameData.p2AttackKeys)
+                    {
+                        if (key != currentKey)
+                        {
+                            faultKeys.Add(key);
+                        }
+                    }
+                    Debug.Log($"Player 2 (Multiplayer) must press: {currentKey}");
+                }
+            }
+            // Single player mode - only Player 1, difficulty-based key assignment
+            else
+            {
                 if (gameData.attackKeys == null || gameData.attackKeys.Count == 0)
                 {
                     Debug.LogWarning("No attack keys defined in GameData! Defaulting to A.");
@@ -156,47 +206,35 @@ namespace SamuraiStandoff
 
                 switch (gameData.currentDifficulty)
                 {
-                    // Tutorial / Easy mode: always use first key
-                    case EnemyDifficultyType.EasyMode when gameData.isMultiplayer == false:
-                    case EnemyDifficultyType.Tutorial when gameData.isMultiplayer == false:
+                    case EnemyDifficultyType.Tutorial:
+                    case EnemyDifficultyType.EasyMode:
+                        // Tutorial and Easy: always use first key
                         currentKey = gameData.attackKeys[0];
                         break;
-                    
-                    // Medium, Hard or Multiplayer: random key from the list
+
                     case EnemyDifficultyType.MediumMode:
                     case EnemyDifficultyType.HardMode:
+                        // Medium and Hard: random key
                         int randomIndex = UnityEngine.Random.Range(0, gameData.attackKeys.Count);
                         currentKey = gameData.attackKeys[randomIndex];
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        Debug.LogWarning($"Unhandled difficulty: {gameData.currentDifficulty}. Defaulting to first key.");
+                        currentKey = gameData.attackKeys[0];
+                        break;
                 }
-                //add fault keys
+
+                // Add fault keys
                 faultKeys.Clear();
-                foreach(KeyCode key in gameData.attackKeys)
+                foreach (KeyCode key in gameData.attackKeys)
                 {
-                    if(key != currentKey)
+                    if (key != currentKey)
                     {
                         faultKeys.Add(key);
                     }
                 }
-                Debug.Log($"Player must press: {currentKey}");
-
-            }
-            else if(playerData.playerNumber == 2)
-            {
-                int randomIndex = UnityEngine.Random.Range(0, gameData.p2AttackKeys.Count);
-                currentKey = gameData.p2AttackKeys[randomIndex];
-                Debug.Log($"Player 2 must press: {currentKey}");
-
-                foreach(KeyCode key in gameData.p2AttackKeys)
-                {
-                    if(key != currentKey)
-                    {
-                        faultKeys.Add(key);
-                    }
-                }
+                Debug.Log($"Player (Single Player - {gameData.currentDifficulty}) must press: {currentKey}");
             }
 
             // Update the key prompt text if it has a TextMeshProUGUI component
@@ -208,7 +246,6 @@ namespace SamuraiStandoff
                     promptText.text = currentKey.ToString();
                 }
             }
-              
         }
 
         #endregion

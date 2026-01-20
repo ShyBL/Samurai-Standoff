@@ -77,7 +77,7 @@ namespace SamuraiStandoff
             if (selectedCharacter.sprites.Count == 0)
             {
                 var gameData = Resources.Load("GameData") as GameData;
-                if (gameData != null && gameData.allCharacters != null)
+                if (gameData != null && gameData.allCharacters.Count != 0)
                 {
                     selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == characterType);
                 }

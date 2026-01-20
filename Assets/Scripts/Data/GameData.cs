@@ -44,8 +44,6 @@ namespace SamuraiStandoff
         public bool isMultiplayer;
 
         [Header("Last Duel Results")]
-        public bool lastDuelPlayerWon; // For single player - did player win?
-        public bool lastDuelPlayer1Won; // For multiplayer - did player 1 win?
         public CharacterType lastEnemyCharacterType; // Who was the enemy in last duel?
         public CharacterType winningCharacter; // Who won the last duel overall?
         public int lastDuelFrameCount; // How many frames after signal did winner attack?
