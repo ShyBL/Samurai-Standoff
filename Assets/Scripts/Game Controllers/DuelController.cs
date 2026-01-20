@@ -189,21 +189,16 @@ namespace SamuraiStandoff
                         RecordSinglePlayerDuel(false,enemyType, _frames);
                     }
                 }
-                else
+                else // Multiplayer Logic
                 {    
-                    if(pTwo == gameObject.CompareTag("Player")) // Multiplayer Logic
+                    // Assuming progression is tracked from the perspective of Player 1 (pOne).
+                    if (winner == pOne)
                     {
-                        // Assuming progression is tracked from the perspective of Player 1 (pOne).
-                        if (winner == pOne)
-                        {
-                        GameManager.instance.OnDuelWon(_frames, loser.name);
                         RecordMultiplayerDuel(true,playerData.characterType,player2Data.characterType, _frames);
-                        }
-                        else
-                        {
-                        GameManager.instance.OnDuelLost();
+                    }
+                    else
+                    {
                         RecordMultiplayerDuel(false,playerData.characterType,player2Data.characterType, _frames);
-                        }
                     }
                 }
 
@@ -291,7 +286,6 @@ namespace SamuraiStandoff
         // Helper method to record single player duel result
         public void RecordSinglePlayerDuel(bool playerWon, CharacterType enemyType, int frameCount)
         {
-            gameData.lastDuelPlayerWon = playerWon;
             gameData.lastEnemyCharacterType = enemyType;
             gameData.lastDuelFrameCount = frameCount;
             gameData.winningCharacter = playerWon ? playerData.characterType : enemyType; // Adjust based on player's character
@@ -300,9 +294,18 @@ namespace SamuraiStandoff
         // Helper method to record multiplayer duel result
         public void RecordMultiplayerDuel(bool player1Won, CharacterType player1Char, CharacterType player2Char, int frameCount)
         {
-            gameData.lastDuelPlayer1Won = player1Won;
-            gameData.winningCharacter = player1Won ? player1Char : player2Char;
-            gameData.lastDuelFrameCount = frameCount;
+            // Update win counters in PlayerData
+            if (player1Won)
+            {
+                playerData.multiplayerWins++;
+            }
+            else
+            {
+                player2Data.multiplayerWins++;
+
+            }
+    
+            Debug.Log($"Multiplayer duel recorded. P1 Wins: {playerData.multiplayerWins}, P2 Wins: {player2Data.multiplayerWins}");
         }
     }
 }

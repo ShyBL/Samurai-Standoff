@@ -39,10 +39,10 @@ namespace SamuraiStandoff
 
             // Show scores
             if (player1ScoreText != null)
-                player1ScoreText.text = $"Faults: {player1Data.faultCounter}";
+                player1ScoreText.text = $"{player1Data.multiplayerWins}";
 
             if (player2ScoreText != null)
-                player2ScoreText.text = $"Faults: {player2Data.faultCounter}";
+                player2ScoreText.text = $"{player2Data.multiplayerWins}";
         }
     }
 }
