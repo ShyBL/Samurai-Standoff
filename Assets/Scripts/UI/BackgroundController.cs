@@ -51,5 +51,11 @@ namespace SamuraiStandoff
         {
             AudioManager.instance.StopSound("Waterfall");
         }
+
+        public void ToggleFXOff()
+        {
+            GreenFX.SetActive(false);
+            PinkFX.SetActive(false);
+        }
     }
 }

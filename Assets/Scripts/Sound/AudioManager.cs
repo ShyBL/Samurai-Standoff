@@ -12,16 +12,11 @@ namespace SamuraiStandoff
         public Sound[] sounds;
         [SerializeField] private GameData gameData;
 
-        //To add a sound effect: AudioManager.instance.PlaySound("");
         private void Awake()
         {
             if (instance == null)
             {
                 instance = this;
-                
-                LoadVolumeFromPlayerData("MasterVolume", gameData.masterVolume);
-                LoadVolumeFromPlayerData("BackgroundVolume", gameData.backgroundVolume);
-                
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -44,6 +39,8 @@ namespace SamuraiStandoff
 
         private void Start()
         {
+            LoadVolumeFromPlayerData("MasterVolume", gameData.masterVolume);
+            LoadVolumeFromPlayerData("BackgroundVolume", gameData.backgroundVolume);
           //  PlaySound("Intro");
             // FindFirstObjectByType<AudioManager>().PlaySound("Wind");
         }

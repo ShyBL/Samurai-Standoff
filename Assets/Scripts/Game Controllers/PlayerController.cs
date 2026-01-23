@@ -269,7 +269,7 @@ namespace SamuraiStandoff
 
             if (playerData.faultCounter < 2)
             {
-                StartCoroutine(DuelController.instance.FaultRestart());
+                DuelController.instance.FaultRestart();
             }
             else // Determine which player is at fault and declare the other as winner
             {

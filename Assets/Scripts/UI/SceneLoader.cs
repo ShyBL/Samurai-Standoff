@@ -34,6 +34,7 @@ namespace SamuraiStandoff
         public void Clash()
         {
             transitionGameObject.SetActive(true);
+            FindFirstObjectByType<BackgroundController>().ToggleFXOff();
            // transition.SetTrigger("Clash");
         }
 
@@ -88,7 +89,8 @@ namespace SamuraiStandoff
 
         public void RestartDuel()
         {
-
+            FindFirstObjectByType<BackgroundController>().ToggleFXOff();
+            
             playerData.currentLevel = 1;
 
             if(gameData.isMultiplayer)

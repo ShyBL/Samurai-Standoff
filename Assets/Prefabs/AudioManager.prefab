@@ -107,13 +107,13 @@ MonoBehaviour:
     output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 1
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: Fight
     clip: {fileID: 8300000, guid: bc217436f4899a74399d790a2c2dd81a, type: 3}
     output: {fileID: 24300002, guid: ce19054415df1754f9475d84a0e7d951, type: 2}
     volume: 1
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}

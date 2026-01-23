@@ -262,7 +262,7 @@ namespace SamuraiStandoff
         #region Fault Logic
 
         // Handles fault scenario and restarts round if needed.
-        public IEnumerator FaultRestart()
+        public void FaultRestart()
         {
             // Track the first fault as an early attack.
             GameManager.instance.OnEarlyAttack();
@@ -271,14 +271,7 @@ namespace SamuraiStandoff
             resultText.enabled = true;
             resultText.text = "Fault";
 
-            yield return new WaitForSeconds(3f);
-            RestartRound();
-        }
-
-        // Reloads the current scene to restart the round.
-        private void RestartRound()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneLoader.instance.RestartDuel();
         }
 
         #endregion
