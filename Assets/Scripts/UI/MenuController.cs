@@ -33,19 +33,23 @@ namespace SamuraiStandoff
         [SerializeField] private List<TextMeshProUGUI> difficultyText;
         [SerializeField] private TextMeshProUGUI selectedCharacterNameText;
 
-        [Header("Difficulty Text Colors")] [SerializeField]
-        private Color activeTextColor = new Color32(255, 255, 255, 255);
-
-        [SerializeField] private Color inactiveTextColor = new Color32(255, 255, 255, 125);
-
         [Header("Character Selection")]
         [SerializeField] private GameObject characterSelectionPanel;
         [SerializeField] private GameObject menuSelectionPanel;
         [SerializeField] private Image characterImage;
+        
+        [Header("Multiplayer Selection")]
         [SerializeField] private Image player1MultiplayerCharacterImage;
         [SerializeField] private Image player2MultiplayerCharacterImage;
         [SerializeField] private TextMeshProUGUI player1MultiplayerCharacterNameText;
         [SerializeField] private TextMeshProUGUI player2MultiplayerCharacterNameText;
+        [SerializeField] private TextMeshProUGUI startText;
+        [SerializeField] private TextMeshProUGUI confirmText;
+        [SerializeField] private TextMeshProUGUI player1ChoosesText;
+        [SerializeField] private TextMeshProUGUI player2ChoosesText;
+
+        private bool playersReady;
+        private bool player2pick;
 
         public void SelectCharacterSinglePlayer(int index)
         {
@@ -184,18 +188,19 @@ namespace SamuraiStandoff
             
         }
 
-        [SerializeField] private TextMeshProUGUI startText;
-        [SerializeField] private TextMeshProUGUI playerChoosesText;
-        private bool playersReady;
-        private bool player2pick;
-        
+
+
         public void MultiplayerPlayButton()
         {
             if (!player2pick)
             {
                 player2pick = true;
-                playerChoosesText.text = "Player 2 Chooses";
-                startText.text = "Start";
+
+                player1ChoosesText.gameObject.SetActive(false);
+                player2ChoosesText.gameObject.SetActive(true);
+
+                confirmText.gameObject.SetActive(false);
+                startText.gameObject.SetActive(true);
             }
             else if (!playersReady)
             {
@@ -223,19 +228,25 @@ namespace SamuraiStandoff
             if (difficultyButtons == null || difficultyButtons.Count < 3) return;
             if (difficultyText == null || difficultyText.Count < 3) return;
 
+            Color activeTextColor = new Color32(255, 255, 255, 255);  // fully visible
+            Color inactiveTextColor = new Color32(255, 255, 255, 125);  // partially visible
+            
             difficultyButtons[0].interactable = true;
-            difficultyText[0].color = new Color32(255, 255, 255, 255); // fully visible
-
-            bool mediumUnlocked = playerData.completedEasyMode;
+            difficultyText[0].color = new Color32(255, 255, 255, 255);
+            
+            bool isDemo = gameData.isDemo;
+            
+            bool mediumUnlocked = playerData.completedEasyMode && !isDemo;
             difficultyButtons[1].interactable = mediumUnlocked;
             difficultyText[1].color = mediumUnlocked ? activeTextColor : inactiveTextColor;
 
-            bool hardUnlocked = playerData.completedMediumMode;
+            bool hardUnlocked = playerData.completedMediumMode && !isDemo;
             difficultyButtons[2].interactable = hardUnlocked;
             difficultyText[2].color = hardUnlocked ? activeTextColor : inactiveTextColor;
         }
 
         #endregion
+        
         private void UpdateCharacterDisplay()
         {
             if (playerData != null && gameData != null)

@@ -39,12 +39,14 @@ namespace SamuraiStandoff
         public float backgroundVolume = 100;
 
         [Header("Game State")] 
+
+        public bool isMultiplayer;
+        public int currentLanguage = 0;
+        public bool isDemo = true;
+        
+        [Header("Duel State")]
         public int faultCounter;
         public EnemyDifficultyType currentDifficulty;
-        public bool isMultiplayer;
-        public int currentlanguge = 0;
-        
-        [Header("Last Duel Results")]
         public CharacterType lastEnemyCharacterType; // Who was the enemy in last duel?
         public CharacterType winningCharacter; // Who won the last duel overall?
         public int lastDuelFrameCount; // How many frames after signal did winner attack?
