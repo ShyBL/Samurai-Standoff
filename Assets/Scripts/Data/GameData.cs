@@ -42,7 +42,8 @@ namespace SamuraiStandoff
         public int faultCounter;
         public EnemyDifficultyType currentDifficulty;
         public bool isMultiplayer;
-
+        public int currentlanguge = 0;
+        
         [Header("Last Duel Results")]
         public CharacterType lastEnemyCharacterType; // Who was the enemy in last duel?
         public CharacterType winningCharacter; // Who won the last duel overall?
