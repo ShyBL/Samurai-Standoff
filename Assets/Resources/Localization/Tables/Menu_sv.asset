@@ -63,23 +63,83 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349578
-    m_Localized: "H\xE5rd"
+    m_Localized: "Sv\xE5r"
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349579
     m_Localized: Hur man spelar
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: "n\xE4r du ser utropstecknet"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Huvudljudvolym
+    m_Localized: Musikvolym
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Ljudeffekter Volym
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Tryck p\xE5 ing\xE5ngen s\xE5 snart indikatorn visas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: "Du kommer att ha begr\xE4nsad tid att reagera"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "G\xE5 med i gemenskapen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: "L\xE4mna feedback"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: "\xC4ndra nyckel f\xF6r standardspelare"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: "\xC4ndra nyckel f\xF6r andra spelare"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: "Spelare 1 v\xE4ljer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: "Spelare 2 v\xE4ljer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Spelare 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Spelare 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: "Tidig \xE5tkomstversion"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Pausad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: "Tryck p\xE5 Esc f\xF6r att avbryta"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Avsluta till menyn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Avsluta spelet
     m_Metadata:
       m_Items: []
   references:

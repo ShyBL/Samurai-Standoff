@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1646644600832
-    m_Localized: JOUEUR UNIQUE
+    m_Localized: JOUEUR SEUL
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349568
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349573
-    m_Localized: CHOISISSEZ LE PERSONNAGE
+    m_Localized: CHOISIR UN PERSONNAGE
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349574
@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: Comment jouer
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: quand tu vois le point d'exclamation
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: D'ACCORD
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Volume sonore principal
+    m_Localized: Volume musical
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Volume des effets sonores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Appuyez sur la touche d'entr\xE9e d\xE8s que l'indicateur appara\xEEt."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: "Vous disposerez d'un temps limit\xE9 pour r\xE9agir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "Rejoignez la communaut\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Laisser les commentaires
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: "Changer la touche pour le lecteur par d\xE9faut"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: "Cl\xE9 de changement pour le deuxi\xE8me joueur"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: Le joueur 1 choisit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: Le joueur 2 choisit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Joueur 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Joueur 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Commencer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: "Version d'acc\xE8s anticip\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: En pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: "Appuyez sur \xC9chap pour annuler"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Retour au menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Quitter le jeu
     m_Metadata:
       m_Items: []
   references:

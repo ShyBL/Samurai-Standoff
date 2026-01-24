@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1646644600832
-    m_Localized: ENKELE SPELER
+    m_Localized: SINGLE PLAYER
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349568
-    m_Localized: MEERDERE SPELERS
+    m_Localized: MULTIPLAYER
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349569
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349573
-    m_Localized: KIES KARAKTER
+    m_Localized: KIES EEN PERSONAGE
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349574
@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: Hoe te spelen
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: wanneer je het uitroepteken ziet
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Hoofdgeluidsvolume
+    m_Localized: Muziekvolume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Volume van geluidseffecten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: Druk op de invoerknop zodra de indicator verschijnt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: Je hebt beperkte tijd om te reageren.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: Word lid van de community
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Geef feedback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: Wijzig de toets voor de standaardspeler.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: Wijzig de toets voor de tweede speler.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: Speler 1 kiest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: Speler 2 kiest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Speler 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Speler 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Begin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: Vroege toegang tot de bouw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Gepauzeerd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: Druk op Esc om te annuleren
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Terug naar menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Spel afsluiten
     m_Metadata:
       m_Items: []
   references:

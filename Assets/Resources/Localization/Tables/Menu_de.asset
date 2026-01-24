@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349571
-    m_Localized: "SPRACHE W\xC4HLEN"
+    m_Localized: "SPRACHE AUSW\xC4HLEN"
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349572
@@ -43,11 +43,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349573
-    m_Localized: "CHARAKTER W\xC4HLEN"
+    m_Localized: "CHARAKTER AUSW\xC4HLEN"
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349574
-    m_Localized: "MODUS W\xC4HLEN"
+    m_Localized: "MODUS AUSW\xC4HLEN"
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349575
@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: Spielanleitung
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: wenn Sie das Ausrufezeichen sehen
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: "Gesamtlautst\xE4rke"
+    m_Localized: "Musiklautst\xE4rke"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: "Lautst\xE4rke der Soundeffekte"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Dr\xFCcken Sie den Eingang, sobald die Anzeige erscheint."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: Sie haben nur begrenzt Zeit zu reagieren.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: Treten Sie der Community bei!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Hinterlasse Kommentar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: "Taste f\xFCr Standardspieler \xE4ndern"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: "Tastenbelegung f\xFCr zweiten Spieler \xE4ndern"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: "Spieler 1 w\xE4hlt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: "Spieler 2 w\xE4hlt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Spieler 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Spieler 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: Early-Access-Version
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Angehalten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: "Dr\xFCcken Sie Esc, um abzubrechen."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: "Zur\xFCck zum Men\xFC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Spiel beenden
     m_Metadata:
       m_Items: []
   references:

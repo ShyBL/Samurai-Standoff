@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: Come giocare
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: quando vedi il punto esclamativo
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Volume del suono principale
+    m_Localized: Volume della musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Volume degli effetti sonori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: Premere l'ingresso non appena appare l'indicatore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: Avrai un tempo limitato per reagire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "Unisciti alla comunit\xE0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Lascia un feedback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: Cambia la chiave per il lettore predefinito
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: Cambia chiave per il secondo giocatore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: Il giocatore 1 sceglie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: Il giocatore 2 sceglie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Giocatore 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Giocatore 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Inizio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: Build di accesso anticipato
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: In pausa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: Premi Esc per annullare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Esci dal menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Esci dal gioco
     m_Metadata:
       m_Items: []
   references:

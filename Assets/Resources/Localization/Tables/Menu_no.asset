@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: Hvordan spille
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: "n\xE5r du ser utropstegnet"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Hovedlydvolum
+    m_Localized: Musikkvolum
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Lydeffekter Volum
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Trykk p\xE5 inngangen s\xE5 snart indikatoren vises"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: "Du vil ha begrenset tid til \xE5 reagere"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: Bli med i fellesskapet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Legg igjen tilbakemelding
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: "Endre n\xF8kkel for standardspiller"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: "Endre n\xF8kkel for andre spiller"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: Spiller 1 velger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: Spiller 2 velger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Spiller 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Spiller 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: Tidlig tilgangsbygging
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Pauset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: "Trykk Esc for \xE5 avbryte"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Avslutt til menyen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Avslutt spillet
     m_Metadata:
       m_Items: []
   references:

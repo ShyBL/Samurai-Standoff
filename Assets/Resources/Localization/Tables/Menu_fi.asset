@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: Kuinka pelata
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: "kun n\xE4et huutomerkin"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: "\xC4\xE4nenvoimakkuuden p\xE4\xE4asetus"
+    m_Localized: "Musiikin \xE4\xE4nenvoimakkuus"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: "\xC4\xE4nitehosteiden \xE4\xE4nenvoimakkuus"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Paina sy\xF6tt\xF6painiketta heti, kun ilmaisin tulee n\xE4kyviin."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: Sinulla on rajoitetusti aikaa reagoida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "Liity yhteis\xF6\xF6n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Anna palautetta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: Vaihda oletussoittimen avain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: "Vaihda s\xE4vellajia toiselle pelaajalle"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: Pelaaja 1 valitsee
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: Pelaaja 2 valitsee
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Pelaaja 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Pelaaja 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Aloita
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: "Varhaisen k\xE4ytt\xF6oikeuden koontiversio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Keskeytetty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: Peruuta painamalla Esc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Poistu valikkoon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Lopeta peli
     m_Metadata:
       m_Items: []
   references:

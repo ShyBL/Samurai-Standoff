@@ -70,16 +70,80 @@ MonoBehaviour:
     m_Localized: "C\xE1ch ch\u01A1i"
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: "khi b\u1EA1n nh\xECn th\u1EA5y d\u1EA5u ch\u1EA5m than"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: "\u0110\u01AF\u1EE2C R\u1ED2I"
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: "\xC2m l\u01B0\u1EE3ng ch\xEDnh"
+    m_Localized: "\xC2m l\u01B0\u1EE3ng nh\u1EA1c"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: "\xC2m l\u01B0\u1EE3ng hi\u1EC7u \u1EE9ng \xE2m thanh"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Nh\u1EA5n n\xFAt nh\u1EADp li\u1EC7u ngay khi \u0111\xE8n b\xE1o
+      xu\u1EA5t hi\u1EC7n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: "B\u1EA1n s\u1EBD c\xF3 m\u1ED9t kho\u1EA3ng th\u1EDDi gian gi\u1EDBi
+      h\u1EA1n \u0111\u1EC3 ph\u1EA3n h\u1ED3i."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "Tham gia c\u1ED9ng \u0111\u1ED3ng"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: "G\u1EEDi ph\u1EA3n h\u1ED3i"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: "Thay \u0111\u1ED5i kh\xF3a cho ng\u01B0\u1EDDi ch\u01A1i m\u1EB7c
+      \u0111\u1ECBnh"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: "\u0110\u1ED5i m\u1EADt kh\u1EA9u cho ng\u01B0\u1EDDi ch\u01A1i
+      th\u1EE9 hai"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: "Ng\u01B0\u1EDDi ch\u01A1i 1 l\u1EF1a ch\u1ECDn"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: "Ng\u01B0\u1EDDi ch\u01A1i 2 l\u1EF1a ch\u1ECDn"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: "Ng\u01B0\u1EDDi ch\u01A1i 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: "Ng\u01B0\u1EDDi ch\u01A1i 2"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: "B\u1EAFt \u0111\u1EA7u"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: "B\u1EA3n d\u1EF1ng truy c\u1EADp s\u1EDBm"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: "T\u1EA1m d\u1EEBng"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: "Nh\u1EA5n ph\xEDm Esc \u0111\u1EC3 h\u1EE7y b\u1ECF"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: "Tho\xE1t v\u1EC1 Menu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: "Tho\xE1t tr\xF2 ch\u01A1i"
     m_Metadata:
       m_Items: []
   references:

@@ -10,13 +10,13 @@ namespace SamuraiStandoff
 
         void Start()
         {
-            ChangeLang(_gameData.currentlanguge);
+            ChangeLang(_gameData.currentLanguage);
         }
 
         public void ChangeLang(int lang)
         {
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[lang];
-            _gameData.currentlanguge = lang;
+            _gameData.currentLanguage = lang;
         }
 
     }

@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1646644600832
-    m_Localized: "JOGADOR \xDANICO"
+    m_Localized: JOGADOR INDIVIDUAL
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349568
@@ -47,7 +47,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349574
-    m_Localized: ESCOLHA O MODO
+    m_Localized: ESCOLHER MODO
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349575
@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: Como jogar
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: "quando voc\xEA v\xEA o ponto de exclama\xE7\xE3o"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Volume do som principal
+    m_Localized: "Volume da m\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Volume dos efeitos sonoros
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Pressione o bot\xE3o assim que o indicador aparecer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: "Voc\xEA ter\xE1 um tempo limitado para reagir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "Junte-se \xE0 comunidade"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Deixar feedback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: "Alterar a tecla do jogador padr\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: Alterar a tecla para o segundo jogador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: Jogador 1 escolhe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: Jogador 2 escolhe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Jogador 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Jogador 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: "Come\xE7ar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: "Vers\xE3o de Acesso Antecipado"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Em pausa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: Pressione Esc para cancelar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Voltar ao menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Sair do jogo
     m_Metadata:
       m_Items: []
   references:

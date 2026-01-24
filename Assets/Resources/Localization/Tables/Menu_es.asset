@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: "C\xF3mo jugar"
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: "cuando veas el signo de exclamaci\xF3n"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: DE ACUERDO
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Volumen del sonido maestro
+    m_Localized: "Volumen de la m\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Volumen de los efectos de sonido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: Presione la entrada tan pronto como aparezca el indicador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: "Tendr\xE1s un tiempo limitado para reaccionar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "\xDAnete a la comunidad"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Deja un comentario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: Cambiar la clave para el reproductor predeterminado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: Cambiar clave para el segundo jugador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: El jugador 1 elige
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: El jugador 2 elige
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Jugador 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Jugador 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Comenzar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: "Compilaci\xF3n de acceso anticipado"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: En pausa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: Presione Esc para cancelar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: "Salir al men\xFA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Salir del juego
     m_Metadata:
       m_Items: []
   references:

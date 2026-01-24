@@ -70,16 +70,77 @@ MonoBehaviour:
     m_Localized: "Jak gra\u0107"
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: kiedy zobaczysz wykrzyknik
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: "G\u0142o\u015Bno\u015B\u0107 d\u017Awi\u0119ku g\u0142\xF3wnego"
+    m_Localized: "G\u0142o\u015Bno\u015B\u0107 muzyki"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: "G\u0142o\u015Bno\u015B\u0107 efekt\xF3w d\u017Awi\u0119kowych"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Wci\u015Bnij przycisk wej\u015Bciowy, gdy tylko pojawi si\u0119
+      wska\u017Anik"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: "B\u0119dziesz mie\u0107 ograniczony czas na reakcj\u0119"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "Do\u0142\u0105cz do spo\u0142eczno\u015Bci"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: "Zostaw opini\u0119"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: "Zmie\u0144 klucz dla domy\u015Blnego odtwarzacza"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: "Zmie\u0144 klucz dla drugiego gracza"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: Gracz 1 wybiera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: Gracz 2 wybiera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Gracz 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Gracz 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: "Wczesny dost\u0119p do kompilacji"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Wstrzymano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: "Naci\u015Bnij Esc, aby anulowa\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: "Wyjd\u017A do menu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: "Wyjd\u017A z gry"
     m_Metadata:
       m_Items: []
   references:

@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: "S\xE5dan spiller du"
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: "n\xE5r du ser udr\xE5bstegnet"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: Okay
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Master lydstyrke
+    m_Localized: Musiklydstyrke
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Lydeffekter Lydstyrke
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: "Tryk p\xE5 inputtet, s\xE5 snart indikatoren vises"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: "Du vil have en begr\xE6nset tid til at reagere"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: "Bliv en del af f\xE6llesskabet"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Giv feedback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: "Skift n\xF8gle for standardafspiller"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: "Skift n\xF8gle for anden spiller"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: "Spiller 1 v\xE6lger"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: "Spiller 2 v\xE6lger"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Spiller 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Spiller 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Starte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: Tidlig adgangsbygning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Pausesat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: "Tryk p\xE5 Esc for at annullere"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Afslut til menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Afslut spillet
     m_Metadata:
       m_Items: []
   references:

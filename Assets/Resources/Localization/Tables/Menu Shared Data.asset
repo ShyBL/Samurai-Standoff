@@ -67,28 +67,76 @@ MonoBehaviour:
     m_Key: How to play
     m_Metadata:
       m_Items: []
-  - m_Id: 6781806485504
-    m_Key: 'Press '
+  - m_Id: 36519718972727296
+    m_Key: Press the input as soon as the indicator appears
     m_Metadata:
       m_Items: []
-  - m_Id: 6781806485505
-    m_Key: 'SPACE '
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6781806485506
-    m_Key: immediately
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349581
-    m_Key: when you see the exclamation mark
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Key: OK
+  - m_Id: 36519719006281728
+    m_Key: You will have a limited time to react
     m_Metadata:
       m_Items: []
   - m_Id: 5827585548288
-    m_Key: Master Sound Volume
+    m_Key: Music Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Key: Sound Effects Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Key: Join Community
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Key: Leave Feedback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Key: Change key for defualt player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Key: Change key for second player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Key: Player 1 Chooses
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Key: Player 2 Chooses
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Key: Player 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Key: Player 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Key: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Key: Early Acess Build
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Key: Paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Key: Press Esc to cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Key: Quit to Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Key: Quit Game
     m_Metadata:
       m_Items: []
   m_Metadata:

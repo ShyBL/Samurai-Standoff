@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349568
-    m_Localized: MULTIPEMAIN
+    m_Localized: MULTIPLAYER
     m_Metadata:
       m_Items: []
   - m_Id: 1646682349569
@@ -70,16 +70,76 @@ MonoBehaviour:
     m_Localized: Cara bermain
     m_Metadata:
       m_Items: []
-  - m_Id: 1646682349581
-    m_Localized: ketika kamu melihat tanda seru
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1646682349582
-    m_Localized: OKE
-    m_Metadata:
-      m_Items: []
   - m_Id: 5827585548288
-    m_Localized: Volume Suara Utama
+    m_Localized: Volume Musik
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36499768266629120
+    m_Localized: Volume Efek Suara
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519718972727296
+    m_Localized: Tekan tombol input segera setelah indikator muncul.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281728
+    m_Localized: Anda akan memiliki waktu terbatas untuk bereaksi.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281729
+    m_Localized: Bergabunglah dengan Komunitas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281730
+    m_Localized: Berikan Masukan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281731
+    m_Localized: Ubah tombol untuk pemutar default
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281732
+    m_Localized: Ubah kunci untuk pemain kedua
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281733
+    m_Localized: Pemain 1 Memilih
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281734
+    m_Localized: Pemain 2 Memilih
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281735
+    m_Localized: Pemain 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281736
+    m_Localized: Pemain 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281737
+    m_Localized: Awal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281738
+    m_Localized: Versi Akses Awal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281739
+    m_Localized: Dijeda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281740
+    m_Localized: Tekan Esc untuk membatalkan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281741
+    m_Localized: Keluar ke Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36519719006281742
+    m_Localized: Keluar dari Permainan
     m_Metadata:
       m_Items: []
   references:
