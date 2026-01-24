@@ -8,6 +8,14 @@ namespace SamuraiStandoff
     public class SceneLoader : MonoBehaviour
     {
         public static SceneLoader instance;
+        
+        [SerializeField] private string mainMenuSceneName = "MainMenu";
+        [SerializeField] private string singlePlayerSceneName = "SingleplayerLevel";
+        [SerializeField] private string singlePlayerResultsSceneName = "SingleplayerResults";
+        [SerializeField] private string multiplayerSceneName = "MultiplayerLevel";
+        [SerializeField] private string multiplayerResultsSceneName = "MultiplayerResults";
+        [SerializeField] private string tutorialSceneName = "Tutorial";
+        
         [SerializeField] private GameObject transitionGameObject;
         [SerializeField] Animator transition;
         [SerializeField] private GameData gameData;
@@ -35,40 +43,11 @@ namespace SamuraiStandoff
         {
             transitionGameObject.SetActive(true);
             FindFirstObjectByType<BackgroundController>().ToggleFXOff();
-           // transition.SetTrigger("Clash");
-        }
-
-        //----Scene Transitions-----
-        public void LoadDuel() //Enter Game
-        {
-            gameManager.CleanUp();
-
-            GameManager.instance.StartCoroutine(LoadScene(1));
-
-            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
-
-            if (menuSound == null || !menuSound.source.isPlaying)
-            {
-                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
-                return;
-            }
-
-            Debug.Log("Menu music is playing. Proceeding to load game.");
-
-            AudioManager.instance.StopSound("Menu");
-            AudioManager.instance.PlaySound("Fight");
-
-            
-            //AudioManager.instance.StopSound("Waterfall");
-            //AudioManager.instance.PlaySound("Waterfall");
+            // transition.SetTrigger("Clash");
         }
         
-        public void LoadTutorialDuel() //Enter Tutorial
+        private static void TransitionToGameplayMusic()
         {
-            gameManager.CleanUp();
-
-            GameManager.instance.StartCoroutine(LoadScene(5));
-
             var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
 
             if (menuSound == null || !menuSound.source.isPlaying)
@@ -81,11 +60,29 @@ namespace SamuraiStandoff
 
             AudioManager.instance.StopSound("Menu");
             AudioManager.instance.PlaySound("Fight");
+        }        
+        
+        #region Scene Loading Methods
+        
+        public void LoadDuel()
+        {
+            gameManager.CleanUp();
 
-            
-            //AudioManager.instance.StopSound("Waterfall");
-            //AudioManager.instance.PlaySound("Waterfall");
+            GameManager.instance.StartCoroutine(LoadScene(singlePlayerSceneName));
+
+            TransitionToGameplayMusic();
         }
+        
+        public void LoadTutorialDuel()
+        {
+            gameManager.CleanUp();
+
+            GameManager.instance.StartCoroutine(LoadScene(tutorialSceneName));
+
+            TransitionToGameplayMusic();
+        }
+
+        
 
         public void RestartDuel()
         {
@@ -95,29 +92,16 @@ namespace SamuraiStandoff
 
             if(gameData.isMultiplayer)
             {
-                GameManager.instance.StartCoroutine(LoadScene(3));
+                GameManager.instance.StartCoroutine(LoadScene(multiplayerSceneName));
             }
             else
             {
-                GameManager.instance.StartCoroutine(LoadScene(1));
+                GameManager.instance.StartCoroutine(LoadScene(singlePlayerSceneName));
             }
+            AudioManager.instance.PlaySound("Click1");
+
+            TransitionToGameplayMusic();
             
-            
-            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
-
-            if (menuSound == null || !menuSound.source.isPlaying)
-            {
-                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
-                return;
-            }
-
-            Debug.Log("Menu music is playing. Proceeding to load game.");
-
-            AudioManager.instance.StopSound("Menu");
-            AudioManager.instance.PlaySound("Fight");
-
-            // AudioManager.instance.StopSound("Waterfall");
-            // AudioManager.instance.PlaySound("Waterfall");
         }
 
         public void LoadMainMenu()
@@ -128,50 +112,37 @@ namespace SamuraiStandoff
 
         private IEnumerator LoadMainMenuScene()
         {
-            yield return StartCoroutine(LoadScene(0));
+            yield return StartCoroutine(LoadScene(mainMenuSceneName));
             gameData.isMultiplayer = false;
-            // Wait one frame to ensure scene objects are initialized
-            yield return null;
         }
 
-        public void LoadMultiplayer() //Enter Multiplayer
+        public void LoadMultiplayer()
         {
             gameManager.CleanUp();
-            GameManager.instance.StartCoroutine(LoadScene(3));
+            GameManager.instance.StartCoroutine(LoadScene(multiplayerSceneName));
 
-            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
+            TransitionToGameplayMusic();
 
-            if (menuSound == null || !menuSound.source.isPlaying)
-            {
-                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
-                return;
-            }
-
-            Debug.Log("Menu music is playing. Proceeding to load game.");
-
-            AudioManager.instance.StopSound("Menu");
-            AudioManager.instance.PlaySound("Fight");
-
-
-            //AudioManager.instance.StopSound("Waterfall");
-            //AudioManager.instance.PlaySound("Waterfall");
         }
 
-
-        private IEnumerator LoadScene(int levelIndex)
+        #endregion
+        
+        #region Core Scene Loading
+        
+        private IEnumerator LoadScene(string sceneName)
         {
             transition.SetTrigger("TransitionIn");
 
             yield return new WaitForSeconds(3f);
-            SceneManager.LoadScene(levelIndex);
+            SceneManager.LoadScene(sceneName);
         }
 
         public IEnumerator NextLevel()
         {
             yield return new WaitForSeconds(3f);
-            Debug.Log("Next Level");
-            // transition.SetTrigger("Start");
+            
             playerData.currentLevel++;
+            Debug.Log("Next Level");
 
             if (playerData.currentLevel > GameManager.instance.totalLevels)
             {
@@ -179,38 +150,25 @@ namespace SamuraiStandoff
             }
             else
             {
-                // GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-                // foreach (GameObject player in players)
-                // {
-                //     if (TryGetComponent(out PlayerController playerController)) playerController.faultCounter = 0;
-                // }
-                
-
                 LoadDuel();
             }
         }
 
         public IEnumerator LoadResults()
         {
-            playerData.faultCounter = 0;
-            player2Data.faultCounter = 0;
+            gameManager.CleanUp();
 
             yield return new WaitForSeconds(3f);
 
-            if(!gameData.isMultiplayer)
-            {
-                StartCoroutine(LoadScene(2));    
-            }
-            else
-            {
-                StartCoroutine(LoadScene(4));
-            }
+            string resultsScene = gameData.isMultiplayer 
+                ? multiplayerResultsSceneName 
+                : singlePlayerResultsSceneName;
+            
+            StartCoroutine(LoadScene(resultsScene));
 
             AudioManager.instance.StopSound("Fight");
             AudioManager.instance.PlaySound("Menu");
-            // AudioManager.instance.StopSound("Waterfall");
         }
-
-        
+        #endregion
     }
 }
