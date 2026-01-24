@@ -8,13 +8,7 @@ public class Localization : MonoBehaviour
     
     void Start()
     {
-        Invoke("Delay", 0.1f);
-    }
-
-    private void Delay()
-    {
-        int number = _gameData.currentlanguge;
-        ChangeLang(number);
+        ChangeLang(_gameData.currentlanguge);
     }
     
     public void ChangeLang(int lang)
