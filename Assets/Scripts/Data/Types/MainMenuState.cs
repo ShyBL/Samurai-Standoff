@@ -2,7 +2,7 @@ namespace SamuraiStandoff
 {
     public enum MainMenuState
     {
-        LanguageSelection,
+        //LanguageSelection,
         MainMenu,
         BackFromSinglePlayer,
         BackFromMultiplayer

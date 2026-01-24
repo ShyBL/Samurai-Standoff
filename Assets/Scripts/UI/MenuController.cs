@@ -16,7 +16,7 @@ namespace SamuraiStandoff
         #region UI States
         
         [Header("UI Panels")]
-        [SerializeField] private GameObject languageSelectionPanel;
+        //  [SerializeField] private GameObject languageSelectionPanel;
         [SerializeField] private GameObject mainMenuPanel;
         [SerializeField] private GameObject instructionsPanel;
         [SerializeField] private GameObject singlePlayerPanel;
@@ -41,14 +41,35 @@ namespace SamuraiStandoff
                 case SinglePlayerMenuState.Instruction:
                     mainMenuPanel.SetActive(false);
                     instructionsPanel.SetActive(true);
+                    
+                    GameManager.instance.ToggleMultiplayer(false);
+                    AudioManager.instance.PlaySound("Click2");
                     break;
                 case SinglePlayerMenuState.SinglePlayerMenu:
                     mainMenuPanel.SetActive(false);
                     instructionsPanel.SetActive(false);
                     
                     singlePlayerPanel.SetActive(true);
+                    
+                    AudioManager.instance.PlaySound("Click2");
                     break;
             }
+        }
+
+        public void OpenSettings()
+        {
+            AudioManager.instance.PlaySound("Click2");
+        }
+        
+        public void Back()
+        {
+            AudioManager.instance.PlaySound("Click2");
+        }
+        
+        public void OpenMultiplayer()
+        {
+            GameManager.instance.ToggleMultiplayer(true);
+            AudioManager.instance.PlaySound("Click3");
         }
         
         private void HandleMenuState()
@@ -65,7 +86,7 @@ namespace SamuraiStandoff
                 //     break;
 
                 case MainMenuState.MainMenu:
-                    languageSelectionPanel.SetActive(false);
+                    //   languageSelectionPanel.SetActive(false);
                     instructionsPanel.SetActive(false);
                     singlePlayerPanel.SetActive(false);
                     multiplayerPanel.SetActive(false);
@@ -74,14 +95,15 @@ namespace SamuraiStandoff
                     break;
                 
                 case MainMenuState.BackFromSinglePlayer:
-                    languageSelectionPanel.SetActive(false);
+                    //    languageSelectionPanel.SetActive(false);
+                    instructionsPanel.SetActive(false);
                     mainMenuPanel.SetActive(false);
                     multiplayerPanel.SetActive(false);
                     
                     singlePlayerPanel.SetActive(true);
                     break;
                 case MainMenuState.BackFromMultiplayer:
-                    languageSelectionPanel.SetActive(false);
+                    //    languageSelectionPanel.SetActive(false);
                     instructionsPanel.SetActive(false);
                     mainMenuPanel.SetActive(false);
                     singlePlayerPanel.SetActive(false);
@@ -230,6 +252,8 @@ namespace SamuraiStandoff
 
         public void SetDifficultyByIndex(int index)
         {
+            AudioManager.instance.PlaySound("Click1");
+            
             if (playerData == null) return;
 
             switch (index)
@@ -268,10 +292,10 @@ namespace SamuraiStandoff
             
         }
 
-
-
         public void MultiplayerPlayButton()
         {
+            AudioManager.instance.PlaySound("Click1");
+            
             if (!player2pick)
             {
                 player2pick = true;
@@ -284,6 +308,8 @@ namespace SamuraiStandoff
             }
             else if (!playersReady)
             {
+                AudioManager.instance.PlaySound("Click3");
+
                 playersReady = true;
                 SceneLoader.instance.LoadMultiplayer();
             }
@@ -291,6 +317,7 @@ namespace SamuraiStandoff
 
         public void ApplicationQuit()
         {
+            AudioManager.instance.PlaySound("Click2");
             GameManager.instance.OnApplicationQuit();
         }
 

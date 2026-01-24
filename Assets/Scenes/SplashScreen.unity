@@ -791,7 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a94276edb5920448b46417e29e0a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Main Menu
+  sceneToLoad: MainMenu
 --- !u!1 &1186308252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,7 +1138,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916870905}
   m_CullTransparentMesh: 1
---- !u!1001 &6405979955127572952
+--- !u!1001 &2073011042
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1146,21 +1146,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2169953349631547787, guid: 7a96f780417f37945a645184b6b94250, type: 3}
-      propertyPath: gameData
-      value: 
-      objectReference: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
-    - target: {fileID: 2169953349631547787, guid: 7a96f780417f37945a645184b6b94250, type: 3}
-      propertyPath: sounds.Array.data[7].volume
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3758524887010183833, guid: 7a96f780417f37945a645184b6b94250, type: 3}
       propertyPath: m_Name
       value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4258788531296897523, guid: 7a96f780417f37945a645184b6b94250, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4258788531296897523, guid: 7a96f780417f37945a645184b6b94250, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1211,6 +1199,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 6405979955127572952}
   - {fileID: 178450602}
   - {fileID: 583630683}
+  - {fileID: 2073011042}

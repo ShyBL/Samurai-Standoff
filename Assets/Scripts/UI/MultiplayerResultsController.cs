@@ -50,7 +50,8 @@ namespace SamuraiStandoff
             // Set state to SinglePlayerMenu so when main menu loads, 
             // it shows the single player panel
             gameData.currentMainMenuState = MainMenuState.BackFromMultiplayer;
-            
+            AudioManager.instance.PlaySound("Click1");
+
             // Load main menu scene
             SceneLoader.instance.LoadMainMenu();
         }
