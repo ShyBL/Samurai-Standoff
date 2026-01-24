@@ -55,14 +55,14 @@ namespace SamuraiStandoff
         {
             switch (gameData.currentMainMenuState)
             {
-                case MainMenuState.LanguageSelection:
-                    mainMenuPanel.SetActive(false);
-                    instructionsPanel.SetActive(false);
-                    singlePlayerPanel.SetActive(false);
-                    multiplayerPanel.SetActive(false);
-                    
-                    languageSelectionPanel.SetActive(true);
-                    break;
+                // case MainMenuState.LanguageSelection:
+                //     mainMenuPanel.SetActive(false);
+                //     instructionsPanel.SetActive(false);
+                //     singlePlayerPanel.SetActive(false);
+                //     multiplayerPanel.SetActive(false);
+                //     
+                //     languageSelectionPanel.SetActive(true);
+                //     break;
 
                 case MainMenuState.MainMenu:
                     languageSelectionPanel.SetActive(false);
@@ -100,6 +100,7 @@ namespace SamuraiStandoff
             HandleMenuState();
                 
             AudioManager.instance.PlaySound("Menu");
+            
             UpdateCharacterDisplay();
             UpdateDifficultyButtons();
         }
@@ -333,8 +334,11 @@ namespace SamuraiStandoff
                 var playerSelectedCharacter = playerData.selectedCharacter =
                     gameData.allCharacters.FirstOrDefault(c => c.type == playerData.characterType);
 
-                characterImage.sprite = playerSelectedCharacter.sprites[0];
-                selectedCharacterNameText.text = playerSelectedCharacter.name;
+                if (playerSelectedCharacter != null)
+                {
+                    characterImage.sprite = playerSelectedCharacter.sprites[0];
+                    selectedCharacterNameText.text = playerSelectedCharacter.name;
+                }
             }
         }
 

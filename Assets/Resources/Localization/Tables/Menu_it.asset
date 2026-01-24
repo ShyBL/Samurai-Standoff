@@ -142,6 +142,14 @@ MonoBehaviour:
     m_Localized: Esci dal gioco
     m_Metadata:
       m_Items: []
+  - m_Id: 36591108404977664
+    m_Localized: Premere un tasto qualsiasi per associare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36595218172780544
+    m_Localized: Istruzioni
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

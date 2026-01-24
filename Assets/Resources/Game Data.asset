@@ -83,7 +83,7 @@ MonoBehaviour:
   isMultiplayer: 0
   currentLanguage: 5
   isDemo: 1
-  currentMainMenuState: 0
+  currentMainMenuState: 1
   currentSinglePlayerMenuState: 0
   faultCounter: 0
   currentDifficulty: 0

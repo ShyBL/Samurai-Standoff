@@ -143,6 +143,14 @@ MonoBehaviour:
     m_Localized: "Wyjd\u017A z gry"
     m_Metadata:
       m_Items: []
+  - m_Id: 36591108404977664
+    m_Localized: "Naci\u015Bnij dowolny klawisz, aby powi\u0105za\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36595218172780544
+    m_Localized: Instrukcje
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
