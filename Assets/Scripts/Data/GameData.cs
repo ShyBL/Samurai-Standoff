@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SamuraiStandoff
 {
@@ -39,11 +40,12 @@ namespace SamuraiStandoff
         public float backgroundVolume = 100;
 
         [Header("Game State")] 
-
         public bool isMultiplayer;
         public int currentLanguage = 0;
         public bool isDemo = true;
-        
+        public MainMenuState currentMainMenuState = MainMenuState.LanguageSelection;
+        public SinglePlayerMenuState currentSinglePlayerMenuState = SinglePlayerMenuState.Instruction;
+
         [Header("Duel State")]
         public int faultCounter;
         public EnemyDifficultyType currentDifficulty;

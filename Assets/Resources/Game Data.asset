@@ -80,11 +80,13 @@ MonoBehaviour:
   hardTotalLevels: 4
   masterVolume: 50
   backgroundVolume: 50
+  isMultiplayer: 0
+  currentLanguage: 5
+  isDemo: 1
+  currentMainMenuState: 0
+  currentSinglePlayerMenuState: 0
   faultCounter: 0
   currentDifficulty: 0
-  isMultiplayer: 0
-  lastDuelPlayerWon: 0
-  lastDuelPlayer1Won: 0
   lastEnemyCharacterType: 1
   winningCharacter: 1
-  lastDuelFrameCount: 30
+  lastDuelFrameCount: 0

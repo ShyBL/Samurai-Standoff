@@ -132,13 +132,6 @@ namespace SamuraiStandoff
             gameData.isMultiplayer = false;
             // Wait one frame to ensure scene objects are initialized
             yield return null;
-            
-            // Find MenuController and update panels
-            MenuController menuController = FindObjectOfType<MenuController>();
-            if (menuController != null)
-            {
-                menuController.ShowCharacterSelection();
-            }
         }
 
         public void LoadMultiplayer() //Enter Multiplayer

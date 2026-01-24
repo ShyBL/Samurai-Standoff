@@ -84,6 +84,13 @@ namespace SamuraiStandoff
 
         public void OnApplicationQuit()
         {
+            switch (gameData.currentMainMenuState)
+            {
+                case MainMenuState.BackFromSinglePlayer or MainMenuState.BackFromMultiplayer:
+                    gameData.currentMainMenuState = MainMenuState.MainMenu;
+                    break;
+            }
+
             // Optional cleanup logic
             Application.Quit();
         }
@@ -275,7 +282,8 @@ namespace SamuraiStandoff
     
         #endregion
         
-
+        
+        
     }
     
 }

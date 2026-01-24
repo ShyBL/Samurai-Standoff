@@ -1,9 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SamuraiStandoff
@@ -14,10 +13,92 @@ namespace SamuraiStandoff
         [SerializeField] private PlayerData player2Data;
         [SerializeField] private GameData gameData;
 
+        #region UI States
+        
+        [Header("UI Panels")]
+        [SerializeField] private GameObject languageSelectionPanel;
+        [SerializeField] private GameObject mainMenuPanel;
+        [SerializeField] private GameObject instructionsPanel;
+        [SerializeField] private GameObject singlePlayerPanel;
+        [SerializeField] private GameObject multiplayerPanel;
+        
+        public void OnLanguageConfirmed()
+        {
+            gameData.currentMainMenuState = MainMenuState.MainMenu;
+            HandleMenuState();
+        }
+        
+        public void OnInstructionConfirmed()
+        {
+            gameData.currentSinglePlayerMenuState = SinglePlayerMenuState.SinglePlayerMenu;
+            OpenSinglePlayer();
+        }
+        
+        public void OpenSinglePlayer()
+        {
+            switch (gameData.currentSinglePlayerMenuState)
+            {
+                case SinglePlayerMenuState.Instruction:
+                    mainMenuPanel.SetActive(false);
+                    instructionsPanel.SetActive(true);
+                    break;
+                case SinglePlayerMenuState.SinglePlayerMenu:
+                    mainMenuPanel.SetActive(false);
+                    instructionsPanel.SetActive(false);
+                    
+                    singlePlayerPanel.SetActive(true);
+                    break;
+            }
+        }
+        
+        private void HandleMenuState()
+        {
+            switch (gameData.currentMainMenuState)
+            {
+                case MainMenuState.LanguageSelection:
+                    mainMenuPanel.SetActive(false);
+                    instructionsPanel.SetActive(false);
+                    singlePlayerPanel.SetActive(false);
+                    multiplayerPanel.SetActive(false);
+                    
+                    languageSelectionPanel.SetActive(true);
+                    break;
+
+                case MainMenuState.MainMenu:
+                    languageSelectionPanel.SetActive(false);
+                    instructionsPanel.SetActive(false);
+                    singlePlayerPanel.SetActive(false);
+                    multiplayerPanel.SetActive(false);
+                    
+                    mainMenuPanel.SetActive(true);
+                    break;
+                
+                case MainMenuState.BackFromSinglePlayer:
+                    languageSelectionPanel.SetActive(false);
+                    mainMenuPanel.SetActive(false);
+                    multiplayerPanel.SetActive(false);
+                    
+                    singlePlayerPanel.SetActive(true);
+                    break;
+                case MainMenuState.BackFromMultiplayer:
+                    languageSelectionPanel.SetActive(false);
+                    instructionsPanel.SetActive(false);
+                    mainMenuPanel.SetActive(false);
+                    singlePlayerPanel.SetActive(false);
+                    
+                    multiplayerPanel.SetActive(true);
+                    break;
+            }
+        }
+        
+        #endregion
+        
         #region Unity Methods
         
         private void Start()
         {
+            HandleMenuState();
+                
             AudioManager.instance.PlaySound("Menu");
             UpdateCharacterDisplay();
             UpdateDifficultyButtons();
@@ -26,16 +107,14 @@ namespace SamuraiStandoff
         #endregion
 
         #region Buttons
-
+        
         [Header("Difficulty UI")] [SerializeField]
         private List<Button> difficultyButtons;
-
+        
         [SerializeField] private List<TextMeshProUGUI> difficultyText;
         [SerializeField] private TextMeshProUGUI selectedCharacterNameText;
 
         [Header("Character Selection")]
-        [SerializeField] private GameObject characterSelectionPanel;
-        [SerializeField] private GameObject menuSelectionPanel;
         [SerializeField] private Image characterImage;
         
         [Header("Multiplayer Selection")]
@@ -50,7 +129,7 @@ namespace SamuraiStandoff
 
         private bool playersReady;
         private bool player2pick;
-
+        
         public void SelectCharacterSinglePlayer(int index)
         {
             if (playerData == null || gameData == null) return;
@@ -257,12 +336,6 @@ namespace SamuraiStandoff
                 characterImage.sprite = playerSelectedCharacter.sprites[0];
                 selectedCharacterNameText.text = playerSelectedCharacter.name;
             }
-        }
-
-        public void ShowCharacterSelection()
-        {
-            menuSelectionPanel.SetActive(false);
-            characterSelectionPanel.SetActive(true);
         }
 
         public void OpenDiscordServer()
