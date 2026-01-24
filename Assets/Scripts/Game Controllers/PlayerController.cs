@@ -57,6 +57,8 @@ namespace SamuraiStandoff
 
         private void Update()
         {
+            if (DuelController.instance.isPaused) return;
+            
             UpdateFaultUI();
 
             // Show key prompt when signal appears

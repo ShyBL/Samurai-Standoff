@@ -1,47 +1,49 @@
 using UnityEngine;
 
-public class PauseMenuController : MonoBehaviour
+namespace SamuraiStandoff
 {
-    [SerializeField] private GameObject pauseMenuUI;
-    [SerializeField] private GameObject settingsUI; 
-    private bool isPaused;
-    private bool settingsOpen;
-
-    private void Update()
+    public class PauseMenuController : MonoBehaviour
     {
-        HandlePauseInput();
-    }
+        [SerializeField] private GameObject pauseMenuUI;
+        private bool isPaused;
+        private bool settingsOpen;
 
-    private void HandlePauseInput()
-    {
-        if (!Input.GetKeyDown(KeyCode.Escape)) return;
-
-        // If settings are open, close them first
-        if (settingsOpen)
+        private void Update()
         {
-            settingsUI.SetActive(false);
-            settingsOpen = false;
-            return;
+            HandlePauseInput();
         }
 
-        // Otherwise toggle pause
-        if (isPaused)
+        private void HandlePauseInput()
         {
-            pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            isPaused = false;
-        }
-        else
-        {
-            pauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
-            isPaused = true;
-        }
-    }
-    
-    public void SetSettingsOpen(bool open)
-    {
-        settingsOpen = open;
-    }
+            if (!Input.GetKeyDown(KeyCode.Escape)) return;
 
+            // If settings are open, close them first
+            // if (settingsOpen)
+            // {
+            //     settingsUI.SetActive(false);
+            //     settingsOpen = false;
+            //     return;
+            // }
+
+            // Otherwise toggle pause
+            if (isPaused)
+            {
+                pauseMenuUI.SetActive(false);
+                DuelController.instance.isPaused = false;
+                isPaused = false;
+            }
+            else
+            {
+                pauseMenuUI.SetActive(true);
+                DuelController.instance.isPaused = true;
+                isPaused = true;
+            }
+        }
+
+        public void SetSettingsOpen(bool open)
+        {
+            settingsOpen = open;
+        }
+
+    }
 }

@@ -49,6 +49,8 @@ namespace SamuraiStandoff
 
         private void Update()
         {
+            if (DuelController.instance.isPaused) return;
+            
             if (!DuelController.instance.playerFault)
             {
                 HandleEnemyAttackLogic();

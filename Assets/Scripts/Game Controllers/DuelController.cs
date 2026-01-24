@@ -46,9 +46,12 @@ namespace SamuraiStandoff
         public bool signal;
         public float signalTime;
         public float enemyReactionTime; // Set by EnemyController
-
+        public bool isPaused;
+        
         private void Update()
         {
+            if (isPaused) return;
+            
             if (winnerDeclared)
             {
                 signalSlider.gameObject.SetActive(false);
