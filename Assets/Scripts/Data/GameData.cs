@@ -46,7 +46,6 @@ namespace SamuraiStandoff
         public SinglePlayerMenuState currentSinglePlayerMenuState = SinglePlayerMenuState.Instruction;
 
         [Header("Duel State")]
-        public int faultCounter;
         public EnemyDifficultyType currentDifficulty;
         public CharacterType lastEnemyCharacterType; // Who was the enemy in last duel?
         public CharacterType winningCharacter; // Who won the last duel overall?

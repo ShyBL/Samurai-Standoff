@@ -39,8 +39,9 @@ namespace SamuraiStandoff
         }
 
         private void Start()
-        {
-
+        {   
+            playerData.currentLevel = 1;
+            CleanUp();
         }
 
         #endregion
