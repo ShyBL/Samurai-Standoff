@@ -22,12 +22,6 @@ namespace SamuraiStandoff
         [SerializeField] private GameObject singlePlayerPanel;
         [SerializeField] private GameObject multiplayerPanel;
         
-        public void OnLanguageConfirmed()
-        {
-            gameData.currentMainMenuState = MainMenuState.MainMenu;
-            HandleMenuState();
-        }
-        
         public void OnInstructionConfirmed()
         {
             gameData.currentSinglePlayerMenuState = SinglePlayerMenuState.SinglePlayerMenu;
@@ -72,46 +66,7 @@ namespace SamuraiStandoff
             AudioManager.instance.PlaySound("Click3");
         }
         
-        private void HandleMenuState()
-        {
-            switch (gameData.currentMainMenuState)
-            {
-                // case MainMenuState.LanguageSelection:
-                //     mainMenuPanel.SetActive(false);
-                //     instructionsPanel.SetActive(false);
-                //     singlePlayerPanel.SetActive(false);
-                //     multiplayerPanel.SetActive(false);
-                //     
-                //     languageSelectionPanel.SetActive(true);
-                //     break;
-
-                case MainMenuState.MainMenu:
-                    //   languageSelectionPanel.SetActive(false);
-                    instructionsPanel.SetActive(false);
-                    singlePlayerPanel.SetActive(false);
-                    multiplayerPanel.SetActive(false);
-                    
-                    mainMenuPanel.SetActive(true);
-                    break;
-                
-                case MainMenuState.BackFromSinglePlayer:
-                    //    languageSelectionPanel.SetActive(false);
-                    instructionsPanel.SetActive(false);
-                    mainMenuPanel.SetActive(false);
-                    multiplayerPanel.SetActive(false);
-                    
-                    singlePlayerPanel.SetActive(true);
-                    break;
-                case MainMenuState.BackFromMultiplayer:
-                    //    languageSelectionPanel.SetActive(false);
-                    instructionsPanel.SetActive(false);
-                    mainMenuPanel.SetActive(false);
-                    singlePlayerPanel.SetActive(false);
-                    
-                    multiplayerPanel.SetActive(true);
-                    break;
-            }
-        }
+        
         
         #endregion
         
@@ -119,7 +74,6 @@ namespace SamuraiStandoff
         
         private void Start()
         {
-            HandleMenuState();
                 
             AudioManager.instance.PlaySound("Menu");
             

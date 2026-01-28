@@ -43,7 +43,6 @@ namespace SamuraiStandoff
         public bool isMultiplayer;
         public int currentLanguage = 0;
         public bool isDemo = true;
-        public MainMenuState currentMainMenuState = MainMenuState.MainMenu;
         public SinglePlayerMenuState currentSinglePlayerMenuState = SinglePlayerMenuState.Instruction;
 
         [Header("Duel State")]
