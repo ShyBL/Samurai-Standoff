@@ -41,7 +41,8 @@ namespace SamuraiStandoff
         {
             LoadVolumeFromPlayerData("MasterVolume", gameData.masterVolume);
             LoadVolumeFromPlayerData("BackgroundVolume", gameData.backgroundVolume);
-            // FindFirstObjectByType<AudioManager>().PlaySound("Wind");
+            
+            PlaySound("Intro");
         }
 
         public void PlaySound(string soundName)

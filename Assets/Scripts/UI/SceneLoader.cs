@@ -86,10 +86,12 @@ namespace SamuraiStandoff
 
         public void RestartDuel()
         {
-            FindFirstObjectByType<BackgroundController>().ToggleFXOff();
+            var bgCont = FindFirstObjectByType<BackgroundController>();
+            if (bgCont != null)
+            {
+                bgCont.ToggleFXOff();
+            }
             
-            playerData.currentLevel = 1;
-
             if(gameData.isMultiplayer)
             {
                 GameManager.instance.StartCoroutine(LoadScene(multiplayerSceneName));

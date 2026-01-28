@@ -134,11 +134,6 @@ namespace SamuraiStandoff
             }
         }
 
-        private void OnDestroy()
-        {
-            playerData.currentLevel = 1;
-        }
-
         #endregion
     
         #region Progression Control
