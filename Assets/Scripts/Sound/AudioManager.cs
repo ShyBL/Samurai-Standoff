@@ -1,13 +1,13 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SamuraiStandoff
 {
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager instance;
-
         public AudioMixer audioMixer;
         public Sound[] sounds;
         [SerializeField] private GameData gameData;
@@ -39,12 +39,36 @@ namespace SamuraiStandoff
 
         private void Start()
         {
+            
             LoadVolumeFromPlayerData("MasterVolume", gameData.masterVolume);
             LoadVolumeFromPlayerData("BackgroundVolume", gameData.backgroundVolume);
-            
-            PlaySound("Intro");
         }
 
+        public void GetSound(Scene scene, LoadSceneMode mode)
+        {
+            Debug.Log("getting sounds");
+            
+            foreach (Sound sound in sounds)
+            {
+                if(sound.source.isPlaying)
+                {
+                    StopSound(sound.name);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            if(scene.name == "MainMenu" || scene.name == "SingleplayerResults" || scene.name == "MultiplayerResults")
+            {
+                PlaySound("Menu");
+            }
+            if(scene.name == "SingleplayerLevel" || scene.name == "MultiplayerLevel")
+            {
+                PlaySound("Fight");
+            }
+            
+        }
         public void PlaySound(string soundName)
         {
             Sound s = Array.Find(sounds, sound => sound.name == soundName);
@@ -85,6 +109,19 @@ namespace SamuraiStandoff
             dB = Mathf.Clamp(dB, -60f, 0f); // Clamp to your desired range (-60 dB to 0 dB)
 
             audioMixer.SetFloat(mixerParam, dB);
+        }
+
+        void OnEnable()
+        {
+            Debug.Log("OnEnable called");
+            SceneManager.sceneLoaded += GetSound;
+        }        
+
+
+        void OnDestroy()
+        {
+            Debug.Log("OnDisable");
+            SceneManager.sceneLoaded -= GetSound;
         }
     }
 }
