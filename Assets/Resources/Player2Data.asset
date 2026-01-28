@@ -15,7 +15,7 @@ MonoBehaviour:
   playerNumber: 2
   faultCounter: 0
   selectedCharacter:
-    name: 
+    name: Monk
     type: 0
     sprites: []
   characterType: 0

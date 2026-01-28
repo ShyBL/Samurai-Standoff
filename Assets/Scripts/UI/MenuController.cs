@@ -58,6 +58,10 @@ namespace SamuraiStandoff
         public void Back()
         {
             AudioManager.instance.PlaySound("Click2");
+            GameManager.instance.ToggleMultiplayer(false);
+            player2pick = false;
+            player1ChoosesText.gameObject.SetActive(true);
+            player2ChoosesText.gameObject.SetActive(false);
         }
         
         public void OpenMultiplayer()
