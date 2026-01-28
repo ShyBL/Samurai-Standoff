@@ -224,7 +224,7 @@ namespace SamuraiStandoff
 
                 ShowWinner(winner);
         
-                if (gameData.isMultiplayer == false)
+                if (gameData.isMultiplayer == false && winner.TryGetComponent<PlayerController>(out PlayerController winningPlayer))
                 {
                     playerData.lastBestFrameCount = 10000;
                     StartCoroutine(SceneLoader.instance.NextLevel());

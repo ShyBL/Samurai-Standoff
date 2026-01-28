@@ -46,21 +46,7 @@ namespace SamuraiStandoff
             // transition.SetTrigger("Clash");
         }
         
-        private static void TransitionToGameplayMusic()
-        {
-            var menuSound = AudioManager.instance.sounds.FirstOrDefault(s => s.name == "Menu");
-
-            if (menuSound == null || !menuSound.source.isPlaying)
-            {
-                Debug.LogWarning("Menu music is not playing. Loadgame aborted.");
-                return;
-            }
-
-            Debug.Log("Menu music is playing. Proceeding to load game.");
-
-            AudioManager.instance.StopSound("Menu");
-            AudioManager.instance.PlaySound("Fight");
-        }        
+       
         
         #region Scene Loading Methods
         
@@ -70,7 +56,6 @@ namespace SamuraiStandoff
 
             GameManager.instance.StartCoroutine(LoadScene(singlePlayerSceneName));
 
-            TransitionToGameplayMusic();
         }
         
         public void LoadTutorialDuel()
@@ -79,7 +64,6 @@ namespace SamuraiStandoff
 
             GameManager.instance.StartCoroutine(LoadScene(tutorialSceneName));
 
-            TransitionToGameplayMusic();
         }
 
         
@@ -98,11 +82,11 @@ namespace SamuraiStandoff
             }
             else
             {
+                playerData.currentLevel = 1;
                 GameManager.instance.StartCoroutine(LoadScene(singlePlayerSceneName));
             }
             AudioManager.instance.PlaySound("Click1");
 
-            TransitionToGameplayMusic();
             
         }
 
@@ -123,7 +107,6 @@ namespace SamuraiStandoff
             gameManager.CleanUp();
             GameManager.instance.StartCoroutine(LoadScene(multiplayerSceneName));
 
-            TransitionToGameplayMusic();
 
         }
 
@@ -167,9 +150,6 @@ namespace SamuraiStandoff
                 : singlePlayerResultsSceneName;
             
             StartCoroutine(LoadScene(resultsScene));
-
-            AudioManager.instance.StopSound("Fight");
-            AudioManager.instance.PlaySound("Menu");
         }
         #endregion
     }

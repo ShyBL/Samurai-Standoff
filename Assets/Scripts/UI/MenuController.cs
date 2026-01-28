@@ -78,8 +78,6 @@ namespace SamuraiStandoff
         
         private void Start()
         {
-                
-            AudioManager.instance.PlaySound("Menu");
             
             UpdateCharacterDisplay();
             UpdateDifficultyButtons();
