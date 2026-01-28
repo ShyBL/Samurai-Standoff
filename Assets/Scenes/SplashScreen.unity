@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 130953702}
   - component: {fileID: 130953701}
   - component: {fileID: 130953703}
+  - component: {fileID: 130953704}
   m_Layer: 0
   m_Name: SteamManager
   m_TagString: Untagged
@@ -391,6 +392,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerJoinedNotification: {fileID: 154853625}
   playerLeftNotification: {fileID: 1259961804}
+--- !u!114 &130953704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130953700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67be0f05e57525d48a15fd230e9437b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
+  gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
 --- !u!1 &154853625
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace SamuraiStandoff
     /// Optional component to handle Steam Remote Play session events.
     /// Attach this to your GameManager or a dedicated Steam object.
     /// </summary>
-    public class RemotePlayCallbacks : MonoBehaviour
+    public class SamuraiStandoffRemotePlay : MonoBehaviour
     {
         private Callback<SteamRemotePlaySessionConnected_t> m_SessionConnected;
         private Callback<SteamRemotePlaySessionDisconnected_t> m_SessionDisconnected;
@@ -38,7 +38,6 @@ namespace SamuraiStandoff
             // Get info about the connected player
             CSteamID playerSteamID = SteamRemotePlay.GetSessionSteamID(callback.m_unSessionID);
             string playerName = SteamFriends.GetFriendPersonaName(playerSteamID);
-            
             Debug.Log($"[Remote Play] Player name: {playerName}");
             
             // Optional: Show notification UI
@@ -109,7 +108,7 @@ namespace SamuraiStandoff
             }
         }
 
-        public static RemotePlayCallbacks instance;
+        public static SamuraiStandoffRemotePlay instance;
 
         private void Awake()
         {
