@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SamuraiStandoff
@@ -24,12 +26,8 @@ namespace SamuraiStandoff
                 QualitySettings.vSyncCount = 0;
 
                 DontDestroyOnLoad(gameObject);
-                
-                if (!isTestMode)
-                {
-                    ValidateCharacterUnlocks();
-                }
 
+                ValidateCharacterUnlocks();
             }
             else
             {
@@ -134,6 +132,46 @@ namespace SamuraiStandoff
     
         private void ValidateCharacterUnlocks()
         {
+            // Safeguards against having no characterType set in data
+            if (playerData.characterType != CharacterType.Monk)
+            {
+                playerData.characterType = CharacterType.Monk;
+            }
+            
+            // Safeguards against having no Selected Character set in data
+            if (playerData.selectedCharacter.sprites.Count == 0)
+            {
+                if (gameData != null && gameData.allCharacters.Count != 0)
+                {
+                    playerData.selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == playerData.characterType);
+                }
+            }
+            
+            if (gameData.isDemo)
+            {
+                playerData.Characters = new Dictionary<CharacterType, bool>()
+                {
+                    { CharacterType.Monk, true },
+                    { CharacterType.Ichi, true },
+                    { CharacterType.Bluetail, true },
+                    { CharacterType.Macaroni, true },
+                    { CharacterType.Chaolin, true },
+                    { CharacterType.Fraug, true }
+                };
+            }
+            else
+            {
+                playerData.Characters = new Dictionary<CharacterType, bool>()
+                {
+                    { CharacterType.Monk, true },
+                    { CharacterType.Ichi, false },
+                    { CharacterType.Bluetail, false },
+                    { CharacterType.Macaroni, false },
+                    { CharacterType.Chaolin, false },
+                    { CharacterType.Fraug, false }
+                };
+            }
+            
             // Ensure characters are unlocked based on actual progression
             if (playerData.completedEasyMode)
                 UnlockCharacter(CharacterType.Ichi);
