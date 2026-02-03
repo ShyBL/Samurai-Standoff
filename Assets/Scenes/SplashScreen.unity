@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b54b6a2f814fec988cf593da00254c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testing: 1
+  testing: 0
   playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
   m_bStoreStats: 0
 --- !u!1 &154853625
