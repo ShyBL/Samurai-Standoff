@@ -5,6 +5,8 @@ namespace SamuraiStandoff
 {
     public class SamuraiStandoffStats : MonoBehaviour
     {
+        public bool testing;
+        
         // Reference to the shared progression data
         public PlayerData playerData;
 
@@ -29,6 +31,10 @@ namespace SamuraiStandoff
             {
                 instance = this;
                 DontDestroyOnLoad(gameObject);
+
+                if (!testing) return;
+                
+                ClearAchievements();
             }
             else
             {
@@ -36,6 +42,8 @@ namespace SamuraiStandoff
                 return;
             }
         }
+
+
 
         #endregion
 
@@ -192,7 +200,6 @@ namespace SamuraiStandoff
             new Achievement_t(Achievement.ACH_NEVER_GIVE_UP, "Never Give Up", "Lose 50 duels but keep fighting")
         };
 
-        
         private void CheckAchievements()
         {
             foreach (Achievement_t achievement in m_Achievements)
@@ -307,6 +314,14 @@ namespace SamuraiStandoff
             m_bStoreStats = true;
 
             Debug.Log("Achievement Unlocked: " + achievement.m_strName);
+        }
+        
+        private void ClearAchievements()
+        {
+            foreach (Achievement_t achievement in m_Achievements)
+            {
+                SteamUserStats.ClearAchievement(achievement.m_eAchievementID.ToString());
+            }
         }
         
         #endregion

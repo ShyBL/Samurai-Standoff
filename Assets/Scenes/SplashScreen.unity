@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 130953701}
   - component: {fileID: 130953703}
   - component: {fileID: 130953704}
+  - component: {fileID: 130953705}
   m_Layer: 0
   m_Name: SteamManager
   m_TagString: Untagged
@@ -406,6 +407,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
   gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
+--- !u!114 &130953705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130953700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b54b6a2f814fec988cf593da00254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testing: 1
+  playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
+  m_bStoreStats: 0
 --- !u!1 &154853625
 GameObject:
   m_ObjectHideFlags: 0

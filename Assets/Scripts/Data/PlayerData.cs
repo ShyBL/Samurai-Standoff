@@ -16,28 +16,9 @@ namespace SamuraiStandoff
         public int currentBestFrameCount = 10000;
         public int currentLevel = 1;
 
-        public Dictionary<CharacterType, bool> Characters = new Dictionary<CharacterType, bool>()
-        {
-            { CharacterType.Monk, true },
-            { CharacterType.Ichi, true },
-            { CharacterType.Bluetail, true },
-            { CharacterType.Macaroni, true },
-            { CharacterType.Chaolin, true },
-            { CharacterType.Fraug, true }
-        };
+        public Dictionary<CharacterType, bool> Characters;
         
-        // public Dictionary<CharacterType, bool> Characters = new Dictionary<CharacterType, bool>()
-        // {
-        //     { CharacterType.Monk, true },
-        //     { CharacterType.Ichi, false },
-        //     { CharacterType.Bluetail, false },
-        //     { CharacterType.Macaroni, false },
-        //     { CharacterType.Chaolin, false },
-        //     { CharacterType.Fraug, false }
-        // };
-
-        // TODO: ADD HERE EVERY VARIABLE ADDED IN PLAYER DATA
-
+        
         [Header("Difficulty Progression & Analytics")]
         public bool completedEasyMode;
         public bool completedMediumMode;
@@ -69,18 +50,51 @@ namespace SamuraiStandoff
         
         private void OnEnable()
         {
+            var gameData = Resources.Load("GameData") as GameData;
+            
+            // Safeguards against having no characterType set in data
             if (characterType != CharacterType.Monk)
             {
                 characterType = CharacterType.Monk;
             }
-
+            
+            // Safeguards against having no Selected Character set in data
             if (selectedCharacter.sprites.Count == 0)
             {
-                var gameData = Resources.Load("GameData") as GameData;
                 if (gameData != null && gameData.allCharacters.Count != 0)
                 {
                     selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == characterType);
                 }
+            }
+            
+            InitializeCharactersDictionary(gameData);
+        }
+
+        private void InitializeCharactersDictionary(GameData gameData)
+        {
+            if (gameData.isDemo)
+            {
+                Characters = new Dictionary<CharacterType, bool>()
+                {
+                    { CharacterType.Monk, true },
+                    { CharacterType.Ichi, true },
+                    { CharacterType.Bluetail, true },
+                    { CharacterType.Macaroni, true },
+                    { CharacterType.Chaolin, true },
+                    { CharacterType.Fraug, true }
+                };
+            }
+            else
+            {
+                Characters = new Dictionary<CharacterType, bool>()
+                {
+                    { CharacterType.Monk, true },
+                    { CharacterType.Ichi, false },
+                    { CharacterType.Bluetail, false },
+                    { CharacterType.Macaroni, false },
+                    { CharacterType.Chaolin, false },
+                    { CharacterType.Fraug, false }
+                };
             }
         }
     }

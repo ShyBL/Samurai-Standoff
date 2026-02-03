@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -36,6 +37,11 @@ namespace SamuraiStandoff
                 return;
             }
 
+
+        }
+
+        private void Start()
+        {
             gameManager = GameManager.instance;
         }
 
