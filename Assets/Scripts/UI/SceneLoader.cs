@@ -22,7 +22,7 @@ namespace SamuraiStandoff
         [SerializeField] private PlayerData playerData;
         [SerializeField] private PlayerData player2Data;
 
-        [SerializeField] private GameManager gameManager;
+        private GameManager gameManager;
 
         private void Awake()
         {
@@ -36,7 +36,7 @@ namespace SamuraiStandoff
                 return;
             }
 
-            gameManager = FindObjectOfType<GameManager>();      
+            gameManager = GameManager.instance;
         }
 
         public void Clash()

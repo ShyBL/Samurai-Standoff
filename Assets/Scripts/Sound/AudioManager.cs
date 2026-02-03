@@ -46,28 +46,40 @@ namespace SamuraiStandoff
 
         public void GetSound(Scene scene, LoadSceneMode mode)
         {
-            Debug.Log("getting sounds");
-            
+            Debug.Log("getting sounds for scene: " + scene.name);
+    
+            string targetSound = "";
+            switch (scene.name)
+            {
+                case "SplashScreen":
+                    targetSound = "Intro";
+                    break;
+                case "MainMenu":
+                case "SingleplayerResults":
+                case "MultiplayerResults":
+                    targetSound = "Menu";
+                    break;
+                case "SingleplayerLevel":
+                case "MultiplayerLevel":
+                    targetSound = "Fight";
+                    break;
+            }
+    
+            // Stop all sounds EXCEPT the one we want to play
             foreach (Sound sound in sounds)
             {
-                if(sound.source.isPlaying)
+                if (sound.source.isPlaying && sound.name != targetSound)
                 {
                     StopSound(sound.name);
                 }
-                else
-                {
-                    continue;
-                }
             }
-            if(scene.name == "MainMenu" || scene.name == "SingleplayerResults" || scene.name == "MultiplayerResults")
+    
+            // Only play if it's not already playing
+            Sound s = Array.Find(sounds, sound => sound.name == targetSound);
+            if (s != null && !s.source.isPlaying)
             {
-                PlaySound("Menu");
+                PlaySound(targetSound);
             }
-            if(scene.name == "SingleplayerLevel" || scene.name == "MultiplayerLevel")
-            {
-                PlaySound("Fight");
-            }
-            
         }
         public void PlaySound(string soundName)
         {
