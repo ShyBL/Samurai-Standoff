@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Globalization;
 using TMPro;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace SamuraiStandoff
 {
@@ -137,6 +139,21 @@ namespace SamuraiStandoff
 
         private void Start()
         {
+            SteamRichPresenceManager.instance.SetInDuel(
+                gameData.currentDifficulty,
+                playerData.currentLevel,
+                gameData.currentDifficulty switch
+                {
+                    EnemyDifficultyType.EasyMode    => gameData.easyTotalLevels,
+                    EnemyDifficultyType.MediumMode  => gameData.mediumTotalLevels,
+                    EnemyDifficultyType.HardMode    => gameData.hardTotalLevels,
+                    EnemyDifficultyType.Tutorial    => 1,
+                    _ => throw new ArgumentOutOfRangeException()
+                },
+                playerData.characterType
+            );
+
+            
             signalSlider.gameObject.SetActive(false);
             signalSlider.value = 0f;
             resultText.enabled = false;
