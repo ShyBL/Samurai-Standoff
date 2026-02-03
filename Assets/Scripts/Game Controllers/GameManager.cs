@@ -202,8 +202,9 @@ namespace SamuraiStandoff
                 UnlockCharacter(CharacterType.Chaolin);
             }
             
-            // Update Steam Achievements Flag
-            //  SamuraiStandoffStats.instance.m_bStoreStats = true;
+            // Update Steam Stats & Achievements flag to trigger storing stats
+            SamuraiStandoffStats.instance.m_bStoreStats = true;
+              
         }
 
         public void OnDuelLost()
@@ -213,7 +214,9 @@ namespace SamuraiStandoff
             playerData.m_totalDuels++;
             playerData.m_totalLosses++;
             playerData.m_maxWinStreak = 0;
-            //   SamuraiStandoffStats.instance.m_bStoreStats = true;
+            
+            // Update Steam Stats & Achievements flag to trigger storing stats
+            SamuraiStandoffStats.instance.m_bStoreStats = true;
         }
 
         public void OnDuelDraw()
@@ -222,8 +225,9 @@ namespace SamuraiStandoff
 
             playerData.m_totalDuels++;
             playerData.m_totalDraws++;
-            playerData.m_maxWinStreak = 0;
-            //  SamuraiStandoffStats.instance.m_bStoreStats = true;
+            playerData.m_maxWinStreak = 0; 
+            // Update Steam Stats & Achievements flag to trigger storing stats
+            SamuraiStandoffStats.instance.m_bStoreStats = true;
         }
 
         public void OnEarlyAttack()
@@ -231,7 +235,8 @@ namespace SamuraiStandoff
             if (playerData == null) return;
         
             playerData.m_totalEarlyAttacks++;
-            // SamuraiStandoffStats.instance.m_bStoreStats = true;
+            // Update Steam Stats & Achievements flag to trigger storing stats
+            SamuraiStandoffStats.instance.m_bStoreStats = true;
         }
 
         // Call this when you complete a difficulty, which will then trigger stats to be saved.
@@ -240,7 +245,8 @@ namespace SamuraiStandoff
             if (playerData == null) return;
         
             MarkDifficultyCompleted(difficulty);
-            //   SamuraiStandoffStats.instance.m_bStoreStats = true;
+            // Update Steam Stats & Achievements flag to trigger storing stats
+            SamuraiStandoffStats.instance.m_bStoreStats = true;
         }
     
         /// <summary>
