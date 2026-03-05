@@ -27,6 +27,9 @@ namespace SamuraiStandoff
 
                 DontDestroyOnLoad(gameObject);
 
+                // Load save file first so all SO fields are populated before ValidateCharacterUnlocks reads them
+                SaveSystem.instance.Load();
+
                 ValidateCharacterUnlocks();
             }
             else
@@ -37,7 +40,7 @@ namespace SamuraiStandoff
         }
 
         private void Start()
-        {   
+        {
             playerData.currentLevel = 1;
             CleanUp();
         }
@@ -47,148 +50,147 @@ namespace SamuraiStandoff
         #region Game Mode
 
         public int totalLevels;
-    
+
         public void SetTutorialMode()
         {
-            totalLevels = gameData.tutorialTotalLevels; 
+            totalLevels = gameData.tutorialTotalLevels;
             gameData.currentDifficulty = EnemyDifficultyType.Tutorial;
         }
-        
+
         public void SetEasyMode()
         {
-            totalLevels = gameData.easyTotalLevels; 
+            totalLevels = gameData.easyTotalLevels;
             gameData.currentDifficulty = EnemyDifficultyType.EasyMode;
         }
 
         public void SetMediumMode()
         {
-            totalLevels = gameData.mediumTotalLevels; 
+            totalLevels = gameData.mediumTotalLevels;
             gameData.currentDifficulty = EnemyDifficultyType.MediumMode;
         }
 
         public void SetHardMode()
         {
-            totalLevels = gameData.hardTotalLevels; 
+            totalLevels = gameData.hardTotalLevels;
             gameData.currentDifficulty = EnemyDifficultyType.HardMode;
         }
 
         public void ToggleMultiplayer(bool isMultiplayer)
         {
             gameData.isMultiplayer = isMultiplayer;
-            IsMultiplayer =  gameData.isMultiplayer;
+            IsMultiplayer = gameData.isMultiplayer;
         }
+
         #endregion
 
         #region Application Control
 
         public void OnApplicationQuit()
         {
-            // Optional cleanup logic
             Application.Quit();
         }
 
+        // Unity calls this automatically when the app closes.
+        // Belt-and-suspenders save in case we missed a spot.
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            if (pauseStatus) SaveSystem.instance.Save();
+        }
+
         #endregion
-    
-        #region Player Data Control // TODO: ADD HERE EVERY VARIABLE ADDED IN PLAYER DATA
-    
+
+        #region Player Data Control
+
         /// <summary>
-        /// Resets all progression data to default values. Useful for testing.
+        /// Resets all progression data to default values and deletes the save file.
         /// </summary>
         public void ResetProgression()
         {
-            playerData.completedEasyMode = false;
-            playerData.completedMediumMode = false;
-            playerData.completedHardMode = false;
-            playerData.startedFirstDuel = false;
-            playerData.wonFirstDuel = false;
+            playerData.completedEasyMode      = false;
+            playerData.completedMediumMode    = false;
+            playerData.completedHardMode      = false;
+            playerData.startedFirstDuel       = false;
+            playerData.wonFirstDuel           = false;
             playerData.reachedMediumDifficulty = false;
-            playerData.reachedHardDifficulty = false;
-            playerData.defeatedFraug = false;
-            playerData.m_perfectTimingWins = 0;
-            playerData.m_totalEarlyAttacks = 0;
-            playerData.m_currentWinStreak = 0;
-            playerData.m_bestWinStreak = 0;
-            playerData.m_totalDuels = 0;
-            playerData.m_totalWins = 0;
-            playerData.m_totalLosses = 0;
-            playerData.m_totalDraws = 0;
-            playerData.m_maxWinStreak = 0;
+            playerData.reachedHardDifficulty  = false;
+            playerData.defeatedFraug          = false;
+            playerData.m_perfectTimingWins    = 0;
+            playerData.m_totalEarlyAttacks    = 0;
+            playerData.m_currentWinStreak     = 0;
+            playerData.m_bestWinStreak        = 0;
+            playerData.m_totalDuels           = 0;
+            playerData.m_totalWins            = 0;
+            playerData.m_totalLosses          = 0;
+            playerData.m_totalDraws           = 0;
+            playerData.m_maxWinStreak         = 0;
+
+            SaveSystem.instance.DeleteSave();
             Debug.Log("Player Progression Data has been reset.");
         }
 
-        public void CleanUp()//Resets values for new game
+        public void CleanUp() // Resets transient values for a new duel
         {
             playerData.faultCounter = 0;
-           
-            if(gameData.isMultiplayer)
+
+            if (gameData.isMultiplayer)
             {
                 player2Data.faultCounter = 0;
             }
         }
 
         #endregion
-    
+
         #region Progression Control
-    
+
         private void ValidateCharacterUnlocks()
         {
-            // Safeguards against having no characterType set in data
             if (playerData.characterType != CharacterType.Monk)
             {
                 playerData.characterType = CharacterType.Monk;
             }
-            
-            // Safeguards against having no Selected Character set in data
+
             if (playerData.selectedCharacter.sprites.Count == 0)
             {
                 if (gameData != null && gameData.allCharacters.Count != 0)
                 {
-                    playerData.selectedCharacter = gameData.allCharacters.FirstOrDefault(c => c.type == playerData.characterType);
+                    playerData.selectedCharacter =
+                        gameData.allCharacters.FirstOrDefault(c => c.type == playerData.characterType);
                 }
             }
-            
+
             if (gameData.isDemo)
             {
                 playerData.Characters = new Dictionary<CharacterType, bool>()
                 {
-                    { CharacterType.Monk, true },
-                    { CharacterType.Ichi, true },
+                    { CharacterType.Monk,     true },
+                    { CharacterType.Ichi,     true },
                     { CharacterType.Bluetail, true },
                     { CharacterType.Macaroni, true },
-                    { CharacterType.Chaolin, true },
-                    { CharacterType.Fraug, true }
+                    { CharacterType.Chaolin,  true },
+                    { CharacterType.Fraug,    true }
                 };
             }
             else
             {
                 playerData.Characters = new Dictionary<CharacterType, bool>()
                 {
-                    { CharacterType.Monk, true },
-                    { CharacterType.Ichi, false },
+                    { CharacterType.Monk,     true  },
+                    { CharacterType.Ichi,     false },
                     { CharacterType.Bluetail, false },
                     { CharacterType.Macaroni, false },
-                    { CharacterType.Chaolin, false },
-                    { CharacterType.Fraug, false }
+                    { CharacterType.Chaolin,  false },
+                    { CharacterType.Fraug,    false }
                 };
             }
-            
-            // Ensure characters are unlocked based on actual progression
-            if (playerData.completedEasyMode)
-                UnlockCharacter(CharacterType.Ichi);
-    
-            if (playerData.completedMediumMode)
-                UnlockCharacter(CharacterType.Bluetail);
-    
-            if (playerData.completedHardMode)
-                UnlockCharacter(CharacterType.Fraug);
-    
-            if (playerData.m_totalLosses >= 10)
-                UnlockCharacter(CharacterType.Macaroni);
-    
-            if (playerData.m_bestWinStreak >= 10)
-                UnlockCharacter(CharacterType.Chaolin);
+
+            // Re-apply unlocks based on loaded progression
+            if (playerData.completedEasyMode)   UnlockCharacter(CharacterType.Ichi);
+            if (playerData.completedMediumMode) UnlockCharacter(CharacterType.Bluetail);
+            if (playerData.completedHardMode)   UnlockCharacter(CharacterType.Fraug);
+            if (playerData.m_totalLosses >= 10) UnlockCharacter(CharacterType.Macaroni);
+            if (playerData.m_bestWinStreak >= 10) UnlockCharacter(CharacterType.Chaolin);
         }
-    
+
         public bool IsCharacterUnlocked(CharacterType type)
         {
             return playerData.Characters[type];
@@ -201,7 +203,7 @@ namespace SamuraiStandoff
             else
                 playerData.Characters.Add(type, true);
         }
-    
+
         public void OnDuelWon(int framesAfterSignal, string opponentName = "")
         {
             if (playerData == null) return;
@@ -211,38 +213,26 @@ namespace SamuraiStandoff
             playerData.m_maxWinStreak++;
 
             if (!playerData.wonFirstDuel)
-            {
                 playerData.wonFirstDuel = true;
-            }
 
             if (playerData.m_maxWinStreak > playerData.m_bestWinStreak)
-            {
                 playerData.m_bestWinStreak = playerData.m_maxWinStreak;
-            }
 
             if (framesAfterSignal == 1)
-            {
                 playerData.m_perfectTimingWins++;
-            }
 
-            if (opponentName.ToLower() == "Fraug")
-            {
+            if (opponentName.ToLower() == "fraug")
                 playerData.defeatedFraug = true;
-            }
 
             if (playerData.m_totalLosses == 10)
-            {
                 UnlockCharacter(CharacterType.Macaroni);
-            }
-        
+
             if (playerData.m_bestWinStreak == 10)
-            {
                 UnlockCharacter(CharacterType.Chaolin);
-            }
-            
-            // Update Steam Stats & Achievements flag to trigger storing stats
+
             SamuraiStandoffStats.instance.m_bStoreStats = true;
-              
+
+            SaveSystem.instance.Save();
         }
 
         public void OnDuelLost()
@@ -252,9 +242,10 @@ namespace SamuraiStandoff
             playerData.m_totalDuels++;
             playerData.m_totalLosses++;
             playerData.m_maxWinStreak = 0;
-            
-            // Update Steam Stats & Achievements flag to trigger storing stats
+
             SamuraiStandoffStats.instance.m_bStoreStats = true;
+
+            SaveSystem.instance.Save();
         }
 
         public void OnDuelDraw()
@@ -263,60 +254,56 @@ namespace SamuraiStandoff
 
             playerData.m_totalDuels++;
             playerData.m_totalDraws++;
-            playerData.m_maxWinStreak = 0; 
-            // Update Steam Stats & Achievements flag to trigger storing stats
+            playerData.m_maxWinStreak = 0;
+
             SamuraiStandoffStats.instance.m_bStoreStats = true;
+
+            SaveSystem.instance.Save();
         }
 
         public void OnEarlyAttack()
         {
             if (playerData == null) return;
-        
+
             playerData.m_totalEarlyAttacks++;
-            // Update Steam Stats & Achievements flag to trigger storing stats
+
             SamuraiStandoffStats.instance.m_bStoreStats = true;
+            
+            SaveSystem.instance.Save();
         }
 
-        // Call this when you complete a difficulty, which will then trigger stats to be saved.
         public void OnDifficultyCompleted(string difficulty)
         {
             if (playerData == null) return;
-        
+
             MarkDifficultyCompleted(difficulty);
-            // Update Steam Stats & Achievements flag to trigger storing stats
+
             SamuraiStandoffStats.instance.m_bStoreStats = true;
+
+            SaveSystem.instance.Save();
         }
-    
-        /// <summary>
-        /// Call this method from your game logic when a difficulty is fully completed.
-        /// </summary>
+
         private void MarkDifficultyCompleted(string difficulty)
         {
             switch (difficulty.ToLower())
             {
                 case "easy":
-                    UnlockCharacter(CharacterType.Ichi); // Character Progression
-                    playerData.completedEasyMode = true; // Stage Progression
-                
-                    playerData.reachedMediumDifficulty = true; // Analytics
+                    UnlockCharacter(CharacterType.Ichi);
+                    playerData.completedEasyMode      = true;
+                    playerData.reachedMediumDifficulty = true;
                     break;
                 case "medium":
-                    UnlockCharacter(CharacterType.Bluetail); // Character Progression
-                    playerData.completedMediumMode = true; // Stage Progression
-                
-                    playerData.reachedHardDifficulty = true; // Analytics
+                    UnlockCharacter(CharacterType.Bluetail);
+                    playerData.completedMediumMode   = true;
+                    playerData.reachedHardDifficulty = true;
                     break;
                 case "hard":
-                    UnlockCharacter(CharacterType.Fraug); // Character Progression
-                    playerData.completedHardMode = true; // Stage Progression
+                    UnlockCharacter(CharacterType.Fraug);
+                    playerData.completedHardMode = true;
                     break;
             }
         }
-    
+
         #endregion
-        
-        
-        
     }
-    
 }
