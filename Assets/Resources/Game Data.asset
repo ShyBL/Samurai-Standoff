@@ -78,8 +78,8 @@ MonoBehaviour:
   easyTotalLevels: 3
   mediumTotalLevels: 3
   hardTotalLevels: 4
-  masterVolume: 50
-  backgroundVolume: 50
+  masterVolume: 30
+  backgroundVolume: 30
   isMultiplayer: 0
   currentLanguage: 5
   isDemo: 0
