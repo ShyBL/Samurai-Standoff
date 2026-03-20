@@ -19,9 +19,9 @@ namespace SamuraiStandoff
     /// ScriptableObjects are assets — their runtime changes exist only
     /// in memory and are discarded when the build exits.  This system
     /// serializes the fields that must persist (progression, stats,
-    /// settings, keybinds) to a JSON file on disk, then pushes the
-    /// loaded values back into the ScriptableObjects on startup so
-    /// that every other script can keep reading from them unchanged.
+    /// settings, keybinds, display mode) to a JSON file on disk, then
+    /// pushes the loaded values back into the ScriptableObjects on startup
+    /// so that every other script can keep reading from them unchanged.
     ///
     /// STEAM CLOUD
     /// ───────────
@@ -76,8 +76,10 @@ namespace SamuraiStandoff
         #region Public API
 
         /// <summary>
-        /// Reads the save file and pushes values into the ScriptableObjects.
-        /// Call once on startup (GameManager.Awake).
+        /// Reads the save file and pushes values into the ScriptableObjects,
+        /// then immediately applies runtime settings (display mode, audio volumes)
+        /// so they take effect from the very first frame — even before the player
+        /// opens the settings panel.
         ///
         /// Resolution order:
         ///   1. Try Steam Cloud — if available, enabled, and newer than local → use it
@@ -94,14 +96,14 @@ namespace SamuraiStandoff
 
                 if (cloudJson != null)
                 {
-                    // Cloud is authoritative — deserialize and also sync to disk.
                     SamuraiSaveData cloudData = JsonConvert.DeserializeObject<SamuraiSaveData>(cloudJson);
                     if (cloudData != null)
                     {
                         ApplyToPlayerData(cloudData);
                         ApplyToGameData(cloudData);
-                        File.WriteAllText(SavePath, cloudJson); // keep local in sync
+                        File.WriteAllText(SavePath, cloudJson);
                         Debug.Log("[SaveSystem] Loaded from Steam Cloud (newer than local).");
+                        ApplyRuntimeSettings();
                         return;
                     }
                     Debug.LogWarning("[SaveSystem] Steam Cloud file was malformed — falling back to local.");
@@ -111,6 +113,7 @@ namespace SamuraiStandoff
                 if (!File.Exists(SavePath))
                 {
                     Debug.Log("[SaveSystem] No save file found — using defaults.");
+                    ApplyRuntimeSettings(); // Still apply defaults (display mode, volumes)
                     return;
                 }
 
@@ -120,12 +123,14 @@ namespace SamuraiStandoff
                 if (localData == null)
                 {
                     Debug.LogWarning("[SaveSystem] Local save file was empty or malformed.");
+                    ApplyRuntimeSettings(); // Still apply defaults
                     return;
                 }
 
                 ApplyToPlayerData(localData);
                 ApplyToGameData(localData);
                 Debug.Log("[SaveSystem] Loaded from local disk.");
+                ApplyRuntimeSettings();
             }
             catch (Exception e)
             {
@@ -145,11 +150,11 @@ namespace SamuraiStandoff
                 SamuraiSaveData data = BuildFromScriptableObjects();
                 string json = JsonConvert.SerializeObject(data, Formatting.Indented);
 
-                // Local disk (always) 
+                // Local disk (always)
                 File.WriteAllText(SavePath, json);
                 Debug.Log($"[SaveSystem] Saved to local disk: {SavePath}");
 
-                // Steam Cloud (when available) 
+                // Steam Cloud (when available)
                 CloudSave(Encoding.UTF8.GetBytes(json));
             }
             catch (Exception e)
@@ -173,6 +178,62 @@ namespace SamuraiStandoff
             {
                 Debug.Log("[SaveSystem] No save file to delete.");
             }
+        }
+
+        #endregion
+
+        #region Runtime Settings Application
+
+        /// <summary>
+        /// Applies settings that must be active immediately after loading —
+        /// before the player ever opens the settings panel.
+        ///
+        /// Called at the end of every Load() path, including the no-save-file
+        /// path so that SO inspector defaults are also properly applied.
+        ///
+        /// Audio: AudioManager is a DontDestroyOnLoad singleton on SplashScreen,
+        /// so it is guaranteed to exist when SaveSystem.Load() is called.
+        ///
+        /// Display: Screen API calls are safe from any MonoBehaviour context.
+        /// </summary>
+        private void ApplyRuntimeSettings()
+        {
+            ApplyDisplayMode();
+            ApplyAudioVolumes();
+        }
+
+        private void ApplyDisplayMode()
+        {
+            switch (gameData.displayMode)
+            {
+                case FullScreenMode.Windowed:
+                    Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.Windowed);
+                    break;
+                default:
+                    // Borderless is the safe default — auto-matches desktop resolution,
+                    // avoids Alt+Tab minimise issues, no resolution mismatch risk.
+                    Resolution native = Screen.resolutions[Screen.resolutions.Length - 1];
+                    Screen.SetResolution(native.width, native.height, FullScreenMode.FullScreenWindow);
+                    gameData.displayMode = FullScreenMode.FullScreenWindow;
+                    break;
+            }
+
+            Debug.Log($"[SaveSystem] Display mode applied: {gameData.displayMode}");
+        }
+
+        private void ApplyAudioVolumes()
+        {
+            // AudioManager is a DontDestroyOnLoad singleton guaranteed to exist here.
+            ApplyVolume("MasterVolume",     gameData.masterVolume);
+            ApplyVolume("BackgroundVolume", gameData.backgroundVolume);
+        }
+
+        private void ApplyVolume(string mixerParam, float savedValue)
+        {
+            float clamped    = Mathf.Clamp(savedValue, 1f, 100f);
+            float dB         = Mathf.Clamp(Mathf.Log10(clamped / 100f) * 20f, -60f, 0f);
+            AudioManager.instance.audioMixer.SetFloat(mixerParam, dB);
+            Debug.Log($"[SaveSystem] {mixerParam} applied: {clamped} → {dB} dB");
         }
 
         #endregion
@@ -213,18 +274,21 @@ namespace SamuraiStandoff
             d.currentBestFrameCount = playerData.currentBestFrameCount;
 
             // Multiplayer stats
-            d.multiplayerWins              = playerData.multiplayerWins;
-            d.multiplayerLosses            = playerData.multiplayerLosses;
-            d.multiplayerBestWinStreak     = playerData.multiplayerBestWinStreak;
-            d.multiplayerCurrentWinStreak  = playerData.multiplayerCurrentWinStreak;
+            d.multiplayerWins             = playerData.multiplayerWins;
+            d.multiplayerLosses           = playerData.multiplayerLosses;
+            d.multiplayerBestWinStreak    = playerData.multiplayerBestWinStreak;
+            d.multiplayerCurrentWinStreak = playerData.multiplayerCurrentWinStreak;
 
             // Audio (GameData)
             d.masterVolume     = gameData.masterVolume;
             d.backgroundVolume = gameData.backgroundVolume;
 
-            // Keybindings (GameData) — store as int list
+            // Keybindings (GameData) — stored as int list
             d.attackKeys   = KeyCodesToInts(gameData.attackKeys);
             d.p2AttackKeys = KeyCodesToInts(gameData.p2AttackKeys);
+
+            // Display mode (GameData) — stored as int (FullScreenMode is an enum)
+            d.displayMode = (int)gameData.displayMode;
 
             return d;
         }
@@ -276,6 +340,9 @@ namespace SamuraiStandoff
 
             if (d.p2AttackKeys != null && d.p2AttackKeys.Count > 0)
                 gameData.p2AttackKeys = IntsToKeyCodes(d.p2AttackKeys);
+
+            // Display mode — always apply (default in SamuraiSaveData covers fresh saves)
+            gameData.displayMode = (FullScreenMode)d.displayMode;
         }
 
         #endregion
@@ -339,7 +406,6 @@ namespace SamuraiStandoff
             }
             catch (Exception e)
             {
-                // Never let a cloud failure crash the save path — local disk is already written.
                 Debug.LogError($"[SaveSystem] Steam Cloud save error: {e.Message}");
             }
 #endif
@@ -358,12 +424,11 @@ namespace SamuraiStandoff
         private static string CloudLoad()
         {
 #if !DISABLESTEAMWORKS
-            if (!IsCloudAvailable())                                    return null;
-            if (!SteamRemoteStorage.FileExists(CloudFileName))          return null;
+            if (!IsCloudAvailable())                           return null;
+            if (!SteamRemoteStorage.FileExists(CloudFileName)) return null;
 
             try
             {
-                // Timestamp comparison
                 long cloudUnixTimestamp = SteamRemoteStorage.GetFileTimestamp(CloudFileName);
 
                 if (File.Exists(SavePath))
@@ -375,11 +440,10 @@ namespace SamuraiStandoff
                     if (localUnixTimestamp >= cloudUnixTimestamp)
                     {
                         Debug.Log("[SaveSystem] Local file is same age or newer than Steam Cloud — using local.");
-                        return null; // local wins
+                        return null;
                     }
                 }
 
-                //  Cloud is newer (or no local file) — read it 
                 int fileSize = SteamRemoteStorage.GetFileSize(CloudFileName);
                 if (fileSize <= 0)
                 {

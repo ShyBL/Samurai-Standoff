@@ -39,6 +39,10 @@ namespace SamuraiStandoff
         [Range(1f, 100f)]
         public float backgroundVolume = 100;
 
+        [Header("Display Settings")]
+        // FullScreenMode.FullScreenWindow = borderless windowed (value 3).
+        public FullScreenMode displayMode = FullScreenMode.FullScreenWindow;
+
         [Header("Game State")] 
         public bool isMultiplayer;
         public int currentLanguage = 0;
@@ -50,8 +54,5 @@ namespace SamuraiStandoff
         public CharacterType lastEnemyCharacterType; // Who was the enemy in last duel?
         public CharacterType winningCharacter; // Who won the last duel overall?
         public int lastDuelFrameCount; // How many frames after signal did winner attack?
-
-       
-        
     }
 }

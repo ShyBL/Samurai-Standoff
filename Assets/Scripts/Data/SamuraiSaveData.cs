@@ -1,15 +1,13 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SamuraiStandoff
 {
     /// <summary>
     /// Plain C# class that gets serialized to disk via JSON.
     /// Mirrors every field from PlayerData and the persistent
-    /// fields from GameData (volumes, keybinds) that must
+    /// fields from GameData (volumes, keybinds, display mode) that must
     /// survive between sessions.
-    ///
-    /// ScriptableObjects DO NOT persist in builds — this is the
-    /// source of truth for anything that needs to be remembered.
     /// </summary>
     [System.Serializable]
     public class SamuraiSaveData
@@ -50,12 +48,17 @@ namespace SamuraiStandoff
         public int multiplayerCurrentWinStreak;
 
         // Audio settings (from GameData)
-        public float masterVolume  = 80f;
+        public float masterVolume     = 80f;
         public float backgroundVolume = 100f;
 
         // Keybindings (from GameData)
         // Stored as ints so they survive serialization (KeyCode is an enum).
         public List<int> attackKeys   = new List<int>();
         public List<int> p2AttackKeys = new List<int>();
+
+        // Display settings (from GameData)
+        // Stored as int so it survives serialization (FullScreenMode is an enum).
+        // Default 3 = FullScreenMode.FullScreenWindow (borderless windowed).
+        public int displayMode = (int)FullScreenMode.FullScreenWindow;
     }
 }

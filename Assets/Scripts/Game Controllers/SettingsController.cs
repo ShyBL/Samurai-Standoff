@@ -67,6 +67,47 @@ namespace SamuraiStandoff
 
         #endregion
 
+        #region Display Settings
+
+        [Header("Display Settings")]
+        [SerializeField] private Button borderlessButton;
+        [SerializeField] private Button windowedButton;
+        [SerializeField] private TextMeshProUGUI displayModeLabel;
+
+        // Called from the Borderless button in the Inspector
+        public void SetBorderless()
+        {
+            Resolution native = Screen.resolutions[Screen.resolutions.Length - 1];
+            Screen.SetResolution(native.width, native.height, FullScreenMode.FullScreenWindow);
+            gameData.displayMode = FullScreenMode.FullScreenWindow;
+            UpdateDisplayModeLabel();
+            SaveSystem.instance.Save();
+            Debug.Log("[Display] Set to Borderless Windowed");
+        }
+
+        // Called from the Windowed button in the Inspector
+        public void SetWindowed()
+        {
+            Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.Windowed);
+            gameData.displayMode = FullScreenMode.Windowed;
+            UpdateDisplayModeLabel();
+            SaveSystem.instance.Save();
+            Debug.Log("[Display] Set to Windowed");
+        }
+
+        private void UpdateDisplayModeLabel()
+        {
+            if (displayModeLabel == null) return;
+
+            displayModeLabel.text = gameData.displayMode switch
+            {
+                FullScreenMode.Windowed => "Windowed",
+                _                       => "Borderless"
+            };
+        }
+
+        #endregion
+
         #region Key Bindings
 
         [Header("References")]
@@ -124,9 +165,9 @@ namespace SamuraiStandoff
 
         private bool IsValidKey(KeyCode code)
         {
-            if (code >= KeyCode.Mouse0       && code <= KeyCode.Mouse6)            return false;
+            if (code >= KeyCode.Mouse0          && code <= KeyCode.Mouse6)            return false;
             if (code >= KeyCode.JoystickButton0 && code <= KeyCode.Joystick8Button19) return false;
-            if (code == KeyCode.Escape || code == KeyCode.None)                    return false;
+            if (code == KeyCode.Escape || code == KeyCode.None)                       return false;
             return true;
         }
 
