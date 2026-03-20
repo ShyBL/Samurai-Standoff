@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 96058981}
   - component: {fileID: 96058980}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Version Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0.1.0
+  m_text: v0.1.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 588261a4840a0cf4e808cf1057fa2945, type: 2}
   m_sharedMaterial: {fileID: -8033519224638412943, guid: 588261a4840a0cf4e808cf1057fa2945, type: 2}
@@ -718,6 +718,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 5c44fcae47957934aa846499af89b254, type: 2}
   player2Data: {fileID: 11400000, guid: 7072ee3ae7fe83a43a39b3cfd96b9967, type: 2}
   gameData: {fileID: 11400000, guid: d5f386c1745f53f4ea5b4c9e128071b0, type: 2}
+  versionText: {fileID: 96058980}
   mainMenuPanel: {fileID: 1910927436}
   instructionsPanel: {fileID: 741110225}
   singlePlayerPanel: {fileID: 1615976540}
@@ -3173,7 +3174,7 @@ GameObject:
   - component: {fileID: 1756495950}
   - component: {fileID: 1756495949}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Tilte Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

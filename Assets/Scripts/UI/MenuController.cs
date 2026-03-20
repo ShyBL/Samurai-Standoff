@@ -12,7 +12,16 @@ namespace SamuraiStandoff
         [SerializeField] private PlayerData playerData;
         [SerializeField] private PlayerData player2Data;
         [SerializeField] private GameData gameData;
+        [Header("Version")]
+        [SerializeField] private TextMeshProUGUI versionText;
 
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (versionText != null)
+                versionText.text = $"{UnityEditor.PlayerSettings.bundleVersion}";
+        }
+#endif
         #region UI States
         
         [Header("UI Panels")]
