@@ -43,8 +43,6 @@ namespace SamuraiStandoff
             }
         }
 
-
-
         #endregion
 
         #region Unity Methods
@@ -57,7 +55,6 @@ namespace SamuraiStandoff
             m_UserStatsReceived = Callback<UserStatsReceived_t>.Create(OnUserStatsReceived);
             m_UserStatsStored = Callback<UserStatsStored_t>.Create(OnUserStatsStored);
             m_UserAchievementStored = Callback<UserAchievementStored_t>.Create(OnAchievementStored);
-
         }
 
         private void Update()
@@ -121,6 +118,13 @@ namespace SamuraiStandoff
             SteamUserStats.GetStat("BestWinStreak", out playerData.m_bestWinStreak);
             SteamUserStats.GetStat("TotalEarlyAttacks", out playerData.m_totalEarlyAttacks);
             SteamUserStats.GetStat("PerfectTimingWins", out playerData.m_perfectTimingWins);
+
+            // Load achievement state from Steam so we don't re-unlock
+            // already-unlocked achievements and so CheckAchievements() can skip them.
+            foreach (Achievement_t ach in m_Achievements)
+            {
+                SteamUserStats.GetAchievement(ach.m_eAchievementID.ToString(), out ach.m_bAchieved);
+            }
         }
 
         private void OnUserStatsStored(UserStatsStored_t pCallback)
@@ -185,19 +189,19 @@ namespace SamuraiStandoff
 
         private Achievement_t[] m_Achievements = new Achievement_t[]
         {
-            new Achievement_t(Achievement.ACH_FIRST_VICTORY, "First Blood", "Win your first duel"),
-            new Achievement_t(Achievement.ACH_PERFECT_TIMING, "Perfect Timing","Win with exactly 1 frame after signal"),
-            new Achievement_t(Achievement.ACH_EARLY_BIRD, "Eager Samurai", "Attack too early 10 times"),
-            new Achievement_t(Achievement.ACH_DRAW_MASTER, "Draw Master", "Achieve 5 draws in duels"),
-            new Achievement_t(Achievement.ACH_EASY_COMPLETE, "Novice Warrior", "Complete all Easy difficulty stages"),
-            new Achievement_t(Achievement.ACH_MEDIUM_COMPLETE, "Skilled Swordsman", "Complete all Medium difficulty stages"),
-            new Achievement_t(Achievement.ACH_HARD_COMPLETE, "Master Samurai", "Complete all Hard difficulty stages"),
-            new Achievement_t(Achievement.ACH_DEFEAT_FRAUG, "Frog Slayer", "Defeat Fraug, the ultimate opponent"),
-            new Achievement_t(Achievement.ACH_WIN_STREAK_5, "Hot Streak", "Win 5 duels in a row"),
-            new Achievement_t(Achievement.ACH_WIN_STREAK_10, "Unstoppable", "Win 10 duels in a row"),
-            new Achievement_t(Achievement.ACH_LIGHTNING_FAST, "Lightning Fast", "Win a duel within 3 frames of signal"),
-            new Achievement_t(Achievement.ACH_PRECISION_MASTER, "Precision Master", "Win 20 duels with perfect timing"),
-            new Achievement_t(Achievement.ACH_NEVER_GIVE_UP, "Never Give Up", "Lose 50 duels but keep fighting")
+            new Achievement_t(Achievement.ACH_FIRST_VICTORY,    "First Blood",        "Win your first duel"),
+            new Achievement_t(Achievement.ACH_PERFECT_TIMING,   "Perfect Timing",     "Win with exactly 1 frame after signal"),
+            new Achievement_t(Achievement.ACH_EARLY_BIRD,       "Eager Samurai",      "Attack too early 10 times"),
+            new Achievement_t(Achievement.ACH_DRAW_MASTER,      "Draw Master",        "Achieve 5 draws in duels"),
+            new Achievement_t(Achievement.ACH_EASY_COMPLETE,    "Novice Warrior",     "Complete all Easy difficulty stages"),
+            new Achievement_t(Achievement.ACH_MEDIUM_COMPLETE,  "Skilled Swordsman",  "Complete all Medium difficulty stages"),
+            new Achievement_t(Achievement.ACH_HARD_COMPLETE,    "Master Samurai",     "Complete all Hard difficulty stages"),
+            new Achievement_t(Achievement.ACH_DEFEAT_FRAUG,     "Frog Slayer",        "Defeat Fraug, the ultimate opponent"),
+            new Achievement_t(Achievement.ACH_WIN_STREAK_5,     "Hot Streak",         "Win 5 duels in a row"),
+            new Achievement_t(Achievement.ACH_WIN_STREAK_10,    "Unstoppable",        "Win 10 duels in a row"),
+            new Achievement_t(Achievement.ACH_LIGHTNING_FAST,   "Lightning Fast",     "Win a duel within 3 frames of signal"),
+            new Achievement_t(Achievement.ACH_PRECISION_MASTER, "Precision Master",   "Win 20 duels with perfect timing"),
+            new Achievement_t(Achievement.ACH_NEVER_GIVE_UP,    "Never Give Up",      "Lose 50 duels but keep fighting")
         };
 
         private void CheckAchievements()
@@ -210,91 +214,73 @@ namespace SamuraiStandoff
                 {
                     case Achievement.ACH_FIRST_VICTORY:
                         if (playerData.m_totalWins >= 1)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_PERFECT_TIMING:
                         if (playerData.m_perfectTimingWins >= 1)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_EARLY_BIRD:
                         if (playerData.m_totalEarlyAttacks >= 10)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_DRAW_MASTER:
                         if (playerData.m_totalDraws >= 5)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_EASY_COMPLETE:
-                        if (playerData.reachedMediumDifficulty)
-                        {
+                        if (playerData.completedEasyMode)
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_MEDIUM_COMPLETE:
                         if (playerData.reachedHardDifficulty)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_HARD_COMPLETE:
+                        if (playerData.completedHardMode)
+                            UnlockAchievement(achievement);
+                        break;
+
                     case Achievement.ACH_DEFEAT_FRAUG:
                         if (playerData.defeatedFraug)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_WIN_STREAK_5:
                         if (playerData.m_maxWinStreak >= 5)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_WIN_STREAK_10:
                         if (playerData.m_maxWinStreak >= 10)
-                        {
                             UnlockAchievement(achievement);
-                        }
+                        break;
 
-                        break;
                     case Achievement.ACH_LIGHTNING_FAST:
-                        // This will be triggered externally when a fast win occurs
+                        // Triggered externally via TriggerLightningFastAchievement()
+                        // called from GameManager.OnDuelWon when framesAfterSignal <= 3.
                         break;
+
                     case Achievement.ACH_PRECISION_MASTER:
                         if (playerData.m_perfectTimingWins >= 20)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
+
                     case Achievement.ACH_NEVER_GIVE_UP:
                         if (playerData.m_totalLosses >= 50)
-                        {
                             UnlockAchievement(achievement);
-                        }
-
                         break;
                 }
             }
-            
         }
 
-        private void TriggerLightningFastAchievement()
+        public void TriggerLightningFastAchievement()
         {
             foreach (Achievement_t achievement in m_Achievements)
             {
@@ -310,9 +296,7 @@ namespace SamuraiStandoff
         {
             achievement.m_bAchieved = true;
             SteamUserStats.SetAchievement(achievement.m_eAchievementID.ToString());
-
             m_bStoreStats = true;
-
             Debug.Log("Achievement Unlocked: " + achievement.m_strName);
         }
         

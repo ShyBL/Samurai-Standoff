@@ -184,11 +184,11 @@ namespace SamuraiStandoff
             }
 
             // Re-apply unlocks based on loaded progression
-            if (playerData.completedEasyMode)   UnlockCharacter(CharacterType.Ichi);
-            if (playerData.completedMediumMode) UnlockCharacter(CharacterType.Bluetail);
-            if (playerData.completedHardMode)   UnlockCharacter(CharacterType.Fraug);
-            if (playerData.m_totalLosses >= 10) UnlockCharacter(CharacterType.Macaroni);
-            if (playerData.m_bestWinStreak >= 10) UnlockCharacter(CharacterType.Chaolin);
+            if (playerData.completedEasyMode)      UnlockCharacter(CharacterType.Ichi);
+            if (playerData.completedMediumMode)    UnlockCharacter(CharacterType.Bluetail);
+            if (playerData.completedHardMode)      UnlockCharacter(CharacterType.Fraug);
+            if (playerData.m_totalLosses >= 10)    UnlockCharacter(CharacterType.Macaroni);
+            if (playerData.m_bestWinStreak >= 10)  UnlockCharacter(CharacterType.Chaolin);
         }
 
         public bool IsCharacterUnlocked(CharacterType type)
@@ -221,13 +221,16 @@ namespace SamuraiStandoff
             if (framesAfterSignal == 1)
                 playerData.m_perfectTimingWins++;
 
+            if (framesAfterSignal <= 3)
+                SamuraiStandoffStats.instance.TriggerLightningFastAchievement();
+
             if (opponentName.ToLower() == "fraug")
                 playerData.defeatedFraug = true;
 
-            if (playerData.m_totalLosses == 10)
+            if (playerData.m_totalLosses >= 10)
                 UnlockCharacter(CharacterType.Macaroni);
 
-            if (playerData.m_bestWinStreak == 10)
+            if (playerData.m_bestWinStreak >= 10)
                 UnlockCharacter(CharacterType.Chaolin);
 
             SamuraiStandoffStats.instance.m_bStoreStats = true;
@@ -242,6 +245,9 @@ namespace SamuraiStandoff
             playerData.m_totalDuels++;
             playerData.m_totalLosses++;
             playerData.m_maxWinStreak = 0;
+
+            if (playerData.m_totalLosses >= 10)
+                UnlockCharacter(CharacterType.Macaroni);
 
             SamuraiStandoffStats.instance.m_bStoreStats = true;
 
@@ -289,7 +295,7 @@ namespace SamuraiStandoff
             {
                 case "easy":
                     UnlockCharacter(CharacterType.Ichi);
-                    playerData.completedEasyMode      = true;
+                    playerData.completedEasyMode       = true;
                     playerData.reachedMediumDifficulty = true;
                     break;
                 case "medium":
